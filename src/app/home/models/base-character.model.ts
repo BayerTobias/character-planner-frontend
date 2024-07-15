@@ -1,9 +1,10 @@
-interface BaseCharacterData {
+export interface BaseCharacterData {
   name: string;
   race: string;
   class: string;
+  level?: number;
 
-  maxHealth: number; // Calculate class based when final
+  // maxHealth: number; // Calculate class based when final
 
   strengthValue: number;
   agilityValue: number;
@@ -16,7 +17,8 @@ export class BaseCharacter {
   name: string;
   race: string;
   class: string;
-  maxHealth: number;
+  level: number;
+  // maxHealth: number;
   strengthValue: number;
   strengthBonus: number;
   agilityValue: number;
@@ -32,7 +34,8 @@ export class BaseCharacter {
     this.name = data?.name || '';
     this.race = data?.race || '';
     this.class = data?.class || '';
-    this.maxHealth = data.maxHealth || 0;
+    this.level = data?.level || 0;
+    // this.maxHealth = data.maxHealth || 0;
     this.strengthValue = data.strengthValue || 0;
     this.strengthBonus = this.getStatBonusValue(this.strengthValue);
     this.agilityValue = data.agilityValue || 0;
