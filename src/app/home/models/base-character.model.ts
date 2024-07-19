@@ -6,11 +6,16 @@ export interface BaseCharacterData {
 
   // maxHealth: number; // Calculate class based when final
 
-  strengthValue: number;
-  agilityValue: number;
-  constitutionValue: number;
-  intelligenceValue: number;
-  charismaValue: number;
+  strength_value: number;
+  strength_bonus: number;
+  agility_value: number;
+  agility_bonus: number;
+  constitution_value: number;
+  constitution_bonus: number;
+  intelligence_value: number;
+  intelligence_bonus: number;
+  charisma_value: number;
+  charisma_bonus: number;
 }
 
 export class BaseCharacter {
@@ -36,19 +41,26 @@ export class BaseCharacter {
     this.class = data?.class || '';
     this.level = data?.level || 0;
     // this.maxHealth = data.maxHealth || 0;
-    this.strengthValue = data.strengthValue || 0;
-    this.strengthBonus = this.getStatBonusValue(this.strengthValue);
-    this.agilityValue = data.agilityValue || 0;
-    this.agilityBonus = this.getStatBonusValue(this.agilityValue);
-    this.constitutionValue = data.constitutionValue || 0;
-    this.constitutionBonus = this.getStatBonusValue(this.constitutionValue);
-    this.intelligenceValue = data.intelligenceValue || 0;
-    this.intelligenceBonus = this.getStatBonusValue(this.intelligenceValue);
-    this.charismaValue = data.charismaValue || 0;
-    this.charismaBonus = this.getStatBonusValue(this.charismaValue);
+    this.strengthValue = data.strength_value || 0;
+    this.strengthBonus =
+      data.strength_bonus || this.getStatBonusValue(this.strengthValue);
+    this.agilityValue = data.agility_value || 0;
+    this.agilityBonus =
+      data.agility_bonus || this.getStatBonusValue(this.agilityValue);
+    this.constitutionValue = data.charisma_value || 0;
+    this.constitutionBonus =
+      data.constitution_bonus || this.getStatBonusValue(this.constitutionValue);
+    this.intelligenceValue = data.intelligence_value || 0;
+    this.intelligenceBonus =
+      data.intelligence_bonus || this.getStatBonusValue(this.intelligenceValue);
+    this.charismaValue = data.charisma_value || 0;
+    this.charismaBonus =
+      data.charisma_bonus || this.getStatBonusValue(this.charismaValue);
   }
 
   getStatBonusValue(statValue: number) {
+    console.log(statValue);
+
     switch (statValue) {
       case 0:
         return -99;
