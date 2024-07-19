@@ -21,6 +21,9 @@ export class Mage extends BaseCharacter {
   }
 
   setupDefaultSkills() {
+    // Redesign when backend is coded skills in backend save lvl in character 
+
+
     const defaultSkillData: SkillData[] = [
       {
         name: 'Develop Magic',
