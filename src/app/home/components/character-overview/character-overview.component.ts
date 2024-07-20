@@ -21,8 +21,4 @@ export class CharacterOverviewComponent {
     this.character = new BaseCharacter(characterData);
     console.log(this.character);
   }
-
-  async getClasses() {
-    await this.characterDataService.getClassesList();
-  }
 }

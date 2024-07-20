@@ -37,5 +37,6 @@ export class CharacterDataService {
     });
 
     this.charClasses = charClasses;
+    console.log(this.charClasses);
   }
 }
