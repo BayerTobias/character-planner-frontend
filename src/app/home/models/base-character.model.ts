@@ -1,10 +1,11 @@
+import { CharRace, CharRaceData } from './char-race.model';
+
 export interface BaseCharacterData {
+  id: number;
   name: string;
-  race: string;
+  race: CharRaceData;
   class: string;
   level?: number;
-
-  // maxHealth: number; // Calculate class based when final
 
   strength_value: number;
   strength_bonus: number;
@@ -19,11 +20,12 @@ export interface BaseCharacterData {
 }
 
 export class BaseCharacter {
+  id: number | null;
   name: string;
-  race: string;
+  race: CharRace;
   class: string;
   level: number;
-  // maxHealth: number;
+
   strengthValue: number;
   strengthBonus: number;
   agilityValue: number;
@@ -36,11 +38,12 @@ export class BaseCharacter {
   charismaBonus: number;
 
   constructor(data: BaseCharacterData) {
+    this.id = data?.id || null;
     this.name = data?.name || '';
-    this.race = data?.race || '';
+    this.race = new CharRace(data?.race);
     this.class = data?.class || '';
     this.level = data?.level || 0;
-    // this.maxHealth = data.maxHealth || 0;
+
     this.strengthValue = data.strength_value || 0;
     this.strengthBonus =
       data.strength_bonus || this.getStatBonusValue(this.strengthValue);

@@ -7,22 +7,26 @@ interface MageData extends BaseCharacterData {
 
 export class Mage extends BaseCharacter {
   maxHealth: number;
+  maxMana: number;
   skills: Skill[];
 
   constructor(data: MageData) {
     super(data);
     this.maxHealth = this.calculateMaxHealth();
+    this.maxMana = this.calculateMaxMana();
     this.skills = data?.skills || [];
-    this.setupDefaultSkills();
   }
 
   calculateMaxHealth() {
     return (this.constitutionBonus + 4) * this.level;
   }
 
-  setupDefaultSkills() {
-    // Redesign when backend is coded skills in backend save lvl in character 
+  calculateMaxMana() {
+    return (this.intelligenceBonus + 3) * 7; /*magie entwikeln rank*/
+  }
 
+  setupDefaultSkills() {
+    // Redesign when backend is coded skills in backend save lvl in character
 
     const defaultSkillData: SkillData[] = [
       {
@@ -59,6 +63,4 @@ export class Mage extends BaseCharacter {
       );
     }
   }
-
-  calculateMaxMana() {}
 }
