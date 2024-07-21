@@ -1,10 +1,11 @@
+import { CharClass, CharClassData } from './char-class.model';
 import { CharRace, CharRaceData } from './char-race.model';
 
 export interface BaseCharacterData {
   id: number;
   name: string;
   race: CharRaceData;
-  class: string;
+  char_class: CharClassData;
   level?: number;
 
   strength_value: number;
@@ -23,7 +24,7 @@ export class BaseCharacter {
   id: number | null;
   name: string;
   race: CharRace;
-  class: string;
+  class: CharClass;
   level: number;
 
   strengthValue: number;
@@ -41,7 +42,7 @@ export class BaseCharacter {
     this.id = data?.id || null;
     this.name = data?.name || '';
     this.race = new CharRace(data?.race);
-    this.class = data?.class || '';
+    this.class = new CharClass(data?.char_class);
     this.level = data?.level || 0;
 
     this.strengthValue = data.strength_value || 0;
