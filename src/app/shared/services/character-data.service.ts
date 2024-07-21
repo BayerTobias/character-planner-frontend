@@ -2,10 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { lastValueFrom } from 'rxjs';
+import { CharClassListItem } from '../../home/models/char-class-list-item.mode';
 import {
-  CharClassListItem,
-  CharClassListItemData,
-} from '../../home/models/char-class-list-item.mode';
+  BaseCharacter,
+  CharacterData,
+} from '../../home/models/base-character.model';
+import { Mage } from '../../home/models/mage-character.model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +15,7 @@ import {
 export class CharacterDataService {
   private http = inject(HttpClient);
 
+  public character?: BaseCharacter | Mage;
   public charClasses: CharClassListItem[] = [];
 
   constructor() {
@@ -21,8 +24,22 @@ export class CharacterDataService {
 
   async getCharacterData() {
     const url = environment.baseUrl + '/api/characters/';
+    const resp: CharacterData = await lastValueFrom(
+      this.http.get<CharacterData>(url)
+    );
 
-    return lastValueFrom(this.http.get(url));
+    this.setupCharacterObject(resp);
+    console.log(this.character);
+  }
+
+  setupCharacterObject(data: CharacterData) {
+    switch (data.char_class.name.toLowerCase()) {
+      case 'mage':
+        this.character = new Mage(data);
+        break;
+      default:
+        this.character = new BaseCharacter(data);
+    }
   }
 
   async getClassesList() {

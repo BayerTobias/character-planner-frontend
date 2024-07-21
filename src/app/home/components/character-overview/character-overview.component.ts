@@ -15,10 +15,12 @@ export class CharacterOverviewComponent {
   public character?: BaseCharacter;
 
   async getCharacterData() {
-    const characterData: any =
-      await this.characterDataService.getCharacterData();
-    console.log(characterData);
-    this.character = new BaseCharacter(characterData);
-    console.log(this.character);
+    await this.characterDataService.getCharacterData();
+
+    // const characterData: any =
+    //   await this.characterDataService.getCharacterData();
+    // console.log(characterData);
+    // this.character = new BaseCharacter(characterData);
+    // console.log(this.character);
   }
 }

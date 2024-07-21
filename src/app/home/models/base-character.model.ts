@@ -1,7 +1,7 @@
 import { CharClass, CharClassData } from './char-class.model';
 import { CharRace, CharRaceData } from './char-race.model';
 
-export interface BaseCharacterData {
+export interface CharacterData {
   id: number;
   name: string;
   race: CharRaceData;
@@ -38,12 +38,12 @@ export class BaseCharacter {
   charismaValue: number;
   charismaBonus: number;
 
-  constructor(data: BaseCharacterData) {
+  constructor(data: CharacterData) {
     this.id = data?.id || null;
     this.name = data?.name || '';
     this.race = new CharRace(data?.race);
     this.class = new CharClass(data?.char_class);
-    this.level = data?.level || 0;
+    this.level = data?.level || 1;
 
     this.strengthValue = data.strength_value || 0;
     this.strengthBonus =

@@ -1,7 +1,7 @@
-import { BaseCharacter, BaseCharacterData } from './base-character.model';
+import { BaseCharacter, CharacterData } from './base-character.model';
 import { Skill, SkillData } from './skill.model';
 
-interface MageData extends BaseCharacterData {
+interface MageData extends CharacterData {
   skills?: Skill[];
 }
 
@@ -23,31 +23,6 @@ export class Mage extends BaseCharacter {
 
   calculateMaxMana() {
     return (this.intelligenceBonus + 3) * 7; /*magie entwikeln rank*/
-  }
-
-  setupDefaultSkills() {
-    // Redesign when backend is coded skills in backend save lvl in character
-
-    const defaultSkillData: SkillData[] = [
-      {
-        name: 'Develop Magic',
-        description: 'Allows the mage to develop magical abilities.',
-        level: 0,
-        firstLevelCost: 1,
-        secondLevelCost: 2,
-      },
-      {
-        name: 'Riding',
-        description: 'Allows the mage to ride creatures.',
-        level: 0,
-        firstLevelCost: 3,
-        secondLevelCost: null,
-      },
-    ];
-
-    defaultSkillData.forEach((skillData) => {
-      this.addSkill(skillData);
-    });
   }
 
   addSkill(skillData: SkillData) {
