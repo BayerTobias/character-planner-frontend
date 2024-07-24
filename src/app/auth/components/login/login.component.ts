@@ -7,6 +7,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { LoginResponse } from '../../interfaces/login-response';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +22,7 @@ export class LoginComponent {
 
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
+  private router = inject(Router);
 
   constructor() {
     this.loginForm = this.fb.group({
@@ -43,15 +46,27 @@ export class LoginComponent {
 
   async login() {
     if (this.loginForm.valid) {
+      localStorage.removeItem('token');
       try {
-        const resp = await this.authService.loginWithUsernameAndPawword(
-          this.username?.value,
-          this.password?.value
-        );
-        console.log(resp);
+        const resp: LoginResponse =
+          (await this.authService.loginWithUsernameAndPawword(
+            this.username?.value,
+            this.password?.value
+          )) as LoginResponse;
+        this.handleSuccessfullLogin(resp);
       } catch (err) {
         console.error(err);
       }
     } else this.loginForm.markAllAsTouched();
+  }
+
+  /**
+   * Handles a successful login response by storing the authentication token in local storage
+   * and navigating the user to the home page with public visibility.
+   * @param resp The response containing the authentication token.
+   */
+  handleSuccessfullLogin(resp: LoginResponse) {
+    localStorage.setItem('token', resp.token);
+    this.router.navigateByUrl('/character');
   }
 }
