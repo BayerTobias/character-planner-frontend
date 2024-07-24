@@ -11,9 +11,20 @@ export class AuthService {
 
   constructor() {}
 
-  loginWithUsernameAndPawword(username: string, password: string) {
+  async loginWithUsernameAndPawword(username: string, password: string) {
     const url = environment.baseUrl + '/auth/login/';
     const body = { username: username, password: password };
+
+    return lastValueFrom(this.http.post(url, body));
+  }
+
+  async registerUserWithUsernameAndPassword(
+    username: string,
+    email: string,
+    password: string
+  ) {
+    const url = environment.baseUrl + '/auth/users/';
+    const body = { username: username, email: email, password: password };
 
     return lastValueFrom(this.http.post(url, body));
   }

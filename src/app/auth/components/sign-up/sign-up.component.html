@@ -1,1 +1,8 @@
-<p>sign-up works!</p>
+<form [formGroup]="signupForm" (submit)="signUp()">
+  <input formControlName="username" type="text" />
+  <input formControlName="email" type="email" />
+  <input formControlName="password" type="password" />
+  <input formControlName="passwordRepeat" type="password" />
+  <input formControlName="privacyPolicy" type="checkbox" />
+  <button type="submit">send</button>
+</form>
