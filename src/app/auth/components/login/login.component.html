@@ -1,0 +1,6 @@
+<form [formGroup]="loginForm" (submit)="login()">
+  <input formControlName="username" type="text" />
+  <input formControlName="password" type="password" />
+  <input formControlName="rememberMe" type="checkbox" />
+  <button type="submit">Send</button>
+</form>
