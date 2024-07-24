@@ -44,7 +44,7 @@ export class LoginComponent {
   async login() {
     if (this.loginForm.valid) {
       try {
-        const resp = this.authService.loginWithUsernameAndPawword(
+        const resp = await this.authService.loginWithUsernameAndPawword(
           this.username?.value,
           this.password?.value
         );
