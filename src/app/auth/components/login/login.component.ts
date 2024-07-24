@@ -6,6 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ export class LoginComponent {
   public loginForm: FormGroup;
 
   private fb = inject(FormBuilder);
+  private authService = inject(AuthService);
 
   constructor() {
     this.loginForm = this.fb.group({
@@ -40,8 +42,16 @@ export class LoginComponent {
   }
 
   async login() {
-    console.log(this.username?.value);
-    console.log(this.password?.value);
-    console.log(this.rememberMe?.value);
+    if (this.loginForm.valid) {
+      try {
+        const resp = this.authService.loginWithUsernameAndPawword(
+          this.username?.value,
+          this.password?.value
+        );
+        console.log(resp);
+      } catch (err) {
+        console.error(err);
+      }
+    } else this.loginForm.markAllAsTouched();
   }
 }
