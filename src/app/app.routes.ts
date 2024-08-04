@@ -3,11 +3,19 @@ import { CharacterOverviewComponent } from './home/components/character-overview
 import { SelectClassComponent } from './home/components/select-class/select-class.component';
 import { LoginComponent } from './auth/components/login/login.component';
 import { SignUpComponent } from './auth/components/sign-up/sign-up.component';
+import { authGuard } from './auth/guards/auth.guard';
 
 export const routes: Routes = [
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'sign-up', component: SignUpComponent },
 
-  { path: 'character', component: CharacterOverviewComponent },
-  { path: 'select-class', component: SelectClassComponent },
+  {
+    path: '',
+    canActivate: [authGuard],
+    children: [
+      { path: 'character', component: CharacterOverviewComponent },
+      { path: 'select-class', component: SelectClassComponent },
+    ],
+  },
 ];

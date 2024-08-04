@@ -28,4 +28,19 @@ export class AuthService {
 
     return lastValueFrom(this.http.post(url, body));
   }
+
+  async checkAuth() {
+    const url = environment.baseUrl + '/auth/check/';
+
+    try {
+      const response: { message?: string } = await lastValueFrom(
+        this.http.get(url)
+      );
+
+      return response && response.message === 'Authenticated';
+    } catch (err) {
+      console.error(err);
+      return false;
+    }
+  }
 }
