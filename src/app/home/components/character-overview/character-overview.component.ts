@@ -15,7 +15,7 @@ export class CharacterOverviewComponent {
   public character?: BaseCharacter;
 
   async getCharacterData() {
-    await this.characterDataService.getCharacterData();
+    await this.characterDataService.getCharacterData(1);
 
     // const characterData: any =
     //   await this.characterDataService.getCharacterData();
