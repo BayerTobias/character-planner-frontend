@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CharacterDataService } from '../../../shared/services/character-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-character-selection',
@@ -10,8 +11,13 @@ import { CharacterDataService } from '../../../shared/services/character-data.se
 })
 export class CharacterSelectionComponent {
   public characterDataService = inject(CharacterDataService);
+  private router = inject(Router);
 
   ngOnInit() {
     this.characterDataService.getCharacterList();
+  }
+
+  selectCharacter(id: number) {
+    this.router.navigate(['/character'], { queryParams: { character_id: id } });
   }
 }
