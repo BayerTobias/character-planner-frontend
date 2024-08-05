@@ -26,6 +26,8 @@ export class BaseCharacter {
   race: CharRace;
   class: CharClass;
   level: number;
+  maxHealth: number;
+  maxMana: number;
 
   strengthValue: number;
   strengthBonus: number;
@@ -44,6 +46,8 @@ export class BaseCharacter {
     this.race = new CharRace(data?.race);
     this.class = new CharClass(data?.char_class);
     this.level = data?.level || 1;
+    this.maxHealth = 0;
+    this.maxMana = 0;
 
     this.strengthValue = data.strength_value || 0;
     this.strengthBonus =
@@ -63,8 +67,6 @@ export class BaseCharacter {
   }
 
   getStatBonusValue(statValue: number) {
-    console.log(statValue);
-
     switch (statValue) {
       case 0:
         return -99;

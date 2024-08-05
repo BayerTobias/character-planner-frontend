@@ -41,12 +41,10 @@ export class CharacterDataService {
   }
 
   async getCharacterData(id: number) {
-    const url = environment.baseUrl + `/api/characters/${id}}/`;
+    const url = environment.baseUrl + `/api/characters/${id}/`;
     const resp: CharacterData = await lastValueFrom(
       this.http.get<CharacterData>(url)
     );
-    console.log(resp);
-
     this.setupCharacterObject(resp);
     console.log(this.character);
   }
