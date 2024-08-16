@@ -24,6 +24,25 @@ export class CharacterOverviewComponent {
       this.characterId = +params['character_id'];
     });
     await this.characterDataService.getCharacterData(this.characterId);
+    this.addSkilledNodes();
+  }
+
+  addSkilledNodes() {
+    const skills = this.characterDataService.character?.class.skills;
+    const skilledSkills = this.characterDataService.character?.skilledSkills;
+
+    if (!skills || !skilledSkills) {
+      return;
+    }
+
+    skilledSkills?.forEach((skilledNode) => {
+      const skill = skills?.find((skill) => skill.id === skilledNode.skillId);
+
+      if (skill) {
+        skill.nodesSkilled = skilledNode.nodesSkilled;
+        console.log(skill);
+      }
+    });
   }
 
   isCaster(): boolean {

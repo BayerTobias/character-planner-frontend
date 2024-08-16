@@ -35,7 +35,10 @@
   <div>
     @for (skill of characterDataService.character?.class?.skills; track $index)
     {
-    <div>{{ skill.name }}</div>
+    <div>{{ skill.name }} {{ skill.nodesSkilled }}</div>
+    } @for (customSkill of characterDataService.character?.customSkills; track
+    $index) {
+    <div>{{ customSkill.name }} {{ customSkill.nodesSkilled }}</div>
     }
   </div>
 </div>

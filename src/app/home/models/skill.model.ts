@@ -12,6 +12,7 @@ export class Skill {
   description: string;
   firstLevelCost: number;
   secondLevelCost: number | null;
+  nodesSkilled: number;
 
   constructor(data: SkillData) {
     this.id = data.id || -1;
@@ -19,5 +20,6 @@ export class Skill {
     this.description = data?.description || '';
     this.firstLevelCost = data?.first_level_cost || 99;
     this.secondLevelCost = data?.second_level_cost || null;
+    this.nodesSkilled = 0;
   }
 }
