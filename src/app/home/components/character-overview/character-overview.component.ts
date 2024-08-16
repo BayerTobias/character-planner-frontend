@@ -3,11 +3,12 @@ import { CharacterDataService } from '../../../shared/services/character-data.se
 import { BaseCharacter } from '../../models/base-character.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Mage } from '../../models/mage-character.model';
+import { StatBoxComponent } from '../../../shared/components/character-components/stat-box/stat-box.component';
 
 @Component({
   selector: 'app-character-overview',
   standalone: true,
-  imports: [],
+  imports: [StatBoxComponent],
   templateUrl: './character-overview.component.html',
   styleUrl: './character-overview.component.scss',
 })
