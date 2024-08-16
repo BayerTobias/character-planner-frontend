@@ -45,6 +45,8 @@ export class CharacterDataService {
     const resp: CharacterData = await lastValueFrom(
       this.http.get<CharacterData>(url)
     );
+    console.log(resp);
+
     this.setupCharacterObject(resp);
     console.log(this.character);
   }

@@ -1,5 +1,6 @@
 import { CharClass, CharClassData } from './char-class.model';
 import { CharRace, CharRaceData } from './char-race.model';
+import { NodeData, SkilledNode } from './skilled-node';
 
 export interface CharacterData {
   id: number;
@@ -18,6 +19,7 @@ export interface CharacterData {
   intelligence_bonus: number;
   charisma_value: number;
   charisma_bonus: number;
+  char_skilled_skills: NodeData[];
 }
 
 export class BaseCharacter {
@@ -39,6 +41,8 @@ export class BaseCharacter {
   intelligenceBonus: number;
   charismaValue: number;
   charismaBonus: number;
+
+  skilledSkills: SkilledNode[];
 
   constructor(data: CharacterData) {
     this.id = data?.id || null;
@@ -64,6 +68,9 @@ export class BaseCharacter {
     this.charismaValue = data.charisma_value || 0;
     this.charismaBonus =
       data.charisma_bonus || this.getStatBonusValue(this.charismaValue);
+    this.skilledSkills = (data?.char_skilled_skills || []).map(
+      (skilledNode: NodeData) => new SkilledNode(skilledNode)
+    );
   }
 
   getStatBonusValue(statValue: number) {
