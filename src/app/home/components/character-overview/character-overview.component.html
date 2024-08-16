@@ -32,4 +32,10 @@
     <div>Charisma: {{ characterDataService.character?.charismaValue }}</div>
     <div>Bonus: {{ characterDataService.character?.charismaBonus }}</div>
   </div>
+  <div>
+    @for (skill of characterDataService.character?.class?.skills; track $index)
+    {
+    <div>{{ skill.name }}</div>
+    }
+  </div>
 </div>

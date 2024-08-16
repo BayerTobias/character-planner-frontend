@@ -1,5 +1,6 @@
 import { CharClass, CharClassData } from './char-class.model';
 import { CharRace, CharRaceData } from './char-race.model';
+import { CustomSkill, CustomSkillData } from './custom-skill.model';
 import { NodeData, SkilledNode } from './skilled-node';
 
 export interface CharacterData {
@@ -20,6 +21,7 @@ export interface CharacterData {
   charisma_value: number;
   charisma_bonus: number;
   char_skilled_skills: NodeData[];
+  custom_skills: CustomSkillData[];
 }
 
 export class BaseCharacter {
@@ -42,6 +44,7 @@ export class BaseCharacter {
   charismaValue: number;
   charismaBonus: number;
 
+  customSkills: CustomSkill[];
   skilledSkills: SkilledNode[];
 
   constructor(data: CharacterData) {
@@ -70,6 +73,9 @@ export class BaseCharacter {
       data.charisma_bonus || this.getStatBonusValue(this.charismaValue);
     this.skilledSkills = (data?.char_skilled_skills || []).map(
       (skilledNode: NodeData) => new SkilledNode(skilledNode)
+    );
+    this.customSkills = (data?.custom_skills || []).map(
+      (customSkill: CustomSkillData) => new CustomSkill(customSkill)
     );
   }
 
