@@ -1,4 +1,5 @@
 <div class="character-card">
+  @if (characterDataService.character) {
   <app-stat-box
     [strengthValue]="characterDataService.character!.strengthValue"
     [strengthBonus]="characterDataService.character!.strengthBonus"
@@ -11,6 +12,8 @@
     [charismaValue]="characterDataService.character!.charismaValue"
     [charismaBonus]="characterDataService.character!.charismaBonus"
   ></app-stat-box>
+  }
+
   <!-- <div>{{ characterDataService.character?.name }}</div>
   <div>Level: {{ characterDataService.character?.level }}</div>
   <div>Volk: {{ characterDataService.character?.race?.name }}</div>

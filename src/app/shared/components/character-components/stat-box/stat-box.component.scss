@@ -1,0 +1,26 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  border: 1px solid black;
+  padding: 8px;
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+
+  .stat-name {
+    width: 85px;
+    color: red;
+  }
+
+  .stat-bonus {
+    color: aqua;
+  }
+
+  .value {
+    font-weight: 700;
+    color: green;
+  }
+}
