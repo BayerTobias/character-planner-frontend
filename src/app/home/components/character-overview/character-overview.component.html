@@ -12,7 +12,11 @@
     [charismaValue]="characterDataService.character!.charismaValue"
     [charismaBonus]="characterDataService.character!.charismaBonus"
   ></app-stat-box>
-  }
+  @for (skill of characterDataService.character.class.skills; track $index)
+  {<app-skills-display [skill]="skill"></app-skills-display>} @for (skill of
+  characterDataService.character.customSkills; track $index) {
+  <app-skills-display [skill]="skill"></app-skills-display>
+  } }
 
   <!-- <div>{{ characterDataService.character?.name }}</div>
   <div>Level: {{ characterDataService.character?.level }}</div>
@@ -22,38 +26,5 @@
   <div>Max HP: {{ characterDataService.character?.maxHealth }}</div>
   @if(isCaster()){
   <div>Max Mana {{ characterDataService.character?.maxMana }}</div>
-  }
-  <div>
-    <div>Stärke: {{ characterDataService.character?.strengthValue }}</div>
-    <div>Bonus: {{ characterDataService.character?.strengthBonus }}</div>
-  </div>
-  <div>
-    <div>Geschick: {{ characterDataService.character?.agilityValue }}</div>
-    <div>Bonus: {{ characterDataService.character?.agilityBonus }}</div>
-  </div>
-  <div>
-    <div>
-      Konstitution: {{ characterDataService.character?.constitutionValue }}
-    </div>
-    <div>Bonus: {{ characterDataService.character?.constitutionBonus }}</div>
-  </div>
-  <div>
-    <div>
-      Interligenz: {{ characterDataService.character?.intelligenceValue }}
-    </div>
-    <div>Bonus: {{ characterDataService.character?.intelligenceBonus }}</div>
-  </div>
-  <div>
-    <div>Charisma: {{ characterDataService.character?.charismaValue }}</div>
-    <div>Bonus: {{ characterDataService.character?.charismaBonus }}</div>
-  </div>
-  <div>
-    @for (skill of characterDataService.character?.class?.skills; track $index)
-    {
-    <div>{{ skill.name }} {{ skill.nodesSkilled }}</div>
-    } @for (customSkill of characterDataService.character?.customSkills; track
-    $index) {
-    <div>{{ customSkill.name }} {{ customSkill.nodesSkilled }}</div>
-    }
-  </div> -->
+  } -->
 </div>

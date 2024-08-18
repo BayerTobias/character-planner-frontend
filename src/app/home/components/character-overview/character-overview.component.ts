@@ -4,11 +4,12 @@ import { BaseCharacter } from '../../models/base-character.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Mage } from '../../models/mage-character.model';
 import { StatBoxComponent } from '../../../shared/components/character-components/stat-box/stat-box.component';
+import { SkillsDisplayComponent } from '../../../shared/components/character-components/skills-display/skills-display.component';
 
 @Component({
   selector: 'app-character-overview',
   standalone: true,
-  imports: [StatBoxComponent],
+  imports: [StatBoxComponent, SkillsDisplayComponent],
   templateUrl: './character-overview.component.html',
   styleUrl: './character-overview.component.scss',
 })
