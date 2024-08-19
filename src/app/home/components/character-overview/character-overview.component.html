@@ -12,10 +12,17 @@
     [charismaValue]="characterDataService.character!.charismaValue"
     [charismaBonus]="characterDataService.character!.charismaBonus"
   ></app-stat-box>
+
+  <app-character-details
+    [name]="characterDataService.character!.name"
+    [maxHealth]="characterDataService.character!.maxHealth"
+    [level]="characterDataService.character!.level"
+  ></app-character-details>
+
   @for (skill of characterDataService.character.class.skills; track $index)
-  {<app-skills-display [skill]="skill"></app-skills-display>} @for (skill of
-  characterDataService.character.customSkills; track $index) {
-  <app-skills-display [skill]="skill"></app-skills-display>
+  {<app-skills-display [skill]="skill" [index]="$index"></app-skills-display>}
+  @for (skill of characterDataService.character.customSkills; track $index) {
+  <app-skills-display [skill]="skill" [index]="null"></app-skills-display>
   } }
 
   <!-- <div>{{ characterDataService.character?.name }}</div>

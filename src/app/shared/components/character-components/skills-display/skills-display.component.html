@@ -1,8 +1,11 @@
-<div class="wrapper">
+@if (index === 0) {
+<div>TEST</div>
+}
+<div class="skill-wrapper">
   <div class="skill-box">
     <p>{{ skill.name }}:</p>
     @if (skill.secondLevelCost) {<span
-      >{{ skill.firstLevelCost }} / {{ skill.secondLevelCost }}</span
+      >{{ skill.firstLevelCost }}/{{ skill.secondLevelCost }}</span
     >}@else {
     <span>{{ skill.firstLevelCost }}</span>
     }

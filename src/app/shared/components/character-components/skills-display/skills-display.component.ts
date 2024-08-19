@@ -11,4 +11,10 @@ import { CommonModule } from '@angular/common';
 })
 export class SkillsDisplayComponent {
   @Input() skill!: Skill;
+  @Input() index: number | null = 0;
+
+  ngOnInit() {
+    // this.skill.nodesSkilled = 23;
+    console.log(this.index);
+  }
 }

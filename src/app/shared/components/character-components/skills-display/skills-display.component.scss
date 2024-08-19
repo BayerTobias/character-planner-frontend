@@ -1,4 +1,4 @@
-.wrapper {
+.skill-wrapper {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -7,7 +7,7 @@
   .skill-box {
     display: flex;
     justify-content: space-between;
-    width: 151px;
+    width: 143px;
   }
 
   .single-point {
@@ -41,6 +41,7 @@
     width: calc(12px * 4);
     border: 1px solid black;
     border-radius: 6px;
+    overflow: hidden;
 
     div {
       height: 100%;
