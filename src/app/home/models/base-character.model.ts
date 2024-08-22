@@ -1,7 +1,8 @@
+import { BaseWeapon, BaseWeaponData } from './base-weapon.model';
 import { CharClass, CharClassData } from './char-class.model';
 import { CharRace, CharRaceData } from './char-race.model';
 import { CustomSkill, CustomSkillData } from './custom-skill.model';
-import { NodeData, SkilledNode } from './skilled-node';
+import { NodeData, SkilledNode } from './skilled-node.model';
 
 export interface CharacterData {
   id: number;
@@ -9,6 +10,9 @@ export interface CharacterData {
   race: CharRaceData;
   char_class: CharClassData;
   level?: number;
+
+  current_hp: number;
+  current_mana: number | null;
 
   strength_value: number;
   strength_bonus: number;
@@ -22,6 +26,8 @@ export interface CharacterData {
   charisma_bonus: number;
   char_skilled_skills: NodeData[];
   custom_skills: CustomSkillData[];
+
+  base_weapons: BaseWeaponData[];
 }
 
 export class BaseCharacter {
@@ -30,7 +36,9 @@ export class BaseCharacter {
   race: CharRace;
   class: CharClass;
   level: number;
+  currentHp: number;
   maxHealth: number;
+  currentMana: number | null;
   maxMana: number;
 
   strengthValue: number;
@@ -47,13 +55,17 @@ export class BaseCharacter {
   customSkills: CustomSkill[];
   skilledSkills: SkilledNode[];
 
+  baseWeapons: BaseWeapon[];
+
   constructor(data: CharacterData) {
     this.id = data?.id || null;
     this.name = data?.name || '';
     this.race = new CharRace(data?.race);
     this.class = new CharClass(data?.char_class);
     this.level = data?.level || 1;
+    this.currentHp = data?.current_hp || 0;
     this.maxHealth = 0;
+    this.currentMana = data.current_mana || null;
     this.maxMana = 0;
 
     this.strengthValue = data.strength_value || 0;
@@ -76,6 +88,9 @@ export class BaseCharacter {
     );
     this.customSkills = (data?.custom_skills || []).map(
       (customSkill: CustomSkillData) => new CustomSkill(customSkill)
+    );
+    this.baseWeapons = (data.base_weapons || []).map(
+      (baseWeapon: BaseWeaponData) => new BaseWeapon(baseWeapon)
     );
   }
 
