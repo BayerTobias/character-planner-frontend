@@ -1,20 +1,25 @@
+import { BaseArmor, BaseArmorData } from './base-armor.model';
 import { BaseWeapon, BaseWeaponData } from './base-weapon.model';
 import { CharClass, CharClassData } from './char-class.model';
 import { CharRace, CharRaceData } from './char-race.model';
 import { CustomSkill, CustomSkillData } from './custom-skill.model';
 import { CustomWeapon, CustomWeaponData } from './custom-weapon.model';
+import { Money, MoneyData } from './money.model';
 import { NodeData, SkilledNode } from './skilled-node.model';
 
 export interface CharacterData {
+  // Core Character Information
   id: number;
   name: string;
   race: CharRaceData;
   char_class: CharClassData;
   level?: number;
 
+  // Health and Mana
   current_hp: number;
   current_mana: number | null;
 
+  // Primary Attributes
   strength_value: number;
   strength_bonus: number;
   agility_value: number;
@@ -25,24 +30,33 @@ export interface CharacterData {
   intelligence_bonus: number;
   charisma_value: number;
   charisma_bonus: number;
+
+  // Skills
   char_skilled_skills: NodeData[];
   custom_skills: CustomSkillData[];
 
+  // Items
   base_weapons: BaseWeaponData[];
   custom_weapons: CustomWeaponData[];
+  armor: BaseArmorData | null; // evtl custom armor
+  money: MoneyData;
 }
 
 export class BaseCharacter {
+  // Core Character Information
   id: number | null;
   name: string;
   race: CharRace;
   class: CharClass;
   level: number;
+
+  // Health and Mana
   currentHp: number;
   maxHealth: number;
   currentMana: number | null;
   maxMana: number;
 
+  // Primary Attributes
   strengthValue: number;
   strengthBonus: number;
   agilityValue: number;
@@ -54,23 +68,31 @@ export class BaseCharacter {
   charismaValue: number;
   charismaBonus: number;
 
+  // Skills
   customSkills: CustomSkill[];
   skilledSkills: SkilledNode[];
 
+  // Items
   baseWeapons: BaseWeapon[];
   customWeapons: CustomWeapon[];
+  armor: BaseArmor | null;
+  money: Money;
 
   constructor(data: CharacterData) {
+    // Core Character Information
     this.id = data?.id || null;
     this.name = data?.name || '';
     this.race = new CharRace(data?.race);
     this.class = new CharClass(data?.char_class);
     this.level = data?.level || 1;
+
+    // Health and Mana
     this.currentHp = data?.current_hp || 0;
     this.maxHealth = 0;
     this.currentMana = data.current_mana || null;
     this.maxMana = 0;
 
+    // Primary Attributes
     this.strengthValue = data.strength_value || 0;
     this.strengthBonus =
       data.strength_bonus || this.getStatBonusValue(this.strengthValue);
@@ -86,18 +108,24 @@ export class BaseCharacter {
     this.charismaValue = data.charisma_value || 0;
     this.charismaBonus =
       data.charisma_bonus || this.getStatBonusValue(this.charismaValue);
+
+    // Skills
     this.skilledSkills = (data?.char_skilled_skills || []).map(
       (skilledNode: NodeData) => new SkilledNode(skilledNode)
     );
     this.customSkills = (data?.custom_skills || []).map(
       (customSkill: CustomSkillData) => new CustomSkill(customSkill)
     );
+
+    // Items
     this.baseWeapons = (data?.base_weapons || []).map(
       (baseWeapon: BaseWeaponData) => new BaseWeapon(baseWeapon)
     );
     this.customWeapons = (data?.custom_weapons || []).map(
       (customWeapon: CustomWeaponData) => new CustomWeapon(customWeapon)
     );
+    this.armor = data.armor ? new BaseArmor(data.armor) : null;
+    this.money = new Money(data.money);
   }
 
   getStatBonusValue(statValue: number) {

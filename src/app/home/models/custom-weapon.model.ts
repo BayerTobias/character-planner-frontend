@@ -7,7 +7,7 @@ export interface CustomWeaponData {
   min_str: number;
   dmg: number;
   attribute: string;
-  weight: number;
+  weight: string;
   ini_bonus: number;
   special: string;
 }
@@ -32,7 +32,7 @@ export class CustomWeapon {
     this.minStr = data?.min_str || 0;
     this.dmg = data?.dmg || 0;
     this.attribute = data?.attribute || 'ST/GE';
-    this.weight = data?.weight || 0;
+    this.weight = data?.weight ? parseFloat(data?.weight) : 0;
     this.iniBonus = data?.ini_bonus || 0;
     this.special = data?.special || '';
   }
