@@ -2,6 +2,7 @@ import { BaseWeapon, BaseWeaponData } from './base-weapon.model';
 import { CharClass, CharClassData } from './char-class.model';
 import { CharRace, CharRaceData } from './char-race.model';
 import { CustomSkill, CustomSkillData } from './custom-skill.model';
+import { CustomWeapon, CustomWeaponData } from './custom-weapon.model';
 import { NodeData, SkilledNode } from './skilled-node.model';
 
 export interface CharacterData {
@@ -28,6 +29,7 @@ export interface CharacterData {
   custom_skills: CustomSkillData[];
 
   base_weapons: BaseWeaponData[];
+  custom_weapons: CustomWeaponData[];
 }
 
 export class BaseCharacter {
@@ -56,6 +58,7 @@ export class BaseCharacter {
   skilledSkills: SkilledNode[];
 
   baseWeapons: BaseWeapon[];
+  customWeapons: CustomWeapon[];
 
   constructor(data: CharacterData) {
     this.id = data?.id || null;
@@ -89,8 +92,11 @@ export class BaseCharacter {
     this.customSkills = (data?.custom_skills || []).map(
       (customSkill: CustomSkillData) => new CustomSkill(customSkill)
     );
-    this.baseWeapons = (data.base_weapons || []).map(
+    this.baseWeapons = (data?.base_weapons || []).map(
       (baseWeapon: BaseWeaponData) => new BaseWeapon(baseWeapon)
+    );
+    this.customWeapons = (data?.custom_weapons || []).map(
+      (customWeapon: CustomWeaponData) => new CustomWeapon(customWeapon)
     );
   }
 
