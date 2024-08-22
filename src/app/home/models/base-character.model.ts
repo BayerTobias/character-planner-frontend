@@ -54,7 +54,7 @@ export class BaseCharacter {
   currentHp: number;
   maxHealth: number;
   currentMana: number | null;
-  maxMana: number;
+  maxMana: number | null;
 
   // Primary Attributes
   strengthValue: number;
@@ -90,7 +90,7 @@ export class BaseCharacter {
     this.currentHp = data?.current_hp || 0;
     this.maxHealth = 0;
     this.currentMana = data.current_mana || null;
-    this.maxMana = 0;
+    this.maxMana = null;
 
     // Primary Attributes
     this.strengthValue = data.strength_value || 0;
@@ -116,7 +116,7 @@ export class BaseCharacter {
     this.customSkills = (data?.custom_skills || []).map(
       (customSkill: CustomSkillData) => new CustomSkill(customSkill)
     );
-
+    this.addSkilledNodes();
     // Items
     this.baseWeapons = (data?.base_weapons || []).map(
       (baseWeapon: BaseWeaponData) => new BaseWeapon(baseWeapon)
@@ -126,6 +126,23 @@ export class BaseCharacter {
     );
     this.armor = data.armor ? new BaseArmor(data.armor) : null;
     this.money = new Money(data.money);
+  }
+
+  addSkilledNodes() {
+    const skills = this.class.skills;
+    const skilledSkills = this.skilledSkills;
+
+    if (!skills || !skilledSkills) {
+      return;
+    }
+
+    skilledSkills?.forEach((skilledNode) => {
+      const skill = skills?.find((skill) => skill.id === skilledNode.skillId);
+
+      if (skill) {
+        skill.nodesSkilled = skilledNode.nodesSkilled;
+      }
+    });
   }
 
   getStatBonusValue(statValue: number) {
@@ -167,6 +184,64 @@ export class BaseCharacter {
         break;
       default:
         return -99;
+    }
+  }
+
+  getSkillRank(skilledNodes: number) {
+    console.log('get skill:', skilledNodes);
+
+    switch (skilledNodes) {
+      case 0:
+        return 0;
+        break;
+      case 1:
+        return 1;
+        break;
+      case 2:
+        return 2;
+        break;
+      case 3:
+        return 3;
+        break;
+      case 4:
+        return 4;
+        break;
+      case 5:
+      case 6:
+        return 5;
+        break;
+      case 7:
+      case 8:
+        return 6;
+        break;
+      case 9:
+      case 10:
+        return 7;
+        break;
+      case 11:
+      case 12:
+        return 8;
+        break;
+      case 13:
+      case 14:
+        return 9;
+        break;
+      case 15:
+      case 16:
+      case 17:
+      case 18:
+        return 10;
+        break;
+      case 19:
+      case 20:
+      case 21:
+      case 22:
+        return 11;
+        break;
+      case 23:
+        return 12;
+      default:
+        return 0;
     }
   }
 

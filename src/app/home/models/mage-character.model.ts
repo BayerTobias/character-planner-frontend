@@ -17,6 +17,13 @@ export class Mage extends BaseCharacter {
   }
 
   calculateMaxMana() {
-    return (this.intelligenceBonus + 3) * 7; /*magie entwikeln rank*/
+    const developMagic = this.class.skills.find(
+      (skill: Skill) => skill.name === 'Magie Entwickeln'
+    );
+
+    if (developMagic) {
+      const developMagicRanks = this.getSkillRank(developMagic.nodesSkilled);
+      return (this.intelligenceBonus + 3) * developMagicRanks;
+    } else return null;
   }
 }
