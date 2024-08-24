@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CharacterDataService } from '../../../shared/services/character-data.service';
 import { BaseCharacter } from '../../models/base-character.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Mage } from '../../models/mage-character.model';
 import { StatBoxComponent } from '../../../shared/components/character-components/stat-box/stat-box.component';
 import { SkillsDisplayComponent } from '../../../shared/components/character-components/skills-display/skills-display.component';
@@ -20,7 +20,6 @@ import { CharacterDetailsComponent } from '../../../shared/components/character-
 })
 export class CharacterOverviewComponent {
   public characterDataService = inject(CharacterDataService);
-  private router = inject(Router);
   private route = inject(ActivatedRoute);
   public character?: BaseCharacter;
 

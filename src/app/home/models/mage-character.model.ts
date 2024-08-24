@@ -1,5 +1,5 @@
 import { BaseCharacter, CharacterData } from './base-character.model';
-import { Skill, SkillData } from './skill.model';
+import { Skill } from './skill.model';
 
 interface MageData extends CharacterData {
   skills?: Skill[];
