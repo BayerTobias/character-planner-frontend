@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { lastValueFrom } from 'rxjs';
-import { CharClassListItem } from '../../home/models/char-class-list-item.mode';
+
 import {
   BaseCharacter,
   CharacterData,
@@ -21,11 +21,8 @@ export class CharacterDataService {
 
   public character?: BaseCharacter | Mage;
   public characterList: CharacterListItem[] = [];
-  public charClasses: CharClassListItem[] = [];
 
-  constructor() {
-    this.getClassesList();
-  }
+  constructor() {}
 
   async getCharacterList() {
     const url = environment.baseUrl + '/api/characters/';
@@ -59,20 +56,5 @@ export class CharacterDataService {
       default:
         this.character = new BaseCharacter(data);
     }
-  }
-
-  async getClassesList() {
-    const url = environment.baseUrl + 'api/classes/';
-    const resp = await lastValueFrom(this.http.get<[]>(url));
-
-    const charClasses: CharClassListItem[] = [];
-
-    resp.forEach((charClassData) => {
-      const object = new CharClassListItem(charClassData);
-      charClasses.push(object);
-    });
-
-    this.charClasses = charClasses;
-    console.log(this.charClasses);
   }
 }

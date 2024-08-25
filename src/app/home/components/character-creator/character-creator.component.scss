@@ -1,0 +1,11 @@
+@import "../../../../mixin.scss";
+
+section {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  @include dFlex($ai: flex-start);
+  background-color: whitesmoke;
+}

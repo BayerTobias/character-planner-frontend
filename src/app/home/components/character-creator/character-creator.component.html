@@ -1,1 +1,8 @@
-<p>character-creator works!</p>
+<section>
+  <div class="classes-wrapper">
+    @for (class of gameDataService.charClasses; track $index) {
+    <div (click)="selectClass(class)">{{ class.name }}</div>
+    }
+  </div>
+  <div class="race-wrapper"></div>
+</section>
