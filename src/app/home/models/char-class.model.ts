@@ -15,7 +15,7 @@ export class CharClass {
   baseLvlMana: number | null;
   skills: Skill[];
 
-  constructor(data: CharClassData) {
+  constructor(data?: CharClassData) {
     this.id = data?.id || null;
     this.name = data?.name || '';
     this.baseLvlHp = data?.base_lvl_hp || 0;

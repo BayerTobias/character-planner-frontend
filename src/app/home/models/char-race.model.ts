@@ -7,8 +7,8 @@ export class CharRace {
   id: number | null;
   name: string;
 
-  constructor(data: CharRaceData) {
+  constructor(data?: CharRaceData) {
     this.id = data?.id || null;
-    this.name = data.name || '';
+    this.name = data?.name || '';
   }
 }

@@ -78,7 +78,7 @@ export class BaseCharacter {
   armor: BaseArmor | null;
   money: Money;
 
-  constructor(data: CharacterData) {
+  constructor(data?: CharacterData) {
     // Core Character Information
     this.id = data?.id || null;
     this.name = data?.name || '';
@@ -89,25 +89,27 @@ export class BaseCharacter {
     // Health and Mana
     this.currentHp = data?.current_hp || 0;
     this.maxHealth = 0;
-    this.currentMana = data.current_mana || null;
+    this.currentMana = data?.current_mana || null;
     this.maxMana = null;
 
     // Primary Attributes
-    this.strengthValue = data.strength_value || 0;
+    this.strengthValue = data?.strength_value || 0;
     this.strengthBonus =
-      data.strength_bonus || this.getStatBonusValue(this.strengthValue);
-    this.agilityValue = data.agility_value || 0;
+      data?.strength_bonus || this.getStatBonusValue(this.strengthValue);
+    this.agilityValue = data?.agility_value || 0;
     this.agilityBonus =
-      data.agility_bonus || this.getStatBonusValue(this.agilityValue);
-    this.constitutionValue = data.charisma_value || 0;
+      data?.agility_bonus || this.getStatBonusValue(this.agilityValue);
+    this.constitutionValue = data?.charisma_value || 0;
     this.constitutionBonus =
-      data.constitution_bonus || this.getStatBonusValue(this.constitutionValue);
-    this.intelligenceValue = data.intelligence_value || 0;
+      data?.constitution_bonus ||
+      this.getStatBonusValue(this.constitutionValue);
+    this.intelligenceValue = data?.intelligence_value || 0;
     this.intelligenceBonus =
-      data.intelligence_bonus || this.getStatBonusValue(this.intelligenceValue);
-    this.charismaValue = data.charisma_value || 0;
+      data?.intelligence_bonus ||
+      this.getStatBonusValue(this.intelligenceValue);
+    this.charismaValue = data?.charisma_value || 0;
     this.charismaBonus =
-      data.charisma_bonus || this.getStatBonusValue(this.charismaValue);
+      data?.charisma_bonus || this.getStatBonusValue(this.charismaValue);
 
     // Skills
     this.skilledSkills = (data?.char_skilled_skills || []).map(
@@ -124,8 +126,8 @@ export class BaseCharacter {
     this.customWeapons = (data?.custom_weapons || []).map(
       (customWeapon: CustomWeaponData) => new CustomWeapon(customWeapon)
     );
-    this.armor = data.armor ? new BaseArmor(data.armor) : null;
-    this.money = new Money(data.money);
+    this.armor = data?.armor ? new BaseArmor(data.armor) : null;
+    this.money = new Money(data?.money);
   }
 
   addSkilledNodes() {

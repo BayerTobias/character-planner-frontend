@@ -6,6 +6,7 @@ section {
   left: 0;
   right: 0;
   bottom: 0;
-  @include dFlex($ai: flex-start);
+  @include dFlex($jc: flex-start, $gp: 16px);
+  flex-direction: column;
   background-color: whitesmoke;
 }

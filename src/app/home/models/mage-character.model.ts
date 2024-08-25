@@ -6,7 +6,7 @@ interface MageData extends CharacterData {
 }
 
 export class Mage extends BaseCharacter {
-  constructor(data: MageData) {
+  constructor(data?: MageData) {
     super(data);
     this.maxHealth = this.calculateMaxHealth();
     this.maxMana = this.calculateMaxMana();
