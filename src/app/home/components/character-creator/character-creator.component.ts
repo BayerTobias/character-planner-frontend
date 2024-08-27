@@ -4,6 +4,7 @@ import { CharClassListItem } from '../../models/char-class-list-item.mode';
 import { CharRace } from '../../models/char-race.model';
 import { Mage } from '../../models/mage-character.model';
 import { CharClass } from '../../models/char-class.model';
+import { CharacterDataService } from '../../../shared/services/character-data.service';
 
 @Component({
   selector: 'app-character-creator',
@@ -14,6 +15,7 @@ import { CharClass } from '../../models/char-class.model';
 })
 export class CharacterCreatorComponent {
   public gameDataService = inject(GameDataService);
+  public characterDataService = inject(CharacterDataService);
 
   character: Mage | null = null;
 
@@ -33,14 +35,20 @@ export class CharacterCreatorComponent {
     console.log(this.selectedRace);
   }
 
-  next() {
-    if (this.selectedClass && this.selectedRace) {
+  async next() {
+    if (this.selectedClass && this.selectedClass.id && this.selectedRace) {
       this.selectScreen = false;
       this.characterDetailsScreen = true;
-      //Setup char based on class
       this.character = new Mage();
+      this.character.class = await this.characterDataService.getClassDetails(
+        this.selectedClass.id
+      );
 
       console.log(this.character);
     }
+  }
+
+  async createCharacter() {
+    console.log(this.character);
   }
 }

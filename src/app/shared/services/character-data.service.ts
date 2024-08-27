@@ -12,6 +12,7 @@ import {
   CharacterListItem,
   CharacterListItemData,
 } from '../../home/models/character-list-item.model';
+import { CharClass, CharClassData } from '../../home/models/char-class.model';
 
 @Injectable({
   providedIn: 'root',
@@ -46,6 +47,20 @@ export class CharacterDataService {
 
     this.setupCharacterObject(resp);
     console.log(this.character);
+  }
+
+  async getClassDetails(id: number) {
+    const url = environment.baseUrl + `/api/classes/${id}/`;
+
+    try {
+      const resp: CharClassData = await lastValueFrom(
+        this.http.get<CharClassData>(url)
+      );
+      return new CharClass(resp);
+    } catch (err) {
+      console.error(err);
+      return new CharClass();
+    }
   }
 
   setupCharacterObject(data: CharacterData) {
