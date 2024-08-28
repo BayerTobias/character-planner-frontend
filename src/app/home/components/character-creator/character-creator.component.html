@@ -14,9 +14,63 @@
     Weiter
   </button>
   }@else if (characterDetailsScreen) {
-  <form (submit)="createCharacter()"></form>
+
   <div>Karakter Form</div>
-  <button type="submit">Karakter erstellen</button>
+
+  <form [formGroup]="createCharacterForm" (submit)="createCharacter()">
+    <input
+      formControlName="characterName"
+      type="text"
+      placeholder="Karakter Name"
+    />
+
+    <div class="stat-distribution-row">
+      <input
+        (input)="calculateBonusValue('strength')"
+        formControlName="strengthValue"
+        type="number"
+      />
+      <span>{{ statBonuses["strengthBonus"] }}</span>
+    </div>
+
+    <div class="stat-distribution-row">
+      <input
+        (input)="calculateBonusValue('agility')"
+        formControlName="agilityValue"
+        type="number"
+      />
+      <span>{{ statBonuses["agilityBonus"] }}</span>
+    </div>
+
+    <div class="stat-distribution-row">
+      <input
+        (input)="calculateBonusValue('constitution')"
+        formControlName="constitutionValue"
+        type="number"
+      />
+      <span>{{ statBonuses["constitutionBonus"] }}</span>
+    </div>
+
+    <div class="stat-distribution-row">
+      <input
+        (input)="calculateBonusValue('intelligence')"
+        formControlName="intelligenceValue"
+        type="number"
+      />
+      <span>{{ statBonuses["intelligenceBonus"] }}</span>
+    </div>
+
+    <div class="stat-distribution-row">
+      <input
+        (input)="calculateBonusValue('charisma')"
+        formControlName="charismaValue"
+        type="number"
+      />
+      <span>{{ statBonuses["charismaBonus"] }}</span>
+    </div>
+
+    <button type="submit">Karakter erstellen</button>
+  </form>
 
   }
 </section>
