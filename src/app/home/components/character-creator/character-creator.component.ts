@@ -28,13 +28,28 @@ export class CharacterCreatorComponent {
 
   private character: Mage | null = null;
 
-  public selectScreen: boolean = true;
-  public characterDetailsScreen: boolean = false;
+  public selectScreen: boolean = false;
+  public characterDetailsScreen: boolean = true;
 
   public selectedClass: CharClassListItem | null = null;
   public selectedRace: CharRace | null = null;
 
-  private developmentPoints: number = 35;
+  public developmentPoints: number = 35;
+  public spendPoints: number = 0;
+  public attributeCosts = [
+    { cost: 0, value: 0, bonus: -99 },
+    { cost: 1, value: 1, bonus: -3 },
+    { cost: 2, value: 2, bonus: -2 },
+    { cost: 3, value: 3, bonus: -1 },
+    { cost: 4, value: 4, bonus: -1 },
+    { cost: 5, value: 5, bonus: 0 },
+    { cost: 6, value: 6, bonus: 1 },
+    { cost: 8, value: 7, bonus: 1 },
+    { cost: 10, value: 8, bonus: 2 },
+    { cost: 12, value: 9, bonus: 2 },
+    { cost: 16, value: 10, bonus: 3 },
+  ];
+
   public statBonuses: { [key: string]: number } = {
     strengthBonus: 0,
     agilityBonus: 0,
@@ -46,11 +61,31 @@ export class CharacterCreatorComponent {
   constructor() {
     this.createCharacterForm = this.fb.group({
       characterName: ['', Validators.required],
-      strengthValue: [1, Validators.required],
-      agilityValue: [1, Validators.required],
-      constitutionValue: [1, Validators.required],
-      intelligenceValue: [1, Validators.required],
-      charismaValue: [1, Validators.required],
+      strengthValue: [5, Validators.required],
+      agilityValue: [5, Validators.required],
+      constitutionValue: [5, Validators.required],
+      intelligenceValue: [5, Validators.required],
+      charismaValue: [5, Validators.required],
+    });
+  }
+
+  ngOnInit() {
+    this.calculateDevelopmentPoints();
+  }
+
+  calculateDevelopmentPoints() {
+    this.spendPoints = 0;
+
+    Object.keys(this.createCharacterForm.controls).forEach((key) => {
+      const attributeValue = this.createCharacterForm.get(key)?.value;
+      const costEntry = this.attributeCosts.find(
+        (entry) => entry.value === attributeValue
+      );
+
+      if (costEntry) {
+        this.spendPoints += costEntry.cost;
+        this.calculateBonusValue(attributeValue);
+      }
     });
   }
 

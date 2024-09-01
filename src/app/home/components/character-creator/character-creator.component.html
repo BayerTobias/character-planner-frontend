@@ -17,6 +17,8 @@
 
   <div>Karakter Form</div>
 
+  <span>{{ spendPoints }} / {{ developmentPoints }}</span>
+
   <form [formGroup]="createCharacterForm" (submit)="createCharacter()">
     <input
       formControlName="characterName"
