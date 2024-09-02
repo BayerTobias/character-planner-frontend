@@ -28,8 +28,8 @@ export class CharacterCreatorComponent {
 
   private character: Mage | null = null;
 
-  public selectScreen: boolean = false;
-  public characterDetailsScreen: boolean = true;
+  public selectScreen: boolean = true;
+  public characterDetailsScreen: boolean = false;
 
   public selectedClass: CharClassListItem | null = null;
   public selectedRace: CharRace | null = null;
@@ -84,9 +84,38 @@ export class CharacterCreatorComponent {
 
       if (costEntry) {
         this.spendPoints += costEntry.cost;
-        this.calculateBonusValue(attributeValue);
+        this.calculateBonusValue(key, costEntry);
       }
     });
+  }
+
+  calculateBonusValue(
+    statName: string,
+    costEntry: {
+      cost: number;
+      value: number;
+      bonus: number;
+    }
+  ) {
+    switch (statName) {
+      case 'strengthValue':
+        this.statBonuses['strengthBonus'] = costEntry.bonus;
+        break;
+      case 'agilityValue':
+        this.statBonuses['agilityBonus'] = costEntry.bonus;
+        break;
+      case 'constitutionValue':
+        this.statBonuses['constitutionBonus'] = costEntry.bonus;
+        break;
+      case 'intelligenceValue':
+        this.statBonuses['intelligenceBonus'] = costEntry.bonus;
+        break;
+      case 'charismaValue':
+        this.statBonuses['charismaBonus'] = costEntry.bonus;
+        break;
+      default:
+        break;
+    }
   }
 
   selectClass(charClass: CharClassListItem) {
@@ -112,64 +141,29 @@ export class CharacterCreatorComponent {
     }
   }
 
-  calculateBonusValue(statName: string) {
-    const statValue =
-      this.createCharacterForm.get(statName + 'Value')?.value || 1;
-    console.log(statValue);
-
-    let bonus = 0;
-
-    switch (statValue) {
-      case 0:
-        bonus = -4;
-        break;
-      case 1:
-        bonus = -3;
-        break;
-      case 2:
-        bonus = -2;
-        break;
-      case 3:
-      case 4:
-        bonus = -1;
-        break;
-      case 5:
-        bonus = 0;
-        break;
-      case 6:
-      case 7:
-        bonus = 1;
-        break;
-      case 8:
-      case 9:
-        bonus = 2;
-        break;
-      case 10:
-      case 11:
-        bonus = 3;
-        break;
-      case 12:
-      case 13:
-        bonus = 4;
-        break;
-      case 14:
-        bonus = 5;
-        break;
-      default:
-        bonus = 0;
-        break;
-    }
-
-    this.statBonuses[`${statName}Bonus`] = bonus;
-    console.log(this.statBonuses);
-  }
-
   async createCharacter() {
     if (this.createCharacterForm.valid && this.character) {
-      this.character.name =
-        this.createCharacterForm.get('characterName')?.value;
+      this.fillCharacterStats();
     }
+  }
 
-    console.log(this.character);
+  fillCharacterStats() {
+    if (this.character) {
+      this.character.name = this.getFormValue('characterName');
+      this.character.strengthValue = this.getFormValue('strengthValue');
+      this.character.strengthBonus = this.statBonuses['strengthBonus'];
+      this.character.agilityValue = this.getFormValue('agilityValue');
+      this.character.agilityBonus = this.statBonuses['agilityBonus'];
+      this.character.constitutionValue = this.getFormValue('constitutionValue');
+      this.character.constitutionBonus = this.statBonuses['constitutionBonus'];
+      this.character.intelligenceValue = this.getFormValue('intelligenceValue');
+      this.character.intelligenceBonus = this.statBonuses['intelligenceBonus'];
+      this.character.charismaValue = this.getFormValue('charismaValue');
+      this.character.charismaBonus = this.statBonuses['charismaBonus'];
+    }
+  }
+
+  getFormValue(value: string) {
+    return this.createCharacterForm.get(value)?.value;
   }
 }
