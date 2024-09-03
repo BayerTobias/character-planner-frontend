@@ -7,7 +7,7 @@ export interface SkillData {
 }
 
 export class Skill {
-  id: number;
+  id: number | null;
   name: string;
   description: string;
   firstLevelCost: number;
@@ -15,7 +15,7 @@ export class Skill {
   nodesSkilled: number;
 
   constructor(data: SkillData) {
-    this.id = data.id || -1;
+    this.id = data.id || null;
     this.name = data.name || '';
     this.description = data?.description || '';
     this.firstLevelCost = data?.first_level_cost || 99;

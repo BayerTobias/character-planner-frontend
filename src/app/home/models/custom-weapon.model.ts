@@ -36,4 +36,18 @@ export class CustomWeapon {
     this.iniBonus = data?.ini_bonus || 0;
     this.special = data?.special || '';
   }
+
+  asJason() {
+    return {
+      id: this.id,
+      name: this.name,
+      weaponGroups: this.weaponGroups.map((group) => group.asJason()),
+      minStr: this.minStr,
+      dmg: this.dmg,
+      attribute: this.attribute,
+      weight: this.weight,
+      iniBonus: this.iniBonus,
+      special: this.special,
+    };
+  }
 }

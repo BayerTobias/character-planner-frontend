@@ -8,7 +8,7 @@ export interface CustomSkillData {
 }
 
 export class CustomSkill {
-  id: number;
+  id: number | null;
   name: string;
   description: string;
   firstLevelCost: number;
@@ -16,11 +16,22 @@ export class CustomSkill {
   nodesSkilled: number;
 
   constructor(data: CustomSkillData) {
-    this.id = data.id || -1;
-    this.name = data.name || '';
+    this.id = data?.id || null;
+    this.name = data?.name || '';
     this.description = data?.description || '';
     this.firstLevelCost = data?.first_level_cost || 99;
     this.secondLevelCost = data?.second_level_cost || null;
     this.nodesSkilled = data?.nodes_skilled || 0;
+  }
+
+  asJson() {
+    return {
+      id: this.id,
+      name: this.name,
+      description: this.description,
+      firstLevelCost: this.firstLevelCost,
+      secondLevelCost: this.secondLevelCost,
+      nodesSkilled: this.nodesSkilled,
+    };
   }
 }

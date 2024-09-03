@@ -133,6 +133,7 @@ export class CharacterCreatorComponent {
       this.selectScreen = false;
       this.characterDetailsScreen = true;
       this.character = new Mage();
+      this.character.race = this.selectedRace;
       this.character.class = await this.characterDataService.getClassDetails(
         this.selectedClass.id
       );
@@ -144,6 +145,8 @@ export class CharacterCreatorComponent {
   async createCharacter() {
     if (this.createCharacterForm.valid && this.character) {
       this.fillCharacterStats();
+      this.character.maxHealth = this.character.calculateMaxHealth();
+      console.log(this.character.asJson());
     }
   }
 

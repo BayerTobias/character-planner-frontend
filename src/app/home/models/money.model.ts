@@ -20,4 +20,8 @@ export class Money {
     this.mu = data?.mu || 0;
     this.tt = data?.tt || 0;
   }
+
+  asJason() {
+    return { id: this.id, gf: this.gf, kl: this.kl, mu: this.mu, tt: this.tt };
+  }
 }

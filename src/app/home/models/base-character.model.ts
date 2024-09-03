@@ -248,6 +248,46 @@ export class BaseCharacter {
   }
 
   asJson() {
-    return {};
+    return {
+      // Core Character Information
+      name: this.name,
+      race: this.race.id,
+      class: this.class.id,
+      level: this.level,
+
+      // Health and Mana
+      currentHp: this.currentHp,
+      maxHealth: this.maxHealth,
+      currentMana: this.currentMana,
+      maxMana: this.maxMana,
+
+      // Primary Attributes
+      strengthValue: this.strengthValue,
+      strengthBonus: this.strengthBonus,
+      agilityValue: this.agilityValue,
+      agilityBonus: this.agilityBonus,
+      constitutionValue: this.constitutionValue,
+      constitutionBonus: this.constitutionBonus,
+      intelligenceValue: this.intelligenceValue,
+      intelligenceBonus: this.intelligenceBonus,
+      charismaValue: this.charismaValue,
+      charismaBonus: this.charismaBonus,
+
+      // Skills
+      customSkills: this.customSkills.map((customSkill) =>
+        customSkill.asJson()
+      ),
+      skilledSkills: this.skilledSkills.map((skilledSkill) =>
+        skilledSkill.asJson()
+      ),
+
+      // Items
+      baseWeapons: this.baseWeapons.map((baseWeapon) => baseWeapon.asJason()),
+      customWeapons: this.customWeapons.map((customWeapon) =>
+        customWeapon.asJason()
+      ),
+      armor: this.armor?.asJason(),
+      money: this.money.asJason(),
+    };
   }
 }
