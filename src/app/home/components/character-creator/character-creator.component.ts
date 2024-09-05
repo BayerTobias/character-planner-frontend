@@ -146,7 +146,7 @@ export class CharacterCreatorComponent {
     if (this.createCharacterForm.valid && this.character) {
       this.fillCharacterStats();
       this.character.maxHealth = this.character.calculateMaxHealth();
-      console.log(this.character.asJson());
+      console.log(this.character.asPostRequestJson());
     }
   }
 

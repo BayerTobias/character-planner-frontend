@@ -13,6 +13,8 @@ export class Mage extends BaseCharacter {
   }
 
   calculateMaxHealth() {
+    console.log((this.constitutionBonus + 4) * this.level);
+
     return (this.constitutionBonus + 4) * this.level;
   }
 

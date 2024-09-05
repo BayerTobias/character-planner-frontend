@@ -46,7 +46,7 @@ export class CharacterDataService {
     console.log(resp);
 
     this.setupCharacterObject(resp);
-    console.log(this.character?.asJson());
+    console.log(this.character?.asPostRequestJson());
   }
 
   async getClassDetails(id: number) {
