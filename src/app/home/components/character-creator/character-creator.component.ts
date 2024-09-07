@@ -11,6 +11,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-character-creator',
@@ -23,6 +24,7 @@ export class CharacterCreatorComponent {
   public gameDataService = inject(GameDataService);
   public characterDataService = inject(CharacterDataService);
   private fb = inject(FormBuilder);
+  private router = inject(Router);
 
   public createCharacterForm: FormGroup;
 
@@ -146,7 +148,15 @@ export class CharacterCreatorComponent {
     if (this.createCharacterForm.valid && this.character) {
       this.fillCharacterStats();
       this.character.maxHealth = this.character.calculateMaxHealth();
-      console.log(this.character.asPostRequestJson());
+      try {
+        const resp = await this.characterDataService.umploadCharacter(
+          this.character
+        );
+        console.log(resp);
+        this.router.navigateByUrl(`character?character_id=${resp.id}`);
+      } catch (err) {
+        console.error(err);
+      }
     }
   }
 

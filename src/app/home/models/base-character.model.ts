@@ -17,7 +17,9 @@ export interface CharacterData {
 
   // Health and Mana
   current_hp: number;
+  max_hp: number | null;
   current_mana: number | null;
+  max_mana: number | null;
 
   // Primary Attributes
   strength_value: number;
@@ -257,7 +259,7 @@ export class BaseCharacter {
 
       // Health and Mana
       current_hp: this.currentHp,
-      max_health: this.maxHealth,
+      max_hp: this.maxHealth,
       current_mana: this.currentMana,
       max_mana: this.maxMana,
 

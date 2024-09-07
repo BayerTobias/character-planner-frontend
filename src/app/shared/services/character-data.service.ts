@@ -72,4 +72,14 @@ export class CharacterDataService {
         this.character = new BaseCharacter(data);
     }
   }
+
+  async umploadCharacter(character: BaseCharacter) {
+    const url = environment.baseUrl + '/api/characters/';
+    const body = character.asPostRequestJson();
+
+    const resp: CharacterData = await lastValueFrom(
+      this.http.post<CharacterData>(url, body)
+    );
+    return resp;
+  }
 }
