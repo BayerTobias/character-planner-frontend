@@ -20,11 +20,12 @@
   <span>{{ spendPoints }} / {{ developmentPoints }}</span>
 
   <form [formGroup]="createCharacterForm" (submit)="createCharacter()">
-    <input
-      formControlName="characterName"
-      type="text"
-      placeholder="Karakter Name"
-    />
+    <app-input-with-error-msg
+      [control]="getFormControl('characterName')"
+      [placeholder]="'Karakter Name'"
+      [type]="'text'"
+      [error]="true"
+    ></app-input-with-error-msg>
 
     <div class="stat-distribution-row">
       <input

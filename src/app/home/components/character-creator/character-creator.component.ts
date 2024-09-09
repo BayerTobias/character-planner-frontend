@@ -6,17 +6,19 @@ import { Mage } from '../../models/mage-character.model';
 import { CharacterDataService } from '../../../shared/services/character-data.service';
 import {
   FormBuilder,
+  FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { InputWithErrorMsgComponent } from '../../../shared/components/form-components/input-with-error-msg/input-with-error-msg.component';
 
 @Component({
   selector: 'app-character-creator',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, InputWithErrorMsgComponent],
   templateUrl: './character-creator.component.html',
   styleUrl: './character-creator.component.scss',
 })
@@ -148,15 +150,17 @@ export class CharacterCreatorComponent {
     if (this.createCharacterForm.valid && this.character) {
       this.fillCharacterStats();
       this.character.maxHealth = this.character.calculateMaxHealth();
-      try {
-        const resp = await this.characterDataService.umploadCharacter(
-          this.character
-        );
-        console.log(resp);
-        this.router.navigateByUrl(`character?character_id=${resp.id}`);
-      } catch (err) {
-        console.error(err);
-      }
+      console.log(this.character);
+
+      // try {
+      //   const resp = await this.characterDataService.umploadCharacter(
+      //     this.character
+      //   );
+      //   console.log(resp);
+      //   this.router.navigateByUrl(`character?character_id=${resp.id}`);
+      // } catch (err) {
+      //   console.error(err);
+      // }
     }
   }
 
@@ -178,5 +182,9 @@ export class CharacterCreatorComponent {
 
   getFormValue(value: string) {
     return this.createCharacterForm.get(value)?.value;
+  }
+
+  getFormControl(controlName: string) {
+    return this.createCharacterForm.get(controlName) as FormControl;
   }
 }
