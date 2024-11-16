@@ -1,4 +1,8 @@
 <main>
+  <div>
+    <button (click)="routeCharacterCreater()">create new Character</button>
+  </div>
+
   @for (character of characterDataService.characterList; track $index) {
   <div class="char-card" (click)="selectCharacter(character.id!)">
     <div>{{ character.name }}</div>

@@ -1,4 +1,6 @@
 <div class="character-card">
+  <button (click)="openDmgOverlay()">damage</button>
+
   @if (characterDataService.character) {
   <app-stat-box
     [strengthValue]="characterDataService.character!.strengthValue"
@@ -25,3 +27,7 @@
   <app-skills-display [skill]="skill" [index]="null"></app-skills-display>
   } }
 </div>
+
+@if(overlay){
+<app-overlay-base (closeOverlayEvent)="closeOverlay()"></app-overlay-base>
+}

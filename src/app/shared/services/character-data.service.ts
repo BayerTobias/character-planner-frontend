@@ -74,7 +74,7 @@ export class CharacterDataService {
     }
   }
 
-  async umploadCharacter(character: BaseCharacter) {
+  async uploadCharacter(character: BaseCharacter) {
     const url = environment.baseUrl + '/api/characters/';
     const body = character.asPostRequestJson();
 
@@ -82,5 +82,9 @@ export class CharacterDataService {
       this.http.post<CharacterData>(url, body)
     );
     return resp;
+  }
+
+  async updateCharacter() {
+    console.log('implement update function');
   }
 }

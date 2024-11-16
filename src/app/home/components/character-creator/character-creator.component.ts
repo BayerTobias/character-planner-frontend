@@ -153,7 +153,7 @@ export class CharacterCreatorComponent {
       console.log(this.character);
 
       // try {
-      //   const resp = await this.characterDataService.umploadCharacter(
+      //   const resp = await this.characterDataService.uploadCharacter(
       //     this.character
       //   );
       //   console.log(resp);
