@@ -33,6 +33,7 @@ export class CharacterDataService {
         this.http.get<CharacterListItemData[]>(url)
       );
       this.characterList = resp.map((data) => new CharacterListItem(data));
+      console.log('char List:', this.characterList);
     } catch (err) {
       console.error(err);
     }

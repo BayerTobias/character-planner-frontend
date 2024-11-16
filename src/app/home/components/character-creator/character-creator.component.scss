@@ -1,11 +1,6 @@
 @import "../../../../mixin.scss";
 
 section {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
   @include dFlex($jc: flex-start, $gp: 16px);
   flex-direction: column;
   background-color: whitesmoke;

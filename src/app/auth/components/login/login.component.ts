@@ -67,6 +67,6 @@ export class LoginComponent {
    */
   handleSuccessfullLogin(resp: LoginResponse) {
     localStorage.setItem('token', resp.token);
-    this.router.navigateByUrl('/character');
+    this.router.navigateByUrl('/select-character');
   }
 }
