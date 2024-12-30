@@ -1,1 +1,12 @@
-<p>hourly-rest-component works!</p>
+<form (submit)="submitForm()">
+  <div>
+    <p>
+      Mana: {{ characterService.character?.currentMana }} /
+      <span>{{ characterService.character?.maxMana }}</span>
+    </p>
+  </div>
+  <div>
+    <span>Stunden:</span>
+    <input type="number" />
+  </div>
+</form>

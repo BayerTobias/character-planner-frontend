@@ -150,6 +150,9 @@ export class CharacterCreatorComponent {
     if (this.createCharacterForm.valid && this.character) {
       this.fillCharacterStats();
       this.character.maxHealth = this.character.calculateMaxHealth();
+      if (this.isCaster()) {
+        this.calculateMaxMana();
+      }
       console.log(this.character);
 
       // try {
@@ -163,6 +166,15 @@ export class CharacterCreatorComponent {
       // }
     }
   }
+
+  isCaster() {
+    const characterClass = this.selectedClass;
+    const className = characterClass?.name;
+
+    return className === 'mage';
+  }
+
+  calculateMaxMana() {}
 
   fillCharacterStats() {
     if (this.character) {
