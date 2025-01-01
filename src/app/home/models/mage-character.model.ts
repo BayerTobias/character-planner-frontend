@@ -8,14 +8,10 @@ interface MageData extends CharacterData {
 export class Mage extends BaseCharacter {
   constructor(data?: MageData) {
     super(data);
+    this.class.baseLvlHp = 4;
+    this.class.baseLvlMana = 3;
     this.maxHealth = this.calculateMaxHealth();
     this.maxMana = this.calculateMaxMana();
-  }
-
-  calculateMaxHealth() {
-    console.log((this.constitutionBonus + 4) * this.level);
-
-    return (this.constitutionBonus + 4) * this.level;
   }
 
   calculateMaxMana() {
@@ -23,9 +19,11 @@ export class Mage extends BaseCharacter {
       (skill: Skill) => skill.name === 'Magie Entwickeln'
     );
 
-    if (developMagic) {
+    if (developMagic && this.class.baseLvlMana) {
       const developMagicRanks = this.getSkillRank(developMagic.nodesSkilled);
-      return (this.intelligenceBonus + 3) * developMagicRanks;
+      return (
+        (this.intelligenceBonus + this.class.baseLvlMana) * developMagicRanks
+      );
     } else return null;
   }
 }

@@ -14,6 +14,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { InputWithErrorMsgComponent } from '../../../shared/components/form-components/input-with-error-msg/input-with-error-msg.component';
+import { BaseCharacter } from '../../models/base-character.model';
 
 @Component({
   selector: 'app-character-creator',
@@ -30,7 +31,7 @@ export class CharacterCreatorComponent {
 
   public createCharacterForm: FormGroup;
 
-  private character: Mage | null = null;
+  private character: BaseCharacter | Mage = new BaseCharacter();
 
   public selectScreen: boolean = true;
   public characterDetailsScreen: boolean = false;
@@ -136,7 +137,7 @@ export class CharacterCreatorComponent {
     if (this.selectedClass && this.selectedClass.id && this.selectedRace) {
       this.selectScreen = false;
       this.characterDetailsScreen = true;
-      this.character = new Mage();
+      this.character = this.setCharacterObject();
       this.character.race = this.selectedRace;
       this.character.class = await this.characterDataService.getClassDetails(
         this.selectedClass.id
@@ -150,9 +151,8 @@ export class CharacterCreatorComponent {
     if (this.createCharacterForm.valid && this.character) {
       this.fillCharacterStats();
       this.character.maxHealth = this.character.calculateMaxHealth();
-      if (this.isCaster()) {
-        this.calculateMaxMana();
-      }
+      this.character.currentHp = this.character.maxHealth;
+
       console.log(this.character);
 
       // try {
@@ -167,14 +167,15 @@ export class CharacterCreatorComponent {
     }
   }
 
-  isCaster() {
-    const characterClass = this.selectedClass;
-    const className = characterClass?.name;
+  setCharacterObject() {
+    switch (this.selectedClass?.name) {
+      case 'mage':
+        return new Mage();
 
-    return className === 'mage';
+      default:
+        return new BaseCharacter();
+    }
   }
-
-  calculateMaxMana() {}
 
   fillCharacterStats() {
     if (this.character) {

@@ -249,6 +249,10 @@ export class BaseCharacter {
     }
   }
 
+  calculateMaxHealth() {
+    return (this.constitutionBonus + this.class.baseLvlHp) * this.level;
+  }
+
   asPostRequestJson() {
     return {
       // Core Character Information
