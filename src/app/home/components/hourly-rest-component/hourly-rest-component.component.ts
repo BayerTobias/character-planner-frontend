@@ -1,39 +1,61 @@
 import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { CharacterDataService } from '../../../shared/services/character-data.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-hourly-rest-component',
   standalone: true,
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './hourly-rest-component.component.html',
   styleUrl: './hourly-rest-component.component.scss',
 })
 export class HourlyRestComponentComponent {
   public characterService = inject(CharacterDataService);
+  public hours: number = 0;
+  public displayMana: number | null = 0;
 
   @Output() submitEvent = new EventEmitter();
+
+  constructor() {}
 
   ngOnInit() {
     console.log(this.characterService.character?.class.mainStat);
     console.log(this.calculateManaRegen());
+
+    if (this.characterService.character) {
+      this.displayMana = this.characterService.character.currentMana;
+    }
   }
 
   submitForm() {}
 
   calculateManaRegen() {
     const character = this.characterService.character;
+    if (character && this.displayMana && character.currentMana) {
+      const mainStat = character.class.mainStat;
 
-    if (!character) return null;
+      switch (mainStat) {
+        case 'intelligence':
+          console.log('int');
 
-    const mainStat = character.class.mainStat;
+          this.displayMana = this.calc(
+            character.currentMana,
+            character.intelligenceBonus
+          );
+          console.log(this.displayMana);
+          break;
 
-    switch (mainStat) {
-      case 'intelligence':
-        return (character.intelligenceBonus + 1) * 3;
-      case 'charisma':
-        return (character.charismaBonus + 1) * 3;
-      default:
-        return 0;
+        case 'charisma':
+          this.displayMana =
+            this.displayMana + (character.intelligenceBonus + 1) * 3;
+          break;
+        default:
+          break;
+      }
     }
+  }
+
+  calc(currentMana: number, bonus: number) {
+    return currentMana + (bonus + 1) * this.hours;
   }
 }

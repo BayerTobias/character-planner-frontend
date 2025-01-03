@@ -1,12 +1,18 @@
 <form (submit)="submitForm()">
   <div>
     <p>
-      Mana: {{ characterService.character?.currentMana }} /
+      Mana: {{ displayMana }} /
       <span>{{ characterService.character?.maxMana }}</span>
     </p>
   </div>
   <div>
     <span>Stunden:</span>
-    <input type="number" />
+    <input
+      (input)="calculateManaRegen()"
+      type="number"
+      [(ngModel)]="hours"
+      name="dmg"
+      required
+    />
   </div>
 </form>
