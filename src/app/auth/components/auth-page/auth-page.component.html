@@ -1,0 +1,13 @@
+<section>
+  <div
+    class="background"
+    [style.backgroundImage]="'url(' + currentImg + ')'"
+    [ngClass]="{ leave: isSliding }"
+  ></div>
+
+  <div
+    class="background"
+    [style.backgroundImage]="'url(' + nextImg + ')'"
+    [ngClass]="{ enter: isSliding, hidden: !isSliding }"
+  ></div>
+</section>
