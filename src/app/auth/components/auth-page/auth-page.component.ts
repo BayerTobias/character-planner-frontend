@@ -24,7 +24,7 @@ export class AuthPageComponent {
     '/assets/img/auth-background-img/background-12.png',
   ];
 
-  isSliding: boolean = false;
+  transition: boolean = false;
   index: number = 0;
   currentImg: string = this.backgroundImages[0];
   nextImg: string = this.backgroundImages[1];
@@ -32,13 +32,11 @@ export class AuthPageComponent {
   ngAfterViewInit() {
     setInterval(() => {
       this.slideToNextImage();
-      console.log(this.currentImg);
-      console.log(this.nextImg);
     }, 5000);
   }
 
   slideToNextImage(): void {
-    this.isSliding = true;
+    this.transition = true;
 
     const nextIndex = (this.index + 1) % this.backgroundImages.length;
     this.nextImg = this.backgroundImages[nextIndex];
@@ -46,7 +44,7 @@ export class AuthPageComponent {
     setTimeout(() => {
       this.index = nextIndex;
       this.currentImg = this.backgroundImages[this.index];
-      this.isSliding = false;
+      this.transition = false;
     }, 1000);
   }
 }
