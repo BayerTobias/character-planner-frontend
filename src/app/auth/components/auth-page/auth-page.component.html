@@ -1,13 +1,24 @@
 <section>
+  <!-- Background Images -->
   <div
     class="background"
     [style.backgroundImage]="'url(' + currentImg + ')'"
     [ngClass]="{ leave: transition }"
   ></div>
-
   <div
     class="background"
     [style.backgroundImage]="'url(' + nextImg + ')'"
     style="z-index: -2"
   ></div>
+
+  <main>
+    <header>asdasd</header>
+    <app-login></app-login>
+    <div>
+      <button>login</button>
+      <button>signUP</button>
+    </div>
+  </main>
+
+  <footer>asdasd</footer>
 </section>

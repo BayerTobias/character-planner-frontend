@@ -1,0 +1,26 @@
+@import "./../../../../styles.scss";
+@import "./../../../../mixin.scss";
+
+section {
+  background: rgba(27, 27, 27, 0.95);
+  padding: 36px;
+  color: $copy-light;
+  @include dFlex();
+  flex-direction: column;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+span {
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 0.3px;
+}
+
+form {
+  @include dFlex();
+  flex-direction: column;
+}

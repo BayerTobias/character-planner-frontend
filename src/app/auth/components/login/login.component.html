@@ -1,6 +1,27 @@
-<form [formGroup]="loginForm" (submit)="login()">
-  <input formControlName="username" type="text" />
-  <input formControlName="password" type="password" />
-  <input formControlName="rememberMe" type="checkbox" />
-  <button type="submit">Send</button>
-</form>
+<section>
+  <h1>Login</h1>
+
+  <span>via Email & Passwort</span>
+
+  <form [formGroup]="loginForm" (submit)="login()">
+    <input formControlName="username" type="text" />
+    <input formControlName="password" type="password" />
+    <input formControlName="rememberMe" type="checkbox" />
+    <button type="submit">Send</button>
+  </form>
+
+  <div>
+    <div></div>
+    <span>oder</span>
+    <div></div>
+  </div>
+
+  <span>via Google Account</span>
+
+  <button>Google</button>
+
+  <p>
+    Mit dem Fortfahren und Nutzen der Appakzeptierst du die
+    <a href="">Nutzungsbedingungen</a> und <a href="#">Datenschutzerklärung</a>.
+  </p>
+</section>
