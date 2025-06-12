@@ -11,7 +11,15 @@
       <span>Login-Daten merken</span>
     </div>
 
-    <button type="submit">Send</button>
+    <app-standard-button
+      [type]="'submit'"
+      [content]="'Einloggen'"
+      [width]="'100%'"
+      [height]="'36px'"
+      [borderRadius]="'8px'"
+      [fontWeight]="500"
+      [style]="'blue'"
+    ></app-standard-button>
   </form>
 
   <div class="separator-wrapper">
@@ -22,7 +30,17 @@
 
   <span>via Google Account</span>
 
-  <button>Google</button>
+  <img src="" alt="" />
+
+  <app-standard-button
+    [content]="'Einloggen'"
+    [width]="'100%'"
+    [height]="'36px'"
+    [borderRadius]="'8px'"
+    [fontWeight]="500"
+    [imgUrl]="'assets/icons/auth-icons/google-small.png'"
+    [style]="'white'"
+  ></app-standard-button>
 
   <p>
     Mit dem Fortfahren und Nutzen der Appakzeptierst du die

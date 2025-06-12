@@ -2,7 +2,7 @@
 @import "./../../../../mixin.scss";
 
 section {
-  background: rgba(27, 27, 27, 0.95);
+  background: rgba(27, 27, 27, 0.5);
   padding: 24px;
   color: $copy-light;
   @include dFlex($gp: 16px);
@@ -21,7 +21,7 @@ span {
 }
 
 form {
-  @include dFlex($gp: 8px);
+  @include dFlex($gp: 16px);
   flex-direction: column;
   width: 100%;
 

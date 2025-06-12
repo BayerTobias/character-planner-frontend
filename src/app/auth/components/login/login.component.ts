@@ -9,11 +9,12 @@ import {
 import { AuthService } from '../../services/auth.service';
 import { LoginResponse } from '../../interfaces/login-response';
 import { Router } from '@angular/router';
+import { StandardButtonComponent } from '../../../shared/components/buttons/standard-button/standard-button.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, StandardButtonComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })

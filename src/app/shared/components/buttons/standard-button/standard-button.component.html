@@ -1,0 +1,21 @@
+<button
+  [ngStyle]="{
+    width: width ? width : null,
+    height: height ? height : null,
+    'font-weight': fontWeight ? fontWeight : null,
+    'font-size': fontSize ? fontSize + 'px' : null,
+    'border-radius': borderRadius ? borderRadius : null
+  }"
+  [ngClass]="{
+    white: style === 'white',
+    blue: style === 'blue',
+
+  }"
+  [type]="type"
+  (click)="submit()"
+>
+  @if (imgUrl) {
+  <img [src]="imgUrl" alt="icon" />
+  }
+  {{ content }}
+</button>

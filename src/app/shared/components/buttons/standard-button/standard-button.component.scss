@@ -1,0 +1,33 @@
+@import "./../../../../../styles.scss";
+@import "./../../../../../mixin.scss";
+
+button {
+  @include dFlex($gp: 4px);
+  font-size: 14px;
+  border-radius: 4px;
+  border: unset;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 250ms ease-in-out;
+}
+
+.blue {
+  color: $copy-dark;
+  background-color: $mage-color;
+}
+
+.white {
+  color: $copy-dark;
+  background-color: rgba(250, 252, 255, 1);
+  border: 1.5px solid rgba(73, 87, 110, 0.2);
+}
+
+// .dark {
+//   color: rgb(251, 251, 251);
+//   background-color: rgb(68, 68, 68);
+//   box-shadow: 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+
+//   &:hover {
+//     filter: brightness(0.8);
+//   }
+// }
