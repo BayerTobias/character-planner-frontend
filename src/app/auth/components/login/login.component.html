@@ -1,16 +1,20 @@
 <section>
   <h1>Login</h1>
 
-  <span>via Email & Passwort</span>
+  <span>via Username & Passwort</span>
 
   <form [formGroup]="loginForm" (submit)="login()">
-    <input formControlName="username" type="text" />
-    <input formControlName="password" type="password" />
-    <input formControlName="rememberMe" type="checkbox" />
+    <input placeholder="Username" formControlName="username" type="text" />
+    <input placeholder="Passwort" formControlName="password" type="password" />
+    <div>
+      <input formControlName="rememberMe" type="checkbox" />
+      <span>Login-Daten merken</span>
+    </div>
+
     <button type="submit">Send</button>
   </form>
 
-  <div>
+  <div class="separator-wrapper">
     <div></div>
     <span>oder</span>
     <div></div>

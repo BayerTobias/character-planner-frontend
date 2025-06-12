@@ -13,6 +13,10 @@ main {
   height: 100svh;
   @include dFlex($jc: space-between);
   flex-direction: column;
+
+  @media screen and (orientation: landscape) and (max-height: 500px) {
+    height: auto;
+  }
 }
 
 header,

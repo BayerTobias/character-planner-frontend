@@ -12,7 +12,7 @@ export class AuthService {
   constructor() {}
 
   async loginWithUsernameAndPawword(username: string, password: string) {
-    const url = environment.baseUrl + '/auth/login/';
+    const url = environment.baseUrl + 'auth/login/';
     const body = { username: username, password: password };
 
     return lastValueFrom(this.http.post(url, body));
@@ -23,14 +23,14 @@ export class AuthService {
     email: string,
     password: string
   ) {
-    const url = environment.baseUrl + '/auth/users/';
+    const url = environment.baseUrl + 'auth/users/';
     const body = { username: username, email: email, password: password };
 
     return lastValueFrom(this.http.post(url, body));
   }
 
   async checkAuth() {
-    const url = environment.baseUrl + '/auth/check/';
+    const url = environment.baseUrl + 'auth/check/';
 
     try {
       const response: { message?: string } = await lastValueFrom(

@@ -26,7 +26,7 @@ export class CharacterDataService {
   constructor() {}
 
   async getCharacterList() {
-    const url = environment.baseUrl + '/api/characters/';
+    const url = environment.baseUrl + 'api/characters/';
 
     try {
       const resp: CharacterListItemData[] = await lastValueFrom(
@@ -40,7 +40,7 @@ export class CharacterDataService {
   }
 
   async getCharacterData(id: number) {
-    const url = environment.baseUrl + `/api/characters/${id}/`;
+    const url = environment.baseUrl + `api/characters/${id}/`;
     const resp: CharacterData = await lastValueFrom(
       this.http.get<CharacterData>(url)
     );
@@ -51,7 +51,7 @@ export class CharacterDataService {
   }
 
   async getClassDetails(id: number) {
-    const url = environment.baseUrl + `/api/classes/${id}/`;
+    const url = environment.baseUrl + `api/classes/${id}/`;
 
     try {
       const resp: CharClassData = await lastValueFrom(
@@ -75,7 +75,7 @@ export class CharacterDataService {
   }
 
   async uploadCharacter(character: BaseCharacter) {
-    const url = environment.baseUrl + '/api/characters/';
+    const url = environment.baseUrl + 'api/characters/';
     const body = character.asPostRequestJson();
 
     const resp: CharacterData = await lastValueFrom(
