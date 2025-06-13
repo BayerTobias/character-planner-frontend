@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { LoginComponent } from '../login/login.component';
+import { SignUpComponent } from '../sign-up/sign-up.component';
 
 @Component({
   selector: 'app-auth-page',
   standalone: true,
-  imports: [CommonModule, LoginComponent],
+  imports: [CommonModule, LoginComponent, SignUpComponent],
   templateUrl: './auth-page.component.html',
   styleUrl: './auth-page.component.scss',
 })

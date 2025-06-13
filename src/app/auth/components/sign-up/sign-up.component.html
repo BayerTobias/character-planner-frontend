@@ -1,8 +1,49 @@
-<form [formGroup]="signupForm" (submit)="signUp()">
-  <input formControlName="username" type="text" />
-  <input formControlName="email" type="email" />
-  <input formControlName="password" type="password" />
-  <input formControlName="passwordRepeat" type="password" />
-  <input formControlName="privacyPolicy" type="checkbox" />
-  <button type="submit">send</button>
-</form>
+<section>
+  <h1>Account erstellen</h1>
+
+  <form [formGroup]="signupForm" (submit)="signUp()">
+    <input placeholder="Username" formControlName="username" type="text" />
+    <input placeholder="Email" formControlName="email" type="email" />
+    <input placeholder="Password" formControlName="password" type="password" />
+    <input
+      placeholder="Password wiederholen"
+      formControlName="passwordRepeat"
+      type="password"
+    />
+    <div>
+      <input formControlName="privacyPolicy" type="checkbox" />
+      <span
+        >Ich habe die <a href="">Datenschutzerklärung</a> gelesen und akzeptiere
+        sie.
+      </span>
+    </div>
+
+    <app-standard-button
+      [content]="'Account erstellen'"
+      [width]="'100%'"
+      [height]="'36px'"
+      [borderRadius]="'8px'"
+      [fontWeight]="500"
+      [style]="'blue'"
+      [type]="'submit'"
+    ></app-standard-button>
+  </form>
+
+  <div class="separator-wrapper">
+    <div></div>
+    <span>oder</span>
+    <div></div>
+  </div>
+
+  <span>via Google Account</span>
+
+  <app-standard-button
+    [content]="'Google'"
+    [width]="'100%'"
+    [height]="'36px'"
+    [borderRadius]="'8px'"
+    [fontWeight]="500"
+    [imgUrl]="'assets/icons/auth-icons/google-small.png'"
+    [style]="'white'"
+  ></app-standard-button>
+</section>

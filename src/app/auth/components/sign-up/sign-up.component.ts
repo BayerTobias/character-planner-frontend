@@ -8,11 +8,12 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { CustomValidators } from '../../custom-validators';
+import { StandardButtonComponent } from '../../../shared/components/buttons/standard-button/standard-button.component';
 
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, StandardButtonComponent],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.scss',
 })
