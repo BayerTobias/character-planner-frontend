@@ -12,12 +12,26 @@
   ></div>
 
   <main>
-    <header>asdasd</header>
-    <app-sign-up></app-sign-up>
-    <div>
-      <button>login</button>
-      <button>signUP</button>
-    </div>
+    <header (click)="slideInNav()">asdasd</header>
+
+    @if (activeContainer === 'login') {<app-login
+      (closeLogin)="slideInNav()"
+    ></app-login
+    >} @else if (activeContainer === 'signUp') {<app-sign-up
+      (closeSignup)="slideInNav()"
+    ></app-sign-up>
+    }
+
+    <nav
+      [ngClass]="{
+        'slide-left': slideDirection === 'left',
+        'slide-right': slideDirection === 'right',
+        'height-zero': hideNav && !containerAnimation
+      }"
+    >
+      <button (click)="openLoginOrSignup('login')">login</button>
+      <button (click)="openLoginOrSignup('signUp')">signUP</button>
+    </nav>
   </main>
 
   <footer>asdasd</footer>

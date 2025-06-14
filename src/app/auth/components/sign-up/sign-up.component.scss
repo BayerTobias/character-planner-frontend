@@ -7,6 +7,19 @@ section {
   color: $copy-light;
   @include dFlex($gp: 16px);
   flex-direction: column;
+  transition: transform 1s ease-in-out;
+  transform: translateX(-100vw);
+}
+
+.slide-in {
+  transform: translateX(0);
+}
+
+.close-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  cursor: pointer;
 }
 
 h1 {

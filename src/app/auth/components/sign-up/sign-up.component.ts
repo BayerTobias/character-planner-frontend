@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -9,11 +9,17 @@ import {
 import { AuthService } from '../../services/auth.service';
 import { CustomValidators } from '../../custom-validators';
 import { StandardButtonComponent } from '../../../shared/components/buttons/standard-button/standard-button.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, StandardButtonComponent],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    StandardButtonComponent,
+    CommonModule,
+  ],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.scss',
 })
@@ -22,6 +28,10 @@ export class SignUpComponent {
 
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
+
+  public slideIn: boolean = false;
+
+  @Output() closeSignup = new EventEmitter<void>();
 
   constructor() {
     this.signupForm = this.fb.group(
@@ -37,6 +47,12 @@ export class SignUpComponent {
       },
       { validators: [CustomValidators.passwordMatchValidator] }
     );
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.slideIn = true;
+    }, 10);
   }
 
   /**
@@ -97,5 +113,12 @@ export class SignUpComponent {
         console.error(err);
       }
     } else this.signupForm.markAllAsTouched();
+  }
+
+  close() {
+    this.slideIn = false;
+    setTimeout(() => {
+      this.closeSignup.emit();
+    }, 1000);
   }
 }

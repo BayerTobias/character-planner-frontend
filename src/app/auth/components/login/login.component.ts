@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -10,11 +10,17 @@ import { AuthService } from '../../services/auth.service';
 import { LoginResponse } from '../../interfaces/login-response';
 import { Router } from '@angular/router';
 import { StandardButtonComponent } from '../../../shared/components/buttons/standard-button/standard-button.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, StandardButtonComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardButtonComponent,
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
@@ -25,12 +31,22 @@ export class LoginComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
 
+  public slideIn: boolean = false;
+
+  @Output() closeLogin = new EventEmitter<void>();
+
   constructor() {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
       rememberMe: [false],
     });
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.slideIn = true;
+    }, 10);
   }
 
   get username() {
@@ -69,5 +85,12 @@ export class LoginComponent {
   handleSuccessfullLogin(resp: LoginResponse) {
     localStorage.setItem('token', resp.token);
     this.router.navigateByUrl('/select-character');
+  }
+
+  close() {
+    this.slideIn = false;
+    setTimeout(() => {
+      this.closeLogin.emit();
+    }, 1000);
   }
 }

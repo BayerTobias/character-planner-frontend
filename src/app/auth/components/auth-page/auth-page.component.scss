@@ -1,4 +1,5 @@
 @import "./../../../../mixin.scss";
+@import "./../../../../styles.scss";
 
 section {
   width: 100%;
@@ -36,6 +37,37 @@ footer {
   background-position: center;
 
   z-index: -1;
+}
+
+nav {
+  @include dFlex($jc: space-between);
+  width: 100%;
+  background: rgba(27, 27, 27, 0.5);
+  transition: transform 1s ease-in-out;
+
+  &.slide-left {
+    transform: translateX(calc(-100vw));
+  }
+
+  &.slide-right {
+    transform: translateX(calc(100vw));
+  }
+
+  > button {
+    border: transparent;
+    padding: 24px;
+    width: 120px;
+    background: transparent;
+    color: $copy-light;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 2.25px;
+    text-transform: uppercase;
+  }
+}
+
+.height-zero {
+  height: 0;
 }
 
 .leave {

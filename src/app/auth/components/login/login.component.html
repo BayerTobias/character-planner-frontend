@@ -1,4 +1,10 @@
-<section>
+<section
+  [ngClass]="{
+    'slide-in': slideIn
+  }"
+>
+  <div class="close-button" (click)="close()">X</div>
+
   <h1>Login</h1>
 
   <span>via Username & Passwort</span>

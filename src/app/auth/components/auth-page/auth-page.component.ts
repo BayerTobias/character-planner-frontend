@@ -26,10 +26,16 @@ export class AuthPageComponent {
     '/assets/img/auth-background-img/background-12.png',
   ];
 
+  // variables for background image rotation
   transition: boolean = false;
   index: number = 0;
   currentImg: string = this.backgroundImages[0];
   nextImg: string = this.backgroundImages[1];
+
+  activeContainer: string | null = null;
+  containerAnimation: boolean = false;
+  slideDirection: string = '';
+  hideNav: boolean = false;
 
   ngAfterViewInit() {
     setInterval(() => {
@@ -48,5 +54,22 @@ export class AuthPageComponent {
       this.currentImg = this.backgroundImages[this.index];
       this.transition = false;
     }, 1000);
+  }
+
+  openLoginOrSignup(key: string) {
+    this.containerAnimation = true;
+    this.slideDirection = key === 'login' ? 'right' : 'left';
+
+    setTimeout(() => {
+      this.activeContainer = key;
+      this.hideNav = true;
+      this.containerAnimation = false;
+    }, 1000);
+  }
+
+  slideInNav() {
+    this.activeContainer = null;
+    this.hideNav = false;
+    this.slideDirection = '';
   }
 }
