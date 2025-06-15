@@ -27,15 +27,15 @@ export class AuthPageComponent {
   ];
 
   // variables for background image rotation
-  transition: boolean = false;
-  index: number = 0;
-  currentImg: string = this.backgroundImages[0];
-  nextImg: string = this.backgroundImages[1];
+  public transition: boolean = false;
+  public index: number = 0;
+  public currentImg: string = this.backgroundImages[0];
+  public nextImg: string = this.backgroundImages[1];
 
-  activeContainer: string | null = null;
-  containerAnimation: boolean = false;
-  slideDirection: string = '';
-  hideNav: boolean = false;
+  public activeContainer: string | null = null;
+  public containerAnimation: boolean = false;
+  public slideDirection: string = '';
+  public hideNav: boolean = false;
 
   ngAfterViewInit() {
     setInterval(() => {

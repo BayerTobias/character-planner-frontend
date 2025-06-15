@@ -15,11 +15,17 @@ import {
 import { Router } from '@angular/router';
 import { InputWithErrorMsgComponent } from '../../../shared/components/form-components/input-with-error-msg/input-with-error-msg.component';
 import { BaseCharacter } from '../../models/base-character.model';
+import { SelectClassComponent } from './select-class/select-class.component';
 
 @Component({
   selector: 'app-character-creator',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, InputWithErrorMsgComponent],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    InputWithErrorMsgComponent,
+    SelectClassComponent,
+  ],
   templateUrl: './character-creator.component.html',
   styleUrl: './character-creator.component.scss',
 })
@@ -33,7 +39,8 @@ export class CharacterCreatorComponent {
 
   private character: BaseCharacter | Mage = new BaseCharacter();
 
-  public selectScreen: boolean = true;
+  public selectClassScreen: boolean = true;
+  public selectRaceScreen: boolean = false;
   public characterDetailsScreen: boolean = false;
 
   public selectedClass: CharClassListItem | null = null;
@@ -134,17 +141,16 @@ export class CharacterCreatorComponent {
   }
 
   async next() {
-    if (this.selectedClass && this.selectedClass.id && this.selectedRace) {
-      this.selectScreen = false;
-      this.characterDetailsScreen = true;
-      this.character = this.setCharacterObject();
-      this.character.race = this.selectedRace;
-      this.character.class = await this.characterDataService.getClassDetails(
-        this.selectedClass.id
-      );
-
-      console.log(this.character);
-    }
+    // if (this.selectedClass && this.selectedClass.id && this.selectedRace) {
+    //   this.selectClassScreen = false;
+    //   this.characterDetailsScreen = true;
+    //   this.character = this.setCharacterObject();
+    //   this.character.race = this.selectedRace;
+    //   this.character.class = await this.characterDataService.getClassDetails(
+    //     this.selectedClass.id
+    //   );
+    //   console.log(this.character);
+    // }
   }
 
   async createCharacter() {

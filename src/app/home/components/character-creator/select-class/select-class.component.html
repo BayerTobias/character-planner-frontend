@@ -1,0 +1,28 @@
+<section>
+  <main>
+    <div class="headline-wrapper">
+      <h1>Charakter erstellen</h1>
+      <p>Beruf wählen</p>
+    </div>
+
+    <div class="classes-wrapper">
+      @for (class of gameDataService.charClasses; track $index) {
+      <button (click)="selectClass(class)" class="select-class-">
+        <img
+          [src]="'./assets/icons/job-icons/' + class.name + '.svg'"
+          alt="class-icon"
+        />
+        <span
+          [style.backgroundColor]="
+            selectedClass?.name === class.name ? class.color : null
+          "
+          >{{ getGermanName(class.name) }}</span
+        >
+      </button>
+
+      }
+    </div>
+    <app-navigation [color]="selectedClass?.color ?? null"></app-navigation>
+  </main>
+  <footer>asdasd</footer>
+</section>

@@ -1,10 +1,9 @@
 <section>
-  @if (selectScreen) {
-  <div class="classes-wrapper">
-    @for (class of gameDataService.charClasses; track $index) {
-    <div (click)="selectClass(class)">{{ class.name }}</div>
-    }
-  </div>
+  @if (selectClassScreen) {
+  <app-select-class></app-select-class>
+
+  } @else if (selectRaceScreen) {
+
   <div class="race-wrapper">
     @for (race of gameDataService.charRaces; track $index) {
     <div (click)="selectRace(race)">{{ race.name }}</div>
@@ -13,6 +12,7 @@
   <button (click)="next()" [disabled]="!selectedClass || !selectedRace">
     Weiter
   </button>
+
   }@else if (characterDetailsScreen) {
 
   <div>Karakter Form</div>

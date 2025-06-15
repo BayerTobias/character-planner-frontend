@@ -1,0 +1,67 @@
+@import "./../../../../../styles.scss";
+@import "./../../../../../mixin.scss";
+
+section {
+  width: 100%;
+}
+
+main {
+  @include dFlex($jc: space-between);
+  flex-direction: column;
+  height: 100vh;
+  height: 100svh;
+  overflow-y: auto;
+  background-color: $bg-dark;
+}
+
+.headline-wrapper {
+  @include dFlex($gp: 8px);
+  flex-direction: column;
+  padding-top: 16px;
+
+  h1 {
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  p {
+    color: rgba(224, 224, 224, 0.5);
+    font-size: 15px;
+  }
+}
+
+.classes-wrapper {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 16px;
+  justify-content: center;
+  width: 100%;
+
+  button {
+    @include dFlex($gp: 4px);
+    flex-direction: column;
+    background-color: unset;
+    border: transparent;
+    padding: 0;
+
+    > img {
+      height: 64px;
+      width: 64px;
+    }
+
+    span {
+      color: white;
+      text-align: center;
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.75px;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      transition: background-color 250ms ease-in-out;
+      border-radius: 2px;
+    }
+  }
+}

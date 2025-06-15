@@ -1,0 +1,25 @@
+@import "./../../../../../styles.scss";
+@import "./../../../../../mixin.scss";
+
+nav {
+  @include dFlex($jc: space-between);
+  width: 100%;
+  background-color: $bg-darker;
+
+  > button {
+    border: transparent;
+    padding: 24px;
+    width: 120px;
+    background: transparent;
+    color: $copy-light;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 2.25px;
+    text-transform: uppercase;
+    transition: color 250ms ease-in-out;
+  }
+}
+
+:host {
+  width: 100%;
+}
