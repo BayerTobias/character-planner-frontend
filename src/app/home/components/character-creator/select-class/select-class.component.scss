@@ -36,9 +36,11 @@ main {
 .classes-wrapper {
   display: grid;
   grid-template-columns: auto auto;
-  gap: 16px;
+  gap: 32px;
   justify-content: center;
   width: 100%;
+  position: relative;
+  overflow-x: hidden;
 
   button {
     @include dFlex($gp: 4px);
@@ -48,8 +50,8 @@ main {
     padding: 0;
 
     > img {
-      height: 64px;
-      width: 64px;
+      height: 48px;
+      width: 48px;
     }
 
     span {
@@ -64,4 +66,27 @@ main {
       border-radius: 2px;
     }
   }
+
+  .error-msg-wrapper {
+    position: absolute;
+    right: 0;
+    bottom: 12px;
+    padding: 16px;
+    background-color: $bg-darker;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    width: 160px;
+    transition: transform 250ms ease-in-out;
+    transform: translateX(100%);
+
+    p {
+      color: rgba(255, 131, 131, 1);
+      font-size: 13px;
+      letter-spacing: 0.26px;
+    }
+  }
+}
+
+.slide-in {
+  transform: translateX(0) !important;
 }

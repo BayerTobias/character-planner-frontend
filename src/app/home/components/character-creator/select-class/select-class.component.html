@@ -19,10 +19,20 @@
           >{{ getGermanName(class.name) }}</span
         >
       </button>
-
       }
+
+      <div
+        class="error-msg-wrapper"
+        [ngClass]="{ 'slide-in': nextClicked && !selectedClass }"
+      >
+        <p>Wähle deinen Beruf aus und klicke dann auf Weiter.</p>
+      </div>
     </div>
-    <app-navigation [color]="selectedClass?.color ?? null"></app-navigation>
+    <app-navigation
+      (next)="checkIfClassSelected()"
+      (back)="navigateToPreviousPage()"
+      [color]="selectedClass?.color ?? null"
+    ></app-navigation>
   </main>
   <footer>asdasd</footer>
 </section>
