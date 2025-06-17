@@ -1,0 +1,55 @@
+<section>
+  <main>
+    <div class="headline-wrapper">
+      <h1>Charakter erstellen</h1>
+      <p>Volk wählen</p>
+    </div>
+
+    <div class="race-wrapper">
+      @for (race of gameDataService.charRaces; track $index) {
+      <div class="select-race-box">
+        <button (click)="selectRace(race)">{{ race.name }}</button>
+
+        <div class="scroll-wrapper">
+          <div
+            (scroll)="handleScroll(scrollContainer)"
+            #scrollContainer
+            class="scroll-content"
+            [class.open]="selectedRace?.name === race.name"
+          >
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore
+              eveniet soluta reprehenderit fugiat, quia perferendis delectus
+              optio ducimus voluptate aliquam accusamus at et veniam dolorum
+              ipsa ex, iste, tempora quibusdam.
+            </p>
+          </div>
+
+          @if (selectedRace?.name === race.name ) {
+          <div
+            [style]="{
+              opacity: scrolledToBottom ? 0 : 1
+            }"
+            class="gradient"
+          ></div>
+          }
+        </div>
+      </div>
+
+      }
+
+      <div
+        class="error-msg-wrapper"
+        [ngClass]="{ 'slide-in': nextClicked && !selectedRace }"
+      >
+        <p>Wähle noch dein Volk aus.</p>
+      </div>
+    </div>
+
+    <app-navigation
+      (back)="backToSelectClass.emit()"
+      (next)="nextClicked = true"
+    ></app-navigation>
+  </main>
+  <footer>asdasd</footer>
+</section>

@@ -1,19 +1,11 @@
 <section>
   @if (selectClassScreen) {
-  <app-select-class></app-select-class>
+  <app-select-class (classSelected)="gotToStep('race')"></app-select-class>
 
-  } @else if (selectRaceScreen) {
-
-  <div class="race-wrapper">
-    @for (race of gameDataService.charRaces; track $index) {
-    <div (click)="selectRace(race)">{{ race.name }}</div>
-    }
-  </div>
-  <button (click)="next()" [disabled]="!selectedClass || !selectedRace">
-    Weiter
-  </button>
-
-  }@else if (characterDetailsScreen) {
+  } @else if (selectRaceScreen) {<app-select-race
+    (backToSelectClass)="gotToStep('class')"
+  ></app-select-race>
+  } @else if (characterDetailsScreen) {
 
   <div>Karakter Form</div>
 

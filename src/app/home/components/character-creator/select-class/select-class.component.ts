@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { GameDataService } from '../../../../shared/services/game-data.service';
 import { CharClassListItem } from '../../../models/char-class-list-item.mode';
 import { NavigationComponent } from '../navigation/navigation.component';
@@ -19,12 +19,18 @@ export class SelectClassComponent {
   public selectedClass: CharClassListItem | null = null;
   public nextClicked: boolean = false;
 
+  @Output() classSelected = new EventEmitter<void>();
+
   selectClass(charClass: CharClassListItem) {
     this.selectedClass = charClass;
   }
 
-  checkIfClassSelected() {
+  validateSelectionAndContinue() {
     this.nextClicked = true;
+
+    if (this.selectedClass) {
+      this.classSelected.emit();
+    }
   }
 
   navigateToPreviousPage() {

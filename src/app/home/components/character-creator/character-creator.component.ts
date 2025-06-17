@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 import { InputWithErrorMsgComponent } from '../../../shared/components/form-components/input-with-error-msg/input-with-error-msg.component';
 import { BaseCharacter } from '../../models/base-character.model';
 import { SelectClassComponent } from './select-class/select-class.component';
+import { SelectRaceComponent } from './select-race/select-race.component';
 
 @Component({
   selector: 'app-character-creator',
@@ -25,6 +26,7 @@ import { SelectClassComponent } from './select-class/select-class.component';
     ReactiveFormsModule,
     InputWithErrorMsgComponent,
     SelectClassComponent,
+    SelectRaceComponent,
   ],
   templateUrl: './character-creator.component.html',
   styleUrl: './character-creator.component.scss',
@@ -39,8 +41,8 @@ export class CharacterCreatorComponent {
 
   private character: BaseCharacter | Mage = new BaseCharacter();
 
-  public selectClassScreen: boolean = true;
-  public selectRaceScreen: boolean = false;
+  public selectClassScreen: boolean = false;
+  public selectRaceScreen: boolean = true;
   public characterDetailsScreen: boolean = false;
 
   public selectedClass: CharClassListItem | null = null;
@@ -83,6 +85,12 @@ export class CharacterCreatorComponent {
 
   ngOnInit() {
     this.calculateDevelopmentPoints();
+  }
+
+  gotToStep(step: string) {
+    this.selectClassScreen = step === 'class';
+    this.selectRaceScreen = step === 'race';
+    this.characterDetailsScreen = step === 'details';
   }
 
   calculateDevelopmentPoints() {
