@@ -41,8 +41,8 @@ export class CharacterCreatorComponent {
 
   private character: BaseCharacter | Mage = new BaseCharacter();
 
-  public selectClassScreen: boolean = false;
-  public selectRaceScreen: boolean = true;
+  public selectClassScreen: boolean = true;
+  public selectRaceScreen: boolean = false;
   public characterDetailsScreen: boolean = false;
 
   public selectedClass: CharClassListItem | null = null;
@@ -87,10 +87,23 @@ export class CharacterCreatorComponent {
     this.calculateDevelopmentPoints();
   }
 
-  gotToStep(step: string) {
+  goToStep(step: string) {
     this.selectClassScreen = step === 'class';
     this.selectRaceScreen = step === 'race';
     this.characterDetailsScreen = step === 'details';
+  }
+
+  onClassSelected(selectedClass: CharClassListItem) {
+    this.selectedClass = selectedClass;
+    this.goToStep('race');
+  }
+
+  onRaceSelected(selectedRace: CharRace) {
+    this.selectedRace = selectedRace;
+    this.goToStep('details');
+
+    console.log(this.selectedClass);
+    console.log(this.selectedRace);
   }
 
   calculateDevelopmentPoints() {

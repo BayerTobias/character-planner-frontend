@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { GameDataService } from '../../../../shared/services/game-data.service';
 import { CharClassListItem } from '../../../models/char-class-list-item.mode';
 import { NavigationComponent } from '../navigation/navigation.component';
@@ -16,10 +16,10 @@ export class SelectClassComponent {
   public gameDataService = inject(GameDataService);
   private router = inject(Router);
 
-  public selectedClass: CharClassListItem | null = null;
+  @Input() public selectedClass: CharClassListItem | null = null;
   public nextClicked: boolean = false;
 
-  @Output() classSelected = new EventEmitter<void>();
+  @Output() classSelected = new EventEmitter<CharClassListItem>();
 
   selectClass(charClass: CharClassListItem) {
     this.selectedClass = charClass;
@@ -29,7 +29,7 @@ export class SelectClassComponent {
     this.nextClicked = true;
 
     if (this.selectedClass) {
-      this.classSelected.emit();
+      this.classSelected.emit(this.selectedClass);
     }
   }
 

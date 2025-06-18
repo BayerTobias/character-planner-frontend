@@ -3,6 +3,7 @@ import {
   ElementRef,
   EventEmitter,
   inject,
+  Input,
   Output,
   QueryList,
   ViewChildren,
@@ -24,11 +25,13 @@ export class SelectRaceComponent {
 
   @ViewChildren('scrollContainer') scrollContainers!: QueryList<ElementRef>;
 
-  public selectedRace: CharRace | null = null;
+  @Input() selectedRace: CharRace | null = null;
+
   public nextClicked: boolean = false;
   public scrolledToBottom: boolean = false;
 
   @Output() backToSelectClass = new EventEmitter<void>();
+  @Output() raceSelected = new EventEmitter<CharRace>();
 
   selectRace(race: CharRace) {
     if (this.selectedRace?.name === race.name) {
@@ -44,6 +47,14 @@ export class SelectRaceComponent {
 
         this.handleScroll(element);
       }, 251);
+    }
+  }
+
+  validateSelectionAndContinue() {
+    this.nextClicked = true;
+
+    if (this.selectedRace) {
+      this.raceSelected.emit(this.selectedRace);
     }
   }
 

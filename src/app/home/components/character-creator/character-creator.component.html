@@ -1,9 +1,13 @@
 <section>
   @if (selectClassScreen) {
-  <app-select-class (classSelected)="gotToStep('race')"></app-select-class>
+  <app-select-class
+    [selectedClass]="selectedClass"
+    (classSelected)="onClassSelected($event)"
+  ></app-select-class>
 
   } @else if (selectRaceScreen) {<app-select-race
-    (backToSelectClass)="gotToStep('class')"
+    (backToSelectClass)="goToStep('class')"
+    (raceSelected)="onRaceSelected($event)"
   ></app-select-race>
   } @else if (characterDetailsScreen) {
 
