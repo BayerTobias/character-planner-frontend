@@ -1,0 +1,65 @@
+<section>
+  <main>
+    <div>Karakter Form</div>
+
+    <span>{{ spendPoints }} / {{ developmentPoints }}</span>
+
+    <form [formGroup]="createCharacterForm" (submit)="createCharacter()">
+      <app-input-with-error-msg
+        [control]="getFormControl('characterName')"
+        [placeholder]="'Karakter Name'"
+        [type]="'text'"
+        [error]="true"
+      ></app-input-with-error-msg>
+
+      <div class="stat-distribution-row">
+        <input
+          (input)="calculateDevelopmentPoints()"
+          formControlName="strengthValue"
+          type="number"
+        />
+        <span>{{ statBonuses["strengthBonus"] }}</span>
+      </div>
+
+      <div class="stat-distribution-row">
+        <input
+          (input)="calculateDevelopmentPoints()"
+          formControlName="agilityValue"
+          type="number"
+        />
+        <span>{{ statBonuses["agilityBonus"] }}</span>
+      </div>
+
+      <div class="stat-distribution-row">
+        <input
+          (input)="calculateDevelopmentPoints()"
+          formControlName="constitutionValue"
+          type="number"
+        />
+        <span>{{ statBonuses["constitutionBonus"] }}</span>
+      </div>
+
+      <div class="stat-distribution-row">
+        <input
+          (input)="calculateDevelopmentPoints()"
+          formControlName="intelligenceValue"
+          type="number"
+        />
+        <span>{{ statBonuses["intelligenceBonus"] }}</span>
+      </div>
+
+      <div class="stat-distribution-row">
+        <input
+          (input)="calculateDevelopmentPoints()"
+          formControlName="charismaValue"
+          type="number"
+        />
+        <span>{{ statBonuses["charismaBonus"] }}</span>
+      </div>
+
+      <button type="submit">Karakter erstellen</button>
+    </form>
+
+    <app-navigation></app-navigation>
+  </main>
+</section>

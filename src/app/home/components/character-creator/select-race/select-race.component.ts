@@ -25,7 +25,7 @@ export class SelectRaceComponent {
 
   @ViewChildren('scrollContainer') scrollContainers!: QueryList<ElementRef>;
 
-  @Input() selectedRace: CharRace | null = null;
+  @Input() public selectedRace: CharRace | null = null;
 
   public nextClicked: boolean = false;
   public scrolledToBottom: boolean = false;
