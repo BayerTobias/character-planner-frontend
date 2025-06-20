@@ -4,7 +4,7 @@
 
     <span>{{ spendPoints }} / {{ developmentPoints }}</span>
 
-    <form [formGroup]="createCharacterForm" (submit)="createCharacter()">
+    <form [formGroup]="createCharacterForm" (submit)="submitCharacterDetails()">
       <app-input-with-error-msg
         [control]="getFormControl('characterName')"
         [placeholder]="'Karakter Name'"
@@ -60,6 +60,6 @@
       <button type="submit">Karakter erstellen</button>
     </form>
 
-    <app-navigation></app-navigation>
+    <app-navigation (next)="submitCharacterDetails()"></app-navigation>
   </main>
 </section>

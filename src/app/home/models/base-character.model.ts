@@ -101,7 +101,7 @@ export class BaseCharacter {
     this.agilityValue = data?.agility_value || 0;
     this.agilityBonus =
       data?.agility_bonus || this.getStatBonusValue(this.agilityValue);
-    this.constitutionValue = data?.charisma_value || 0;
+    this.constitutionValue = data?.constitution_value || 0;
     this.constitutionBonus =
       data?.constitution_bonus ||
       this.getStatBonusValue(this.constitutionValue);

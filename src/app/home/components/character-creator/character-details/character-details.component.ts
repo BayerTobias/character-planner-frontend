@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { InputWithErrorMsgComponent } from '../../../../shared/components/form-components/input-with-error-msg/input-with-error-msg.component';
 import { NavigationComponent } from '../navigation/navigation.component';
+import { CharDetails } from '../../../models/char-dedails.model';
 
 @Component({
   selector: 'app-character-details',
@@ -29,6 +30,9 @@ export class CharacterDetailsComponent {
   public spendPoints: number = 0;
 
   public createCharacterForm: FormGroup;
+  private characterDetails: CharDetails = new CharDetails();
+
+  @Output() characterDetailsEvent = new EventEmitter<CharDetails>();
 
   public attributeCosts = [
     { cost: 0, value: 0, bonus: -99 },
@@ -112,5 +116,29 @@ export class CharacterDetailsComponent {
     return this.createCharacterForm.get(controlName) as FormControl;
   }
 
-  createCharacter() {}
+  submitCharacterDetails() {
+    if (this.createCharacterForm.valid) {
+      this.characterDetails.name = this.getFormValue('characterName');
+      this.characterDetails.strengthValue = this.getFormValue('strengthValue');
+      this.characterDetails.strengthBonus = this.statBonuses['strengthBonus'];
+      this.characterDetails.agilityValue = this.getFormValue('agilityValue');
+      this.characterDetails.agilityBonus = this.statBonuses['agilityBonus'];
+      this.characterDetails.constitutionValue =
+        this.getFormValue('constitutionValue');
+      this.characterDetails.constitutionBonus =
+        this.statBonuses['constitutionBonus'];
+      this.characterDetails.intelligenceValue =
+        this.getFormValue('intelligenceValue');
+      this.characterDetails.intelligenceBonus =
+        this.statBonuses['intelligenceBonus'];
+      this.characterDetails.charismaValue = this.getFormValue('charismaValue');
+      this.characterDetails.charismaBonus = this.statBonuses['charismaBonus'];
+
+      this.characterDetailsEvent.emit(this.characterDetails);
+    } else console.error('ERROR');
+  }
+
+  getFormValue(value: string) {
+    return this.createCharacterForm.get(value)?.value;
+  }
 }

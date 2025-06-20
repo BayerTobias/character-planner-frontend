@@ -11,6 +11,8 @@
     (raceSelected)="onRaceSelected($event)"
   ></app-select-race>
   } @else if (characterDetailsScreen) {
-  <app-character-details></app-character-details>
+  <app-character-details
+    (characterDetailsEvent)="createCharacter($event)"
+  ></app-character-details>
   }
 </section>
