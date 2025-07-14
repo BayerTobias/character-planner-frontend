@@ -11,9 +11,9 @@ export class AuthService {
 
   constructor() {}
 
-  async loginWithUsernameAndPawword(username: string, password: string) {
-    const url = environment.baseUrl + 'auth/login/';
-    const body = { username: username, password: password };
+  async loginWithUsernameAndPawword(email: string, password: string) {
+    const url = environment.baseUrl + 'api/login/';
+    const body = { email: email, password: password };
 
     return lastValueFrom(this.http.post(url, body));
   }
@@ -30,7 +30,7 @@ export class AuthService {
   }
 
   async checkAuth() {
-    const url = environment.baseUrl + 'auth/check/';
+    const url = environment.baseUrl + 'api/check-auth/';
 
     try {
       const response: { message?: string } = await lastValueFrom(

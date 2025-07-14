@@ -12,7 +12,7 @@ export interface CharacterData {
   id: number;
   name: string;
   race: CharRaceData;
-  char_class: CharClassData;
+  character_class: CharClassData;
   level?: number;
 
   // Health and Mana
@@ -85,7 +85,7 @@ export class BaseCharacter {
     this.id = data?.id || null;
     this.name = data?.name || '';
     this.race = new CharRace(data?.race);
-    this.class = new CharClass(data?.char_class);
+    this.class = new CharClass(data?.character_class);
     this.level = data?.level || 1;
 
     // Health and Mana
@@ -257,9 +257,9 @@ export class BaseCharacter {
     return {
       // Core Character Information
       name: this.name,
-      race: this.race.id,
-      char_class: this.class.id,
-      level: this.level,
+      character_race_id: this.race.id,
+      character_class_id: this.class.id,
+      current_lvl: this.level,
 
       // Health and Mana
       current_hp: this.currentHp,
@@ -286,6 +286,7 @@ export class BaseCharacter {
       skilledSkills: this.skilledSkills.map((skilledSkill) =>
         skilledSkill.asJson()
       ),
+      attribute_points: 0,
 
       // Items
       base_weapons: this.baseWeapons.map((baseWeapon) => baseWeapon.asJason()),

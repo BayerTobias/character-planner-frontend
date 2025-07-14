@@ -76,10 +76,10 @@ export class CharacterCreatorComponent {
         await this.prepareCharacter();
         console.log(this.character);
 
-        // const resp = await this.characterDataService.uploadCharacter(
-        //   this.character
-        // );
-        // console.log(resp);
+        const resp = await this.characterDataService.uploadCharacter(
+          this.character
+        );
+        console.log(resp);
         // this.router.navigateByUrl(`character?character_id=${resp.id}`);
       } catch (err) {
         console.error(err);

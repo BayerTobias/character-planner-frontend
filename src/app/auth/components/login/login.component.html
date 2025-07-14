@@ -10,7 +10,7 @@
   <span>via Username & Passwort</span>
 
   <form [formGroup]="loginForm" (submit)="login()">
-    <input placeholder="Username" formControlName="username" type="text" />
+    <input placeholder="E-Mail" formControlName="email" type="text" />
     <input placeholder="Passwort" formControlName="password" type="password" />
     <div>
       <input formControlName="rememberMe" type="checkbox" />

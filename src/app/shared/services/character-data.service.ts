@@ -13,6 +13,7 @@ import {
   CharacterListItemData,
 } from '../../home/models/character-list-item.model';
 import { CharClass, CharClassData } from '../../home/models/char-class.model';
+import { CharacterFactory } from '../../home/factories/character-factory';
 
 @Injectable({
   providedIn: 'root',
@@ -46,8 +47,8 @@ export class CharacterDataService {
     );
     console.log(resp);
 
-    this.setupCharacterObject(resp);
-    console.log(this.character?.asPostRequestJson());
+    this.character = CharacterFactory.create(resp);
+    console.log(this.character);
   }
 
   async getClassDetails(id: number) {
@@ -61,16 +62,6 @@ export class CharacterDataService {
     } catch (err) {
       console.error(err);
       return new CharClass();
-    }
-  }
-
-  setupCharacterObject(data: CharacterData) {
-    switch (data.char_class.name.toLowerCase()) {
-      case 'mage':
-        this.character = new Mage(data);
-        break;
-      default:
-        this.character = new BaseCharacter(data);
     }
   }
 

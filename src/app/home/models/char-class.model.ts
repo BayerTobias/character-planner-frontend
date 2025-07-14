@@ -7,7 +7,7 @@ export interface CharClassData {
   base_lvl_hp: number;
   base_lvl_mana: number | null;
   main_stat: string | null;
-  skills: SkillData[];
+  basic_skills: SkillData[];
 }
 
 export class CharClass {
@@ -26,6 +26,8 @@ export class CharClass {
     this.baseLvlHp = data?.base_lvl_hp || 0;
     this.baseLvlMana = data?.base_lvl_mana || null;
     this.mainStat = data?.main_stat || null;
-    this.skills = (data?.skills || []).map((skillData) => new Skill(skillData));
+    this.skills = (data?.basic_skills || []).map(
+      (skillData) => new Skill(skillData)
+    );
   }
 }

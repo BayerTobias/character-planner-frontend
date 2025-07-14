@@ -37,7 +37,7 @@ export class LoginComponent {
 
   constructor() {
     this.loginForm = this.fb.group({
-      username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required],
       rememberMe: [false],
     });
@@ -49,8 +49,8 @@ export class LoginComponent {
     }, 10);
   }
 
-  get username() {
-    return this.loginForm.get('username');
+  get email() {
+    return this.loginForm.get('email');
   }
 
   get password() {
@@ -67,7 +67,7 @@ export class LoginComponent {
       try {
         const resp: LoginResponse =
           (await this.authService.loginWithUsernameAndPawword(
-            this.username?.value,
+            this.email?.value,
             this.password?.value
           )) as LoginResponse;
         this.handleSuccessfullLogin(resp);
@@ -83,7 +83,7 @@ export class LoginComponent {
    * @param resp The response containing the authentication token.
    */
   handleSuccessfullLogin(resp: LoginResponse) {
-    localStorage.setItem('token', resp.token);
+    localStorage.setItem('token', resp.access_token);
     this.router.navigateByUrl('/select-character');
   }
 
