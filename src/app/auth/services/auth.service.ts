@@ -23,8 +23,8 @@ export class AuthService {
     email: string,
     password: string
   ) {
-    const url = environment.baseUrl + 'auth/users/';
-    const body = { username: username, email: email, password: password };
+    const url = environment.baseUrl + 'api/register/';
+    const body = { name: username, email: email, password: password };
 
     return lastValueFrom(this.http.post(url, body));
   }
@@ -42,5 +42,9 @@ export class AuthService {
       console.error(err);
       return false;
     }
+  }
+
+  async verifyEmail(url: string) {
+    return await lastValueFrom(this.http.get<{ message: string }>(url));
   }
 }

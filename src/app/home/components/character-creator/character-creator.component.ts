@@ -10,6 +10,7 @@ import { SelectClassComponent } from './select-class/select-class.component';
 import { SelectRaceComponent } from './select-race/select-race.component';
 import { CharacterDetailsComponent } from './character-details/character-details.component';
 import { CharDetails } from '../../models/char-dedails.model';
+import { CharacterFactory } from '../../factories/character-factory';
 
 @Component({
   selector: 'app-character-creator',
@@ -75,11 +76,12 @@ export class CharacterCreatorComponent {
 
         await this.prepareCharacter();
         console.log(this.character);
+        console.log(this.character.asPostRequestJson());
 
-        const resp = await this.characterDataService.uploadCharacter(
-          this.character
-        );
-        console.log(resp);
+        // const resp = await this.characterDataService.uploadCharacter(
+        //   this.character
+        // );
+        // console.log(resp);
         // this.router.navigateByUrl(`character?character_id=${resp.id}`);
       } catch (err) {
         console.error(err);
@@ -97,7 +99,10 @@ export class CharacterCreatorComponent {
   }
 
   async prepareCharacter() {
-    this.character = this.setupCharacterObject();
+    this.character = CharacterFactory.create(
+      undefined,
+      this.selectedClass?.name || 'default'
+    );
     this.character.race = this.selectedRace!;
     this.character.class = await this.characterDataService.getClassDetails(
       this.selectedClass!.id!
@@ -105,18 +110,6 @@ export class CharacterCreatorComponent {
     this.fillCharacterStats();
     this.character.maxHealth = this.character.calculateMaxHealth();
     this.character.currentHp = this.character.maxHealth;
-  }
-
-  setupCharacterObject() {
-    console.log(this.selectedClass?.name);
-
-    switch (this.selectedClass?.name) {
-      case 'mage':
-        return new Mage();
-
-      default:
-        return new BaseCharacter();
-    }
   }
 
   fillCharacterStats() {

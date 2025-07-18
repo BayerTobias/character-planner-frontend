@@ -3,7 +3,7 @@ import { WeaponGroup, WeaponGroupData } from './weapon-group.model';
 export interface BaseWeaponData {
   id: number;
   name: string;
-  group: WeaponGroupData[];
+  weapon_group: WeaponGroupData[];
   min_str: number;
   dmg: number;
   attribute: string;
@@ -24,7 +24,7 @@ export class BaseWeapon {
   constructor(data?: BaseWeaponData) {
     this.id = data?.id || null;
     this.name = data?.name || '';
-    this.weaponGroups = (data?.group || []).map(
+    this.weaponGroups = (data?.weapon_group || []).map(
       (weaponGroup: WeaponGroupData) => new WeaponGroup(weaponGroup)
     );
     this.minStr = data?.min_str || 0;

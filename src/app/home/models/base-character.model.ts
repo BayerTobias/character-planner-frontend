@@ -34,7 +34,7 @@ export interface CharacterData {
   charisma_bonus: number;
 
   // Skills
-  char_skilled_skills: NodeData[];
+  skilled_skills: NodeData[];
   custom_skills: CustomSkillData[];
 
   // Items
@@ -114,7 +114,7 @@ export class BaseCharacter {
       data?.charisma_bonus || this.getStatBonusValue(this.charismaValue);
 
     // Skills
-    this.skilledSkills = (data?.char_skilled_skills || []).map(
+    this.skilledSkills = (data?.skilled_skills || []).map(
       (skilledNode: NodeData) => new SkilledNode(skilledNode)
     );
     this.customSkills = (data?.custom_skills || []).map(
@@ -255,6 +255,8 @@ export class BaseCharacter {
 
   asPostRequestJson() {
     return {
+      id: this.id ?? null,
+
       // Core Character Information
       name: this.name,
       character_race_id: this.race.id,
@@ -280,19 +282,17 @@ export class BaseCharacter {
       charisma_bonus: this.charismaBonus,
 
       // Skills
-      customSkills: this.customSkills.map((customSkill) =>
+      custom_skills: this.customSkills.map((customSkill) =>
         customSkill.asJson()
       ),
-      skilledSkills: this.skilledSkills.map((skilledSkill) =>
+      skilled_skills: this.skilledSkills.map((skilledSkill) =>
         skilledSkill.asJson()
       ),
       attribute_points: 0,
 
       // Items
-      base_weapons: this.baseWeapons.map((baseWeapon) => baseWeapon.asJason()),
-      customWeapons: this.customWeapons.map((customWeapon) =>
-        customWeapon.asJason()
-      ),
+      base_weapons: this.baseWeapons.map((baseWeapon) => baseWeapon.id),
+      customWeapons: this.customWeapons.map((customWeapon) => customWeapon.id),
       armor: this.armor?.asJason(),
       money: this.money.asJason(),
     };
