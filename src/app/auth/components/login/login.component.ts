@@ -11,6 +11,7 @@ import { LoginResponse } from '../../interfaces/login-response';
 import { Router } from '@angular/router';
 import { StandardButtonComponent } from '../../../shared/components/buttons/standard-button/standard-button.component';
 import { CommonModule } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -32,12 +33,13 @@ export class LoginComponent {
   private router = inject(Router);
 
   public slideIn: boolean = false;
+  public httpErrorMsg: string | null = null;
 
   @Output() closeLogin = new EventEmitter<void>();
 
   constructor() {
     this.loginForm = this.fb.group({
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
       rememberMe: [false],
     });
@@ -63,6 +65,7 @@ export class LoginComponent {
 
   async login() {
     if (this.loginForm.valid) {
+      this.httpErrorMsg = null;
       localStorage.removeItem('token');
       try {
         const resp: LoginResponse =
@@ -72,9 +75,18 @@ export class LoginComponent {
           )) as LoginResponse;
         this.handleSuccessfullLogin(resp);
       } catch (err) {
-        console.error(err);
+        this.handleError(err);
       }
     } else this.loginForm.markAllAsTouched();
+  }
+
+  handleError(error: unknown) {
+    if (error instanceof HttpErrorResponse && error.status === 401) {
+      this.httpErrorMsg = 'E-Mail oder Passwort ist falsch';
+    } else {
+      this.httpErrorMsg =
+        'Unbekannter Fehler. Bitte versuche es später erneut.';
+    }
   }
 
   /**

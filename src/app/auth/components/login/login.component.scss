@@ -34,11 +34,11 @@ span {
 }
 
 form {
-  @include dFlex($gp: 16px);
+  @include dFlex($gp: 20px);
   flex-direction: column;
   width: 100%;
 
-  > input {
+  .text-input {
     width: 100%;
     font-size: 15px;
     padding: 8px 16px;
@@ -49,6 +49,16 @@ form {
   div {
     width: 100%;
     @include dFlex($gp: 8px);
+    position: relative;
+
+    .error-msg {
+      color: red;
+      font-size: 12px;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      transform: translateY(100%);
+    }
 
     span {
       font-size: 13px;

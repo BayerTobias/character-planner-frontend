@@ -32,7 +32,7 @@ export class AuthPageComponent {
   public currentImg: string = this.backgroundImages[0];
   public nextImg: string = this.backgroundImages[1];
 
-  public activeContainer: string | null = null;
+  public activeContainer: string | null = 'null';
   public containerAnimation: boolean = false;
   public slideDirection: string = '';
   public hideNav: boolean = false;

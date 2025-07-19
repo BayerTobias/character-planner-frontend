@@ -7,11 +7,35 @@
 
   <h1>Login</h1>
 
-  <span>via Username & Passwort</span>
+  <span>via E-Mail & Passwort</span>
 
   <form [formGroup]="loginForm" (submit)="login()">
-    <input placeholder="E-Mail" formControlName="email" type="text" />
-    <input placeholder="Passwort" formControlName="password" type="password" />
+    <div>
+      <input
+        class="text-input"
+        placeholder="E-Mail"
+        formControlName="email"
+        type="text"
+      />
+      @if (email?.touched && email?.hasError('required')) {
+      <span class="error-msg">E-Mail ist erforderlich.</span>
+      } @if (email?.touched && email?.hasError('email')) {
+      <span class="error-msg">Bitte gib eine gültige E-Mail-Adresse ein.</span>
+      }
+    </div>
+    <div>
+      <input
+        class="text-input"
+        placeholder="Passwort"
+        formControlName="password"
+        type="password"
+      />
+      @if (password?.touched && password?.hasError('required')) {
+      <span class="error-msg">Bitte Passwort eingeben.</span>
+      } @if (httpErrorMsg) {
+      <span class="error-msg">{{ httpErrorMsg }}</span>
+      }
+    </div>
     <div>
       <input formControlName="rememberMe" type="checkbox" />
       <span>Login-Daten merken</span>

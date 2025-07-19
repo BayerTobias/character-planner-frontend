@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
-import { lastValueFrom } from 'rxjs';
+import { catchError, firstValueFrom, lastValueFrom, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
