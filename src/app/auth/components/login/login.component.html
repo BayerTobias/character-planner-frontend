@@ -19,7 +19,7 @@
       />
       @if (email?.touched && email?.hasError('required')) {
       <span class="error-msg">E-Mail ist erforderlich.</span>
-      } @if (email?.touched && email?.hasError('email')) {
+      } @else if (email?.touched && email?.hasError('email')) {
       <span class="error-msg">Bitte gib eine gültige E-Mail-Adresse ein.</span>
       }
     </div>
@@ -32,7 +32,7 @@
       />
       @if (password?.touched && password?.hasError('required')) {
       <span class="error-msg">Bitte Passwort eingeben.</span>
-      } @if (httpErrorMsg) {
+      } @else if (httpErrorMsg) {
       <span class="error-msg">{{ httpErrorMsg }}</span>
       }
     </div>

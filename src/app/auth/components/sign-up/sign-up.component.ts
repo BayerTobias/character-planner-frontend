@@ -10,6 +10,7 @@ import { AuthService } from '../../services/auth.service';
 import { CustomValidators } from '../../custom-validators';
 import { StandardButtonComponent } from '../../../shared/components/buttons/standard-button/standard-button.component';
 import { CommonModule } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-sign-up',
@@ -30,6 +31,7 @@ export class SignUpComponent {
   private authService = inject(AuthService);
 
   public slideIn: boolean = false;
+  public httpErrorMsg: string | null = null;
 
   @Output() closeSignup = new EventEmitter<void>();
 
@@ -102,6 +104,7 @@ export class SignUpComponent {
 
   async signUp() {
     if (this.signupForm.valid) {
+      this.httpErrorMsg = null;
       try {
         const resp = await this.authService.registerUserWithUsernameAndPassword(
           this.username?.value,
@@ -110,9 +113,23 @@ export class SignUpComponent {
         );
         console.log(resp);
       } catch (err) {
-        console.error(err);
+        console.log('Error:', err);
+
+        this.handleError(err);
       }
     } else this.signupForm.markAllAsTouched();
+  }
+
+  handleError(error: unknown) {
+    if (error instanceof HttpErrorResponse) {
+      if (error.status === 422) {
+        this.httpErrorMsg = 'Diese E-Mail-Adresse ist bereits vergeben.';
+      } else if (error.status === 500 || error.status === 0) {
+        this.httpErrorMsg = 'Serverfehler, bitte versuche es später erneut.';
+      }
+    } else {
+      this.httpErrorMsg = 'Keine Verbindung zum Server.';
+    }
   }
 
   close() {
