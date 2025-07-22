@@ -8,12 +8,14 @@ import { CharacterSelectionComponent } from './home/components/character-selecti
 import { CharacterCreatorComponent } from './home/components/character-creator/character-creator.component';
 import { AuthPageComponent } from './auth/components/auth-page/auth-page.component';
 import { VerifyEmailComponent } from './auth/components/verify-email/verify-email.component';
+import { AuthCallbackComponent } from './auth/components/auth-callback/auth-callback.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: AuthPageComponent },
   { path: 'sign-up', component: SignUpComponent },
   { path: 'verify-email', component: VerifyEmailComponent },
+  { path: 'token-accept', component: AuthCallbackComponent },
 
   {
     path: '',

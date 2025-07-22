@@ -69,7 +69,7 @@ export class LoginComponent {
       localStorage.removeItem('token');
       try {
         const resp: LoginResponse =
-          (await this.authService.loginWithUsernameAndPawword(
+          (await this.authService.loginWithEmailAndPawword(
             this.email?.value,
             this.password?.value
           )) as LoginResponse;
@@ -86,6 +86,14 @@ export class LoginComponent {
     } else {
       this.httpErrorMsg =
         'Unbekannter Fehler. Bitte versuche es später erneut.';
+    }
+  }
+
+  async loginWithGoogle() {
+    try {
+      this.authService.loginWithGoogleOauth();
+    } catch (err) {
+      console.error(err);
     }
   }
 

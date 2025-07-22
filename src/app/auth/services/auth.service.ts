@@ -11,11 +11,17 @@ export class AuthService {
 
   constructor() {}
 
-  async loginWithUsernameAndPawword(email: string, password: string) {
+  async loginWithEmailAndPawword(email: string, password: string) {
     const url = environment.baseUrl + 'api/login/';
     const body = { email: email, password: password };
 
     return lastValueFrom(this.http.post(url, body));
+  }
+
+  async loginWithGoogleOauth() {
+    const url = environment.baseUrl + 'api/google/';
+
+    window.location.href = url;
   }
 
   async registerUserWithUsernameAndPassword(
