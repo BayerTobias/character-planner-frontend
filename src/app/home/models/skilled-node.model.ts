@@ -1,5 +1,5 @@
 export interface NodeData {
-  id: number;
+  id: number | null;
   skill: number;
   nodes_skilled: number;
 }
@@ -10,7 +10,7 @@ export class SkilledNode {
   nodesSkilled: number;
 
   constructor(data: NodeData) {
-    this.id = data.id || -1;
+    this.id = data.id || null;
     this.skillId = data.skill || -1;
     this.nodesSkilled = data.nodes_skilled || 0;
   }
@@ -18,8 +18,8 @@ export class SkilledNode {
   asJson() {
     return {
       id: this.id,
-      skillId: this.skillId,
-      nodesSkilled: this.nodesSkilled,
+      skill_id: this.skillId,
+      nodes_skilled: this.nodesSkilled,
     };
   }
 }

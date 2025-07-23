@@ -72,17 +72,15 @@ export class CharacterCreatorComponent {
 
     if (this.canCreateCharacter()) {
       try {
-        console.log(this.character);
-
         await this.prepareCharacter();
-        console.log(this.character);
-        console.log(this.character.asPostRequestJson());
 
-        // const resp = await this.characterDataService.uploadCharacter(
-        //   this.character
-        // );
-        // console.log(resp);
-        // this.router.navigateByUrl(`character?character_id=${resp.id}`);
+        const resp = await this.characterDataService.uploadCharacter(
+          this.character
+        );
+        console.log(resp);
+        this.router.navigateByUrl(
+          `character?character_id=${resp.character.id}`
+        );
       } catch (err) {
         console.error(err);
       }

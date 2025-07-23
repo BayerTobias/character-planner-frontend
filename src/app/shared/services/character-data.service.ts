@@ -14,6 +14,7 @@ import {
 } from '../../home/models/character-list-item.model';
 import { CharClass, CharClassData } from '../../home/models/char-class.model';
 import { CharacterFactory } from '../../home/factories/character-factory';
+import { CharacterResponseData } from '../../interfaces/character-api-interfaces/character-response-interface';
 
 @Injectable({
   providedIn: 'root',
@@ -69,13 +70,9 @@ export class CharacterDataService {
     const url = environment.baseUrl + 'api/characters/';
     const body = character.asPostRequestJson();
 
-    const resp: CharacterData = await lastValueFrom(
-      this.http.post<CharacterData>(url, body)
+    const resp: CharacterResponseData = await lastValueFrom(
+      this.http.post<CharacterResponseData>(url, body)
     );
     return resp;
-  }
-
-  async updateCharacter() {
-    console.log('implement update function');
   }
 }

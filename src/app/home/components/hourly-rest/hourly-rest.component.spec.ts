@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HourlyRestComponentComponent } from './hourly-rest-component.component';
+import { HourlyRestComponentComponent } from './hourly-rest.component';
 
 describe('HourlyRestComponentComponent', () => {
   let component: HourlyRestComponentComponent;
@@ -8,9 +8,8 @@ describe('HourlyRestComponentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HourlyRestComponentComponent]
-    })
-    .compileComponents();
+      imports: [HourlyRestComponentComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(HourlyRestComponentComponent);
     component = fixture.componentInstance;

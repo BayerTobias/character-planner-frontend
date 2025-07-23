@@ -6,6 +6,7 @@ import { StatBoxComponent } from '../../../shared/components/character-component
 import { SkillsDisplayComponent } from '../../../shared/components/character-components/skills-display/skills-display.component';
 import { CharacterDetailsComponent } from '../../../shared/components/character-components/character-details/character-details.component';
 import { OverlayBaseComponent } from '../overlay-base/overlay-base.component';
+import { SkilledNode } from '../../models/skilled-node.model';
 
 @Component({
   selector: 'app-character-overview',
@@ -44,5 +45,27 @@ export class CharacterOverviewComponent {
   closeOverlay() {
     this.overlay = false;
     console.log(this.characterDataService.character);
+  }
+
+  async skillDevelopMagic() {
+    const character = this.characterDataService.character;
+
+    if (character) {
+      const dm = character?.class.skills.find((skill) => skill.id === 19);
+
+      if (dm) {
+        dm.nodesSkilled = 1;
+
+        character.skilledSkills.push(
+          new SkilledNode({
+            id: null,
+            skill: 19,
+            nodes_skilled: 1,
+          })
+        );
+      }
+
+      await this.characterDataService.uploadCharacter(character);
+    }
   }
 }

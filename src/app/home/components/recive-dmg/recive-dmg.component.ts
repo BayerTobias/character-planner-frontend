@@ -20,7 +20,9 @@ export class ReciveDmgComponent {
 
     if (character) {
       character.currentHp = character.currentHp - this.dmg;
-      await this.characterService.updateCharacter();
+
+      await this.characterService.uploadCharacter(character);
+
       this.submitEvent.emit();
     }
   }

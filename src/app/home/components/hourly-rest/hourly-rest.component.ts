@@ -6,8 +6,8 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-hourly-rest-component',
   standalone: true,
   imports: [FormsModule],
-  templateUrl: './hourly-rest-component.component.html',
-  styleUrl: './hourly-rest-component.component.scss',
+  templateUrl: './hourly-rest.component.html',
+  styleUrl: './hourly-rest.component.scss',
 })
 export class HourlyRestComponentComponent {
   public characterService = inject(CharacterDataService);

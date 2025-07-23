@@ -16,7 +16,7 @@ export class Mage extends BaseCharacter {
 
   calculateMaxMana() {
     const developMagic = this.class.skills.find(
-      (skill: Skill) => skill.name === 'Magie Entwickeln'
+      (skill: Skill) => skill.name === 'Magie entwickeln'
     );
 
     if (developMagic && this.class.baseLvlMana) {

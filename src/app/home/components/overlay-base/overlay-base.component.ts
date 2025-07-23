@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { ReciveDmgComponent } from '../recive-dmg/recive-dmg.component';
-import { HourlyRestComponentComponent } from '../hourly-rest-component/hourly-rest-component.component';
+import { HourlyRestComponentComponent } from '../hourly-rest/hourly-rest.component';
 
 @Component({
   selector: 'app-overlay-base',

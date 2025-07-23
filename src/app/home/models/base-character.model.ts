@@ -11,7 +11,7 @@ export interface CharacterData {
   // Core Character Information
   id: number;
   name: string;
-  race: CharRaceData;
+  character_race: CharRaceData;
   character_class: CharClassData;
   level?: number;
 
@@ -84,7 +84,7 @@ export class BaseCharacter {
     // Core Character Information
     this.id = data?.id || null;
     this.name = data?.name || '';
-    this.race = new CharRace(data?.race);
+    this.race = new CharRace(data?.character_race);
     this.class = new CharClass(data?.character_class);
     this.level = data?.level || 1;
 
