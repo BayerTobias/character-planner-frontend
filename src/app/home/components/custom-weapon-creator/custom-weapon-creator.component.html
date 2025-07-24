@@ -1,0 +1,57 @@
+<section>
+  <form [formGroup]="customWeaponForm" (submit)="createOrUpdateWeapon()">
+    <input type="text" formControlName="name" placeholder="name" />
+
+    <div>
+      @for (weaponGroup of gameDataService.weaponGroups; track $index) {
+      <button
+        type="button"
+        (click)="selectWeaponGroup(weaponGroup)"
+        [class.selected]="isSelected(weaponGroup)"
+      >
+        {{ weaponGroup.name }}
+      </button>
+      }
+    </div>
+
+    <input
+      type="number"
+      placeholder="min-str"
+      formControlName="minStr"
+      min="0"
+      step="1"
+    />
+
+    <input type="number" placeholder="dmg bonus" formControlName="dmg" />
+
+    <input
+      type="text"
+      placeholder="bsp: ST/GE"
+      maxlength="5"
+      formControlName="attribute"
+    />
+
+    <input
+      type="number"
+      placeholder="weight"
+      maxlength="3"
+      formControlName="weight"
+    />
+
+    <input
+      type="number"
+      placeholder="iniBonus"
+      maxlength="3"
+      formControlName="iniBonus"
+    />
+
+    <input
+      type="text"
+      placeholder="special"
+      maxlength="250"
+      formControlName="special"
+    />
+
+    <button type="submit">send</button>
+  </form>
+</section>

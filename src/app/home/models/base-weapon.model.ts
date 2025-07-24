@@ -7,7 +7,7 @@ export interface BaseWeaponData {
   min_str: number;
   dmg: number;
   attribute: string;
-  weight: string;
+  weight: number;
   ini_bonus: number;
 }
 
@@ -30,7 +30,7 @@ export class BaseWeapon {
     this.minStr = data?.min_str || 0;
     this.dmg = data?.dmg || 0;
     this.attribute = data?.attribute || 'ST/GE';
-    this.weight = data?.weight ? parseFloat(data?.weight) : 0;
+    this.weight = data?.weight || 0;
     this.iniBonus = data?.ini_bonus || 0;
   }
 

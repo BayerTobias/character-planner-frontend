@@ -25,7 +25,7 @@ export class CharacterOverviewComponent {
   private route = inject(ActivatedRoute);
 
   private characterId: number = -1;
-  public overlay: boolean = false;
+  public overlay: boolean = true;
 
   async ngOnInit() {
     this.route.queryParams.subscribe((params) => {

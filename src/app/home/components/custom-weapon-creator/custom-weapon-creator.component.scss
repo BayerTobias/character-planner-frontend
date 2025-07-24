@@ -1,0 +1,15 @@
+@import "../../../../styles.scss";
+@import "../../../../mixin.scss";
+
+section {
+  background-color: white;
+}
+
+form {
+  @include dFlex($gp: 20px);
+  flex-direction: column;
+}
+
+.selected {
+  background-color: green;
+}

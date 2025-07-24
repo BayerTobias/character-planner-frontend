@@ -7,13 +7,13 @@ export interface CustomWeaponData {
   min_str: number;
   dmg: number;
   attribute: string;
-  weight: string;
+  weight: number;
   ini_bonus: number;
   special: string;
 }
 
 export class CustomWeapon {
-  id: number;
+  id: number | null;
   name: string;
   weaponGroups: WeaponGroup[];
   minStr: number;
@@ -23,16 +23,17 @@ export class CustomWeapon {
   iniBonus: number;
   special: string;
 
-  constructor(data: CustomWeaponData) {
-    this.id = data?.id || -1;
+  constructor(data?: CustomWeaponData) {
+    this.id = data?.id || null;
     this.name = data?.name || '';
-    this.weaponGroups = (data.weapon_group || []).map(
-      (weaponGroup: WeaponGroupData) => new WeaponGroup(weaponGroup)
-    );
+    this.weaponGroups =
+      (data?.weapon_group || []).map(
+        (weaponGroup: WeaponGroupData) => new WeaponGroup(weaponGroup)
+      ) || [];
     this.minStr = data?.min_str || 0;
     this.dmg = data?.dmg || 0;
-    this.attribute = data?.attribute || 'ST/GE';
-    this.weight = data?.weight ? parseFloat(data?.weight) : 0;
+    this.attribute = data?.attribute || '';
+    this.weight = data?.weight || 0;
     this.iniBonus = data?.ini_bonus || 0;
     this.special = data?.special || '';
   }
@@ -41,12 +42,12 @@ export class CustomWeapon {
     return {
       id: this.id,
       name: this.name,
-      weaponGroups: this.weaponGroups.map((group) => group.asJason()),
-      minStr: this.minStr,
+      weapon_group: this.weaponGroups.map((group) => group.id),
+      min_str: this.minStr,
       dmg: this.dmg,
       attribute: this.attribute,
       weight: this.weight,
-      iniBonus: this.iniBonus,
+      ini_bonus: this.iniBonus,
       special: this.special,
     };
   }
