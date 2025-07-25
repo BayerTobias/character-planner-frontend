@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -31,6 +31,8 @@ export class CustomWeaponCreatorComponent {
   public selectedWeaponGroups: WeaponGroup[] = [];
 
   @Input() customWeapon: CustomWeapon | null = null;
+
+  @Output() closeOverlayEvent = new EventEmitter();
 
   constructor() {
     this.customWeaponForm = this.fb.group({
@@ -91,12 +93,7 @@ export class CustomWeaponCreatorComponent {
       this.createNewWeapon(character);
     }
 
-    try {
-      const resp = await this.characterDataService.uploadCharacter(character);
-      console.log(resp);
-    } catch (err) {
-      console.error(err);
-    }
+    await this.uploadCharacter(character);
   }
 
   updateExistingweapon() {
@@ -110,6 +107,30 @@ export class CustomWeaponCreatorComponent {
     const newWeapon = CustomWeaponFactory.fromForm(this.customWeaponForm);
     newWeapon.weaponGroups = this.selectedWeaponGroups;
     character.customWeapons.push(newWeapon);
+  }
+
+  async deleteWeapon() {
+    const character = this.characterDataService.character;
+
+    if (!this.customWeapon || !character) return;
+
+    const index = character.customWeapons.findIndex(
+      (weapon) => weapon.id === this.customWeapon?.id
+    );
+
+    character.customWeapons.splice(index, 1);
+
+    await this.uploadCharacter(character);
+  }
+
+  async uploadCharacter(character: BaseCharacter) {
+    try {
+      const resp = await this.characterDataService.uploadCharacter(character);
+      this.closeOverlayEvent.emit();
+      console.log(resp);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   get name() {

@@ -80,4 +80,9 @@ export class CharacterOverviewComponent {
 
     console.log('overview', this.selectedCustomWeapon);
   }
+
+  openCreateNewWeapon() {
+    this.selectedCustomWeapon = null;
+    this.overlay = true;
+  }
 }

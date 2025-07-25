@@ -35,7 +35,11 @@ $index) {
   {{ customWeapon.name }}
 </button>
 
-} @if(overlay){
+}
+
+<button (click)="openCreateNewWeapon()">new Custom weapon</button>
+
+@if(overlay){
 <app-overlay-base
   (closeOverlayEvent)="closeOverlay()"
   [slectedCustomWeapon]="selectedCustomWeapon"
