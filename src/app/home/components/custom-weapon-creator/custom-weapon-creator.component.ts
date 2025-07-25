@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -11,6 +11,8 @@ import { CustomWeapon } from '../../models/custom-weapon.model';
 import { WeaponGroup } from '../../models/weapon-group.model';
 import { CommonModule } from '@angular/common';
 import { CharacterDataService } from '../../../shared/services/character-data.service';
+import { CustomWeaponFactory } from '../../factories/custom-weapon-factory';
+import { BaseCharacter } from '../../models/base-character.model';
 
 @Component({
   selector: 'app-custom-weapon-creator',
@@ -28,7 +30,7 @@ export class CustomWeaponCreatorComponent {
 
   public selectedWeaponGroups: WeaponGroup[] = [];
 
-  private customWeapon: CustomWeapon = new CustomWeapon();
+  @Input() customWeapon: CustomWeapon | null = null;
 
   constructor() {
     this.customWeaponForm = this.fb.group({
@@ -40,6 +42,22 @@ export class CustomWeaponCreatorComponent {
       iniBonus: [null, Validators.required],
       special: [null, Validators.required],
     });
+  }
+
+  ngOnInit() {
+    if (this.customWeapon) {
+      this.customWeaponForm.patchValue({
+        name: this.customWeapon.name,
+        minStr: this.customWeapon.minStr,
+        dmg: this.customWeapon.dmg,
+        attribute: this.customWeapon.attribute,
+        weight: this.customWeapon.weight,
+        iniBonus: this.customWeapon.iniBonus,
+        special: this.customWeapon.special,
+      });
+
+      this.selectedWeaponGroups = this.customWeapon.weaponGroups;
+    }
   }
 
   selectWeaponGroup(weaponGroup: WeaponGroup) {
@@ -61,39 +79,37 @@ export class CustomWeaponCreatorComponent {
   }
 
   async createOrUpdateWeapon() {
-    this.fillCustomWeaponObject();
+    const character = this.characterDataService.character;
 
-    if (this.customWeapon.id) {
-      console.log('update weapon');
+    if (!character) {
+      return;
+    }
+
+    if (this.customWeapon) {
+      this.updateExistingweapon();
     } else {
-      const character = this.characterDataService.character;
+      this.createNewWeapon(character);
+    }
 
-      if (character) {
-        character.customWeapons.push(this.customWeapon);
-
-        // console.log(character.asPostRequestJson());
-
-        try {
-          const resp = await this.characterDataService.uploadCharacter(
-            character
-          );
-          console.log(resp);
-        } catch (err) {
-          console.error(err);
-        }
-      }
+    try {
+      const resp = await this.characterDataService.uploadCharacter(character);
+      console.log(resp);
+    } catch (err) {
+      console.error(err);
     }
   }
 
-  fillCustomWeaponObject() {
-    this.customWeapon.name = this.name?.value;
-    this.customWeapon.minStr = this.minStr?.value;
-    this.customWeapon.dmg = this.dmg?.value;
-    this.customWeapon.attribute = this.attribute?.value;
-    this.customWeapon.weight = this.weight?.value;
-    this.customWeapon.iniBonus = this.iniBonus?.value;
-    this.customWeapon.special = this.special?.value;
+  updateExistingweapon() {
+    if (!this.customWeapon) return;
+
+    CustomWeaponFactory.updateWeapon(this.customWeapon, this.customWeaponForm);
     this.customWeapon.weaponGroups = this.selectedWeaponGroups;
+  }
+
+  createNewWeapon(character: BaseCharacter) {
+    const newWeapon = CustomWeaponFactory.fromForm(this.customWeaponForm);
+    newWeapon.weaponGroups = this.selectedWeaponGroups;
+    character.customWeapons.push(newWeapon);
   }
 
   get name() {

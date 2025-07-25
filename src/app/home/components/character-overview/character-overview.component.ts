@@ -7,6 +7,8 @@ import { SkillsDisplayComponent } from '../../../shared/components/character-com
 import { CharacterDetailsComponent } from '../../../shared/components/character-components/character-details/character-details.component';
 import { OverlayBaseComponent } from '../overlay-base/overlay-base.component';
 import { SkilledNode } from '../../models/skilled-node.model';
+import { GameDataService } from '../../../shared/services/game-data.service';
+import { CustomWeapon } from '../../models/custom-weapon.model';
 
 @Component({
   selector: 'app-character-overview',
@@ -22,10 +24,13 @@ import { SkilledNode } from '../../models/skilled-node.model';
 })
 export class CharacterOverviewComponent {
   public characterDataService = inject(CharacterDataService);
+  public gameDataService = inject(GameDataService);
   private route = inject(ActivatedRoute);
 
   private characterId: number = -1;
-  public overlay: boolean = true;
+  public overlay: boolean = false;
+
+  selectedCustomWeapon: CustomWeapon | null = null;
 
   async ngOnInit() {
     this.route.queryParams.subscribe((params) => {
@@ -67,5 +72,12 @@ export class CharacterOverviewComponent {
 
       await this.characterDataService.uploadCharacter(character);
     }
+  }
+
+  openEditCustomWeapon(customWeapon: CustomWeapon) {
+    this.selectedCustomWeapon = customWeapon;
+    this.overlay = true;
+
+    console.log('overview', this.selectedCustomWeapon);
   }
 }

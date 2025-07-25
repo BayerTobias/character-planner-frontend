@@ -29,7 +29,15 @@
 </div>
 
 <button (click)="skillDevelopMagic()">testskills</button>
+@for ( customWeapon of characterDataService.character?.customWeapons; track
+$index) {
+<button (click)="openEditCustomWeapon(customWeapon)">
+  {{ customWeapon.name }}
+</button>
 
-@if(overlay){
-<app-overlay-base (closeOverlayEvent)="closeOverlay()"></app-overlay-base>
+} @if(overlay){
+<app-overlay-base
+  (closeOverlayEvent)="closeOverlay()"
+  [slectedCustomWeapon]="selectedCustomWeapon"
+></app-overlay-base>
 }
