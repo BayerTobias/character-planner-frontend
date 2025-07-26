@@ -7,7 +7,10 @@ import {
 import { environment } from '../../../environments/environment';
 import { lastValueFrom } from 'rxjs';
 import { CharRace, CharRaceData } from '../../home/models/char-race.model';
-import { BaseWeapon } from '../../home/models/base-weapon.model';
+import {
+  BaseWeapon,
+  BaseWeaponData,
+} from '../../home/models/base-weapon.model';
 import {
   WeaponGroup,
   WeaponGroupData,
@@ -76,7 +79,14 @@ export class GameDataService {
   }
 
   async getBaseWeaponsList() {
-    console.log('getBaseWeaponsList implementieren !!!!');
+    const url = environment.baseUrl + 'api/base-weapons';
+    const resp = await lastValueFrom(this.http.get<BaseWeaponData[]>(url));
+
+    this.baseWeapons = resp.map(
+      (baseWeaponData: BaseWeaponData) => new BaseWeapon(baseWeaponData)
+    );
+
+    console.log(this.baseWeapons);
   }
 
   async getWeaponGroupsList() {
