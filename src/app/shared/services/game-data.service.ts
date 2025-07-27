@@ -15,6 +15,7 @@ import {
   WeaponGroup,
   WeaponGroupData,
 } from '../../home/models/weapon-group.model';
+import { BaseArmor, BaseArmorData } from '../../home/models/base-armor.model';
 
 @Injectable({
   providedIn: 'root',
@@ -24,34 +25,14 @@ export class GameDataService {
 
   public charClasses: CharClassListItem[] = [];
   public charRaces: CharRace[] = [];
-  public baseWeapons: BaseWeapon[] = [
-    new BaseWeapon({
-      id: 1,
-      name: 'waffe1',
-      weapon_group: [{ id: 1, name: 'as' }],
-      min_str: 5,
-      dmg: 1,
-      attribute: 'GE',
-      weight: 0.5,
-      ini_bonus: 1,
-    }),
-
-    new BaseWeapon({
-      id: 1,
-      name: 'waffe2',
-      weapon_group: [{ id: 2, name: 'asd123' }],
-      min_str: 7,
-      dmg: 1,
-      attribute: 'ST',
-      weight: 1.5,
-      ini_bonus: 1,
-    }),
-  ];
+  public baseArmors: BaseArmor[] = [];
+  public baseWeapons: BaseWeapon[] = [];
   public weaponGroups: WeaponGroup[] = [];
 
   constructor() {
     this.getClassesList();
     this.getRaceList();
+    this.getBaseArmorsList();
     this.getBaseWeaponsList();
     this.getWeaponGroupsList();
   }
@@ -76,6 +57,17 @@ export class GameDataService {
     );
 
     console.log(this.charRaces);
+  }
+
+  async getBaseArmorsList() {
+    const url = environment.baseUrl + 'api/base-armors';
+    const resp = await lastValueFrom(this.http.get<BaseArmorData[]>(url));
+
+    this.baseArmors = resp.map(
+      (baseArmorData: BaseArmorData) => new BaseArmor(baseArmorData)
+    );
+
+    console.log(this.baseArmors);
   }
 
   async getBaseWeaponsList() {

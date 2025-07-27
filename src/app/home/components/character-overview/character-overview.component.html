@@ -24,8 +24,38 @@
   @for (skill of characterDataService.character.class.skills; track $index)
   {<app-skills-display [skill]="skill" [index]="$index"></app-skills-display>}
   @for (skill of characterDataService.character.customSkills; track $index) {
-  <app-skills-display [skill]="skill" [index]="null"></app-skills-display>
+  <app-skills-display [skill]="skill" [index]="$index"></app-skills-display>
   } }
+</div>
+
+<div>
+  <button
+    (click)="toggleSelectArmor()"
+    (keydown)="handleKeydown($event)"
+    [attr.aria-expanded]="selectArmorOpen"
+    aria-haspopup="listbox"
+    [attr.aria-activedescendant]="
+      selectArmorOpen ? 'armor-option-' + focusedArmorIndex : null
+    "
+  >
+    {{ characterDataService.character?.armor?.name ?? "Select Armor" }}
+  </button>
+
+  @if (selectArmorOpen) {
+  <ul role="listbox" tabindex="-1">
+    @for (armor of gameDataService.baseArmors; track $index) {
+    <li
+      [id]="'armor-option-' + $index"
+      [attr.aria-selected]="$index === focusedArmorIndex"
+      [class.focused]="$index === focusedArmorIndex"
+      (click)="selectArmor(armor)"
+      role="option"
+    >
+      {{ armor.name }}
+    </li>
+    }
+  </ul>
+  }
 </div>
 
 <button (click)="skillDevelopMagic()">testskills</button>

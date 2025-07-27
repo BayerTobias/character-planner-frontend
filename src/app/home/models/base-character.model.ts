@@ -295,7 +295,7 @@ export class BaseCharacter {
       custom_weapons: this.customWeapons.map((customWeapon) =>
         customWeapon.asJason()
       ),
-      armor: this.armor?.asJason(),
+      base_armor_id: this.armor?.id,
       money: this.money.asJason(),
     };
   }
