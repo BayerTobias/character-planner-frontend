@@ -28,6 +28,40 @@
   } }
 </div>
 
+<!-- Weapon Inventar extra Komponente -->
+
+<div>
+  <ul class="weapon-inventory">
+    <span>Base Weapons</span>
+    @for (baseWeapon of characterDataService.character?.baseWeapons; track
+    $index) {
+    <li>{{ baseWeapon.name }}</li>
+    }
+    <span>Custom Weapons</span>
+    @for (customWeapon of characterDataService.character?.customWeapons; track
+    $index) {
+    <li>{{ customWeapon.name }}</li>
+    }
+  </ul>
+
+  <button (click)="toggleSelectBaseWeapon()">Open Select base Weapon</button>
+
+  @if (selectBaseWeaponOpen) {
+  <div>
+    @for (baseWeapon of gameDataService.baseWeapons; track $index) {
+    <ul>
+      <li (click)="selectBaseWeapon(baseWeapon)">{{ baseWeapon.name }}</li>
+    </ul>
+    }
+    <button (click)="saveSelectedWeapons()">save</button>
+  </div>
+  }
+</div>
+
+<button (click)="openCreateNewWeapon()">new Custom weapon</button>
+
+<!-- Armor Section extra komponente -->
+
 <div>
   <button
     (click)="toggleSelectArmor()"
@@ -42,6 +76,7 @@
   </button>
 
   @if (selectArmorOpen) {
+
   <ul role="listbox" tabindex="-1">
     @for (armor of gameDataService.baseArmors; track $index) {
     <li
@@ -65,11 +100,7 @@ $index) {
   {{ customWeapon.name }}
 </button>
 
-}
-
-<button (click)="openCreateNewWeapon()">new Custom weapon</button>
-
-@if(overlay){
+} @if(overlay){
 <app-overlay-base
   (closeOverlayEvent)="closeOverlay()"
   [slectedCustomWeapon]="selectedCustomWeapon"

@@ -12,6 +12,7 @@ import { CustomWeapon } from '../../models/custom-weapon.model';
 import { max } from 'rxjs';
 import { BaseArmor } from '../../models/base-armor.model';
 import { CommonModule } from '@angular/common';
+import { BaseWeapon } from '../../models/base-weapon.model';
 
 @Component({
   selector: 'app-character-overview',
@@ -36,10 +37,14 @@ export class CharacterOverviewComponent {
 
   public selectArmorOpen: boolean = false;
 
+  public selectedCustomWeapon: CustomWeapon | null = null;
+
   // Auslagern in Armor Componente
   public focusedArmorIndex: number = 0;
 
-  public selectedCustomWeapon: CustomWeapon | null = null;
+  // auslagern Weapon Inventory komponente
+  public selectBaseWeaponOpen: boolean = false;
+  public selectedBaseWeapons: BaseWeapon[] = [];
 
   async ngOnInit() {
     this.route.queryParams.subscribe((params) => {
@@ -148,6 +153,42 @@ export class CharacterOverviewComponent {
       const resp = await this.characterDataService.uploadCharacter(character);
       console.log(resp);
       this.selectArmorOpen = false;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  // auslagern Weapon Inventory komponente
+
+  toggleSelectBaseWeapon() {
+    this.selectBaseWeaponOpen = !this.selectBaseWeaponOpen;
+  }
+
+  selectBaseWeapon(baseWeapon: BaseWeapon) {
+    const index = this.selectedBaseWeapons.findIndex(
+      (weapon) => weapon.id === baseWeapon.id
+    );
+
+    if (index === -1) {
+      this.selectedBaseWeapons.push(baseWeapon);
+      console.log(index);
+    } else {
+      this.selectedBaseWeapons.splice(index, 1);
+    }
+
+    console.log(this.selectedBaseWeapons);
+  }
+
+  async saveSelectedWeapons() {
+    const character = this.characterDataService.character;
+
+    if (!character) return;
+
+    character.baseWeapons = this.selectedBaseWeapons;
+
+    try {
+      const resp = await this.characterDataService.uploadCharacter(character);
+      console.log(resp);
     } catch (err) {
       console.error(err);
     }
