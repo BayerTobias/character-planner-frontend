@@ -6,13 +6,13 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { GameDataService } from '../../../shared/services/game-data.service';
-import { CustomWeapon } from '../../models/custom-weapon.model';
-import { WeaponGroup } from '../../models/weapon-group.model';
+import { GameDataService } from '../../../../shared/services/game-data.service';
+import { CustomWeapon } from '../../../models/custom-weapon.model';
+import { WeaponGroup } from '../../../models/weapon-group.model';
 import { CommonModule } from '@angular/common';
-import { CharacterDataService } from '../../../shared/services/character-data.service';
-import { CustomWeaponFactory } from '../../factories/custom-weapon-factory';
-import { BaseCharacter } from '../../models/base-character.model';
+import { CharacterDataService } from '../../../../shared/services/character-data.service';
+import { CustomWeaponFactory } from '../../../factories/custom-weapon-factory';
+import { BaseCharacter } from '../../../models/base-character.model';
 
 @Component({
   selector: 'app-custom-weapon-creator',

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ReciveDmgComponent } from '../recive-dmg/recive-dmg.component';
 import { HourlyRestComponentComponent } from '../hourly-rest/hourly-rest.component';
-import { CustomWeaponCreatorComponent } from '../custom-weapon-creator/custom-weapon-creator.component';
+import { CustomWeaponCreatorComponent } from '../item-management/custom-weapon-creator/custom-weapon-creator.component';
 import { CustomWeapon } from '../../models/custom-weapon.model';
 
 @Component({

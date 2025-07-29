@@ -13,6 +13,7 @@ import { max } from 'rxjs';
 import { BaseArmor } from '../../models/base-armor.model';
 import { CommonModule } from '@angular/common';
 import { BaseWeapon } from '../../models/base-weapon.model';
+import { ArmorSelectorComponent } from '../item-management/armor-selector/armor-selector.component';
 
 @Component({
   selector: 'app-character-overview',
@@ -23,6 +24,7 @@ import { BaseWeapon } from '../../models/base-weapon.model';
     CharacterDetailsComponent,
     OverlayBaseComponent,
     CommonModule,
+    ArmorSelectorComponent,
   ],
   templateUrl: './character-overview.component.html',
   styleUrl: './character-overview.component.scss',
@@ -38,9 +40,6 @@ export class CharacterOverviewComponent {
   public selectArmorOpen: boolean = false;
 
   public selectedCustomWeapon: CustomWeapon | null = null;
-
-  // Auslagern in Armor Componente
-  public focusedArmorIndex: number = 0;
 
   // auslagern Weapon Inventory komponente
   public selectBaseWeaponOpen: boolean = false;
@@ -97,65 +96,6 @@ export class CharacterOverviewComponent {
 
   toggleSelectArmor() {
     this.selectArmorOpen = !this.selectArmorOpen;
-  }
-
-  // Auslagern in Armor Komponente
-
-  async handleKeydown(event: KeyboardEvent) {
-    const maxIndex = this.gameDataService.baseArmors.length - 1;
-
-    switch (event.key) {
-      case 'ArrowDown':
-        if (this.focusedArmorIndex < maxIndex && this.selectArmorOpen)
-          this.focusedArmorIndex++;
-        else this.focusedArmorIndex = 0;
-        event.preventDefault();
-        console.log(this.focusedArmorIndex);
-        break;
-
-      case 'ArrowUp':
-        if (this.focusedArmorIndex > 0 && this.selectArmorOpen)
-          this.focusedArmorIndex--;
-        else this.focusedArmorIndex = maxIndex;
-        event.preventDefault();
-        console.log(this.focusedArmorIndex);
-        break;
-
-      case 'Enter':
-        if (this.selectArmorOpen) {
-          const armor = this.gameDataService.baseArmors[this.focusedArmorIndex];
-          await this.selectArmor(armor);
-          event.preventDefault();
-        }
-        break;
-
-      case 'Escape':
-        if (this.selectArmorOpen) {
-          this.selectArmorOpen = false;
-          event.preventDefault();
-        }
-        break;
-    }
-  }
-
-  // Auslagern in Armor Komponente
-
-  async selectArmor(armor: BaseArmor) {
-    const character = this.characterDataService.character;
-
-    if (!character) {
-      return;
-    }
-
-    character.armor = armor;
-
-    try {
-      const resp = await this.characterDataService.uploadCharacter(character);
-      console.log(resp);
-      this.selectArmorOpen = false;
-    } catch (err) {
-      console.error(err);
-    }
   }
 
   // auslagern Weapon Inventory komponente

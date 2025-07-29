@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SelectClassComponent } from './select-class.component';
+import { ArmorSelectorComponent } from './armor-selector.component';
 
-describe('SelectClassComponent', () => {
-  let component: SelectClassComponent;
-  let fixture: ComponentFixture<SelectClassComponent>;
+describe('ArmorSelectorComponent', () => {
+  let component: ArmorSelectorComponent;
+  let fixture: ComponentFixture<ArmorSelectorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SelectClassComponent]
+      imports: [ArmorSelectorComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SelectClassComponent);
+    fixture = TestBed.createComponent(ArmorSelectorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

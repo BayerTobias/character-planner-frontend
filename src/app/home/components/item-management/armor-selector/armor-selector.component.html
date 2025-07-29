@@ -1,0 +1,32 @@
+<section>
+  <div>
+    <button
+      (click)="toggleArmorSelection()"
+      (keydown)="handleKeydown($event)"
+      [attr.aria-expanded]="selectArmorOpen"
+      aria-haspopup="listbox"
+      [attr.aria-activedescendant]="
+        selectArmorOpen ? 'armor-option-' + focusedArmorIndex : null
+      "
+    >
+      {{ characterDataService.character?.armor?.name ?? "Select Armor" }}
+    </button>
+
+    @if (selectArmorOpen) {
+
+    <ul role="listbox" tabindex="-1">
+      @for (armor of gameDataService.baseArmors; track $index) {
+      <li
+        [id]="'armor-option-' + $index"
+        [attr.aria-selected]="$index === focusedArmorIndex"
+        [class.focused]="$index === focusedArmorIndex"
+        (click)="selectArmor(armor)"
+        role="option"
+      >
+        {{ armor.name }}
+      </li>
+      }
+    </ul>
+    }
+  </div>
+</section>
