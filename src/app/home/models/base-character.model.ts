@@ -40,7 +40,8 @@ export interface CharacterData {
   // Items
   base_weapons: BaseWeaponData[];
   custom_weapons: CustomWeaponData[];
-  armor: BaseArmorData | null; // evtl custom armor
+  base_armor: BaseArmorData | null; // evtl custom armor
+  shield: BaseArmorData | null;
   money: MoneyData;
 }
 
@@ -78,6 +79,7 @@ export class BaseCharacter {
   baseWeapons: BaseWeapon[];
   customWeapons: CustomWeapon[];
   armor: BaseArmor | null;
+  shield: BaseArmor | null;
   money: Money;
 
   constructor(data?: CharacterData) {
@@ -128,7 +130,8 @@ export class BaseCharacter {
     this.customWeapons = (data?.custom_weapons || []).map(
       (customWeapon: CustomWeaponData) => new CustomWeapon(customWeapon)
     );
-    this.armor = data?.armor ? new BaseArmor(data.armor) : null;
+    this.armor = data?.base_armor ? new BaseArmor(data.base_armor) : null;
+    this.shield = data?.shield ? new BaseArmor(data?.shield) : null;
     this.money = new Money(data?.money);
   }
 
@@ -296,6 +299,7 @@ export class BaseCharacter {
         customWeapon.asJason()
       ),
       base_armor_id: this.armor?.id,
+      shield_id: this.shield?.id,
       money: this.money.asJason(),
     };
   }

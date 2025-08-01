@@ -9,7 +9,6 @@ import { OverlayBaseComponent } from '../overlay-base/overlay-base.component';
 import { SkilledNode } from '../../models/skilled-node.model';
 import { GameDataService } from '../../../shared/services/game-data.service';
 import { CustomWeapon } from '../../models/custom-weapon.model';
-import { max } from 'rxjs';
 import { BaseArmor } from '../../models/base-armor.model';
 import { CommonModule } from '@angular/common';
 import { BaseWeapon } from '../../models/base-weapon.model';

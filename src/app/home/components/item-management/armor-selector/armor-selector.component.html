@@ -15,7 +15,9 @@
     @if (selectArmorOpen) {
 
     <ul role="listbox" tabindex="-1">
-      @for (armor of gameDataService.baseArmors; track $index) {
+      @for (armor of gameDataService.baseArmors; track $index) { @if (armor.type
+      === 'armor') {
+
       <li
         [id]="'armor-option-' + $index"
         [attr.aria-selected]="$index === focusedArmorIndex"
@@ -25,7 +27,7 @@
       >
         {{ armor.name }}
       </li>
-      }
+      } }
     </ul>
     }
   </div>

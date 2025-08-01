@@ -5,6 +5,7 @@ export interface BaseArmorData {
   weight: string;
   armor_bonus: number;
   maneuver_bonus: number;
+  type: string;
 }
 
 export class BaseArmor {
@@ -14,6 +15,7 @@ export class BaseArmor {
   weight: number;
   armorBonus: number;
   maneuverBonus: number;
+  type: string;
 
   constructor(data?: BaseArmorData) {
     this.id = data?.id || null;
@@ -22,6 +24,7 @@ export class BaseArmor {
     this.weight = data?.weight ? parseFloat(data?.weight) : 0;
     this.armorBonus = data?.armor_bonus || 0;
     this.maneuverBonus = data?.maneuver_bonus || 0;
+    this.type = data?.type || '';
   }
 
   asJason() {
@@ -32,6 +35,7 @@ export class BaseArmor {
       weight: this.weight,
       armorBonus: this.armorBonus,
       maneuverBonus: this.maneuverBonus,
+      type: this.type,
     };
   }
 }
