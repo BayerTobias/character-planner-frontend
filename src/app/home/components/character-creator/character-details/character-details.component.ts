@@ -8,7 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { InputWithErrorMsgComponent } from '../../../../shared/components/form-components/input-with-error-msg/input-with-error-msg.component';
-import { NavigationComponent } from '../navigation/navigation.component';
+import { NavigationComponent } from '../../../../shared/components/navigation/navigation.component';
 import { CharDetails } from '../../../models/char-dedails.model';
 
 @Component({

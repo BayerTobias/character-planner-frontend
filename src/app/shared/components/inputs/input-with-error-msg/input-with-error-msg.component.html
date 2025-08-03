@@ -1,0 +1,11 @@
+<div>
+  <input
+    class="text-input"
+    placeholder="E-Mail"
+    [formControl]="control"
+    type="text"
+  />
+  @if (errorMessage) {
+  <span class="error-msg">{{ errorMessage }}</span>
+  }
+</div>

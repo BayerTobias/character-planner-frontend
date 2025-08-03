@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { CustomValidators } from '../../custom-validators';
+import { CustomValidators } from '../../../shared/validators/custom-validators';
 import { StandardButtonComponent } from '../../../shared/components/buttons/standard-button/standard-button.component';
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';

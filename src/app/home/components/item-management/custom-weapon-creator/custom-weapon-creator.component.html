@@ -1,7 +1,6 @@
-<section>
+<section (click)="$event.stopPropagation()">
   <form [formGroup]="customWeaponForm" (submit)="createOrUpdateWeapon()">
-    <input type="text" formControlName="name" placeholder="name" />
-
+    <app-input-with-error-msg [control]="name"></app-input-with-error-msg>
     <div>
       @for (weaponGroup of gameDataService.weaponGroups; track $index) {
       <button
@@ -54,8 +53,5 @@
 
     <button type="submit">send</button>
   </form>
-
-  @if (customWeapon) {
-  <button (click)="deleteWeapon()">DELETE</button>
-  }
+  <app-navigation></app-navigation>
 </section>

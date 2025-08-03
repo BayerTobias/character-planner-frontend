@@ -1,6 +1,7 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import {
   FormBuilder,
+  FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
@@ -13,11 +14,19 @@ import { CommonModule } from '@angular/common';
 import { CharacterDataService } from '../../../../shared/services/character-data.service';
 import { CustomWeaponFactory } from '../../../factories/custom-weapon-factory';
 import { BaseCharacter } from '../../../models/base-character.model';
+import { InputWithErrorMsgComponent } from '../../../../shared/components/inputs/input-with-error-msg/input-with-error-msg.component';
+import { NavigationComponent } from '../../../../shared/components/navigation/navigation.component';
 
 @Component({
   selector: 'app-custom-weapon-creator',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    InputWithErrorMsgComponent,
+    NavigationComponent,
+  ],
   templateUrl: './custom-weapon-creator.component.html',
   styleUrl: './custom-weapon-creator.component.scss',
 })
@@ -134,7 +143,7 @@ export class CustomWeaponCreatorComponent {
   }
 
   get name() {
-    return this.customWeaponForm.get('name');
+    return this.customWeaponForm.get('name') as FormControl;
   }
 
   get minStr() {

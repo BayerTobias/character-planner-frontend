@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { CharRace } from '../../../models/char-race.model';
 import { GameDataService } from '../../../../shared/services/game-data.service';
-import { NavigationComponent } from '../navigation/navigation.component';
+import { NavigationComponent } from '../../../../shared/components/navigation/navigation.component';
 import { CommonModule } from '@angular/common';
 
 @Component({

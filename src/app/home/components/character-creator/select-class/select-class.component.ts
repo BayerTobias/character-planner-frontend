@@ -1,7 +1,7 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { GameDataService } from '../../../../shared/services/game-data.service';
 import { CharClassListItem } from '../../../models/char-class-list-item.mode';
-import { NavigationComponent } from '../navigation/navigation.component';
+import { NavigationComponent } from '../../../../shared/components/navigation/navigation.component';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
