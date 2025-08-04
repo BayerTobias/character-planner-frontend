@@ -1,6 +1,6 @@
 <nav>
-  <button (click)="emitBack()">Zurück</button>
+  <button (click)="emitBack()">{{ backText }}</button>
   <button (click)="emitNext()" [style.color]="color ? color : ''">
-    Weiter
+    {{ nextText }}
   </button>
 </nav>

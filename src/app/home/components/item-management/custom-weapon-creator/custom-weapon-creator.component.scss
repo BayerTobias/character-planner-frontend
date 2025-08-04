@@ -1,20 +1,96 @@
 @import "../../../../../styles.scss";
 @import "../../../../../mixin.scss";
 
-section {
-  width: 100vw;
-  width: 100svw;
+main {
+  @include dFlex($jc: space-between);
+  flex-direction: column;
   height: 100vh;
   height: 100svh;
-
+  width: 100vw;
+  width: 100svw;
+  overflow-y: auto;
   background-color: $bg-dark;
 }
 
-form {
-  @include dFlex($gp: 20px);
+.headline-wrapper {
+  @include dFlex($gp: 8px);
   flex-direction: column;
+  padding-top: 16px;
+
+  h1 {
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+}
+
+p {
+  color: rgba(224, 224, 224, 0.5);
+  font-size: 15px;
+}
+
+form {
+  @include dFlex($gp: 20px, $jc: flex-start);
+  flex-direction: column;
+  padding: 24px;
+  flex-grow: 1;
+
+  @media screen and (max-width: 350px) {
+    padding: 20px;
+  }
+
+  > div {
+    @include dFlex($gp: 8px);
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+.weapon-group-select-wrapper {
+  @include dFlex($gp: 4px);
+  flex-wrap: wrap;
+  min-height: 108px;
+
+  > button {
+    color: $copy-light;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    border-radius: 8px;
+    border: 1px solid $bg-dark;
+    background: $bg-darker;
+    box-shadow: 0 20px 50px 0 rgba(0, 0, 0, 0.12);
+
+    @media screen and (max-width: 350px) {
+      letter-spacing: unset;
+    }
+  }
 }
 
 .selected {
-  background-color: green;
+  background: $mage-color !important;
+}
+
+.stats-input-wrapper {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  gap: 12px;
+
+  > input {
+    width: 120px;
+    border-radius: 8px;
+    border: 1px solid $copy-dark;
+    background: $copy-light;
+    box-shadow: 0 20px 50px 0 rgba(0, 0, 0, 0.12);
+    padding: 8px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+  }
 }

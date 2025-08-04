@@ -1,57 +1,88 @@
 <section (click)="$event.stopPropagation()">
-  <form [formGroup]="customWeaponForm" (submit)="createOrUpdateWeapon()">
-    <app-input-with-error-msg [control]="name"></app-input-with-error-msg>
-    <div>
-      @for (weaponGroup of gameDataService.weaponGroups; track $index) {
-      <button
-        type="button"
-        (click)="selectWeaponGroup(weaponGroup)"
-        [class.selected]="isSelected(weaponGroup)"
-      >
-        {{ weaponGroup.name }}
-      </button>
-      }
+  <main>
+    <div class="headline-wrapper">
+      <h1>neue Waffe Erstellen</h1>
     </div>
 
-    <input
-      type="number"
-      placeholder="min-str"
-      formControlName="minStr"
-      min="0"
-      step="1"
-    />
+    <form [formGroup]="customWeaponForm" (submit)="createOrUpdateWeapon()">
+      <div>
+        <p>Name der Waffe eintragen</p>
+        <app-input-with-error-msg
+          [control]="name"
+          [placeholder]="'Waffen Name'"
+          [label]="'Waffen Name'"
+        ></app-input-with-error-msg>
+      </div>
 
-    <input type="number" placeholder="dmg bonus" formControlName="dmg" />
+      <div>
+        <p>Art(en) der Waffe wählen</p>
+        <div class="weapon-group-select-wrapper">
+          @for (weaponGroup of gameDataService.weaponGroups; track $index) {
+          <button
+            type="button"
+            (click)="selectWeaponGroup(weaponGroup)"
+            [class.selected]="isSelected(weaponGroup)"
+          >
+            {{ weaponGroup.name }}
+          </button>
+          }
+        </div>
+      </div>
 
-    <input
-      type="text"
-      placeholder="bsp: ST/GE"
-      maxlength="5"
-      formControlName="attribute"
-    />
+      <div>
+        <p>Attribute der Waffe eintragen</p>
 
-    <input
-      type="number"
-      placeholder="weight"
-      maxlength="3"
-      formControlName="weight"
-    />
+        <div class="stats-input-wrapper">
+          <input
+            type="number"
+            placeholder="Min-str (5)"
+            formControlName="minStr"
+            min="0"
+            step="1"
+          />
 
-    <input
-      type="number"
-      placeholder="iniBonus"
-      maxlength="3"
-      formControlName="iniBonus"
-    />
+          <input
+            type="number"
+            placeholder="Dmg Bonus (2)"
+            formControlName="dmg"
+          />
 
-    <input
-      type="text"
-      placeholder="special"
-      maxlength="250"
-      formControlName="special"
-    />
+          <input
+            type="text"
+            placeholder="bsp: ST/GE"
+            maxlength="5"
+            formControlName="attribute"
+          />
 
-    <button type="submit">send</button>
-  </form>
-  <app-navigation></app-navigation>
+          <input
+            type="number"
+            placeholder="Gewicht (1,6)"
+            maxlength="3"
+            formControlName="weight"
+          />
+
+          <input
+            type="number"
+            placeholder="Ini Bonus (-1)"
+            maxlength="3"
+            formControlName="iniBonus"
+          />
+
+          <input
+            type="text"
+            placeholder="Spezial (Text)"
+            maxlength="250"
+            formControlName="special"
+          />
+        </div>
+      </div>
+    </form>
+
+    <app-navigation
+      (back)="emitCloseOverlay()"
+      (next)="createOrUpdateWeapon()"
+      [nextText]="'erstellen'"
+      [backText]="'abbrechen'"
+    ></app-navigation>
+  </main>
 </section>

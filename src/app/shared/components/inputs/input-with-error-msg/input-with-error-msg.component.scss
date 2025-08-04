@@ -5,6 +5,11 @@
 // flex-direction: column;
 // width: 100%;
 
+:host {
+  display: block;
+  width: 100%;
+}
+
 div {
   width: 100%;
   @include dFlex($gp: 8px);

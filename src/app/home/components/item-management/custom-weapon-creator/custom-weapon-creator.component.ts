@@ -135,11 +135,15 @@ export class CustomWeaponCreatorComponent {
   async uploadCharacter(character: BaseCharacter) {
     try {
       const resp = await this.characterDataService.uploadCharacter(character);
-      this.closeOverlayEvent.emit();
+      this.emitCloseOverlay();
       console.log(resp);
     } catch (err) {
       console.error(err);
     }
+  }
+
+  emitCloseOverlay() {
+    this.closeOverlayEvent.emit();
   }
 
   get name() {

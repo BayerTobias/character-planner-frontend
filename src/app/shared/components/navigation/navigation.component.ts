@@ -9,6 +9,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class NavigationComponent {
   @Input() color: string | null = null;
+  @Input() nextText: string = 'Weiter';
+  @Input() backText: string = 'Zurück';
 
   @Output() back = new EventEmitter<void>();
   @Output() next = new EventEmitter<void>();
