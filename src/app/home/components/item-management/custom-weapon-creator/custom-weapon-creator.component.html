@@ -47,12 +47,11 @@
             formControlName="dmg"
           />
 
-          <input
-            type="text"
-            placeholder="bsp: ST/GE"
-            maxlength="5"
-            formControlName="attribute"
-          />
+          <select formControlName="attribute">
+            <option value="ST/GE">ST/GE</option>
+            <option value="ST">ST</option>
+            <option value="GE">GE</option>
+          </select>
 
           <input
             type="number"

@@ -48,7 +48,7 @@ export class CustomWeaponCreatorComponent {
       name: ['', Validators.required],
       minStr: [null, Validators.required],
       dmg: [null, Validators.required],
-      attribute: ['', Validators.required],
+      attribute: ['ST/GE', Validators.required],
       weight: [null, Validators.required],
       iniBonus: [null, Validators.required],
       special: [null, Validators.required],
@@ -92,7 +92,7 @@ export class CustomWeaponCreatorComponent {
   async createOrUpdateWeapon() {
     const character = this.characterDataService.character;
 
-    if (!character) {
+    if (!character || !this.customWeaponForm.valid) {
       return;
     }
 

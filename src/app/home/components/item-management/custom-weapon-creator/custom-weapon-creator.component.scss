@@ -82,7 +82,8 @@ form {
   justify-content: center;
   gap: 12px;
 
-  > input {
+  > input,
+  select {
     width: 120px;
     border-radius: 8px;
     border: 1px solid $copy-dark;
@@ -92,5 +93,11 @@ form {
     text-align: center;
     font-size: 12px;
     font-weight: 500;
+  }
+
+  select:focus {
+    border-radius: unset;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
   }
 }
