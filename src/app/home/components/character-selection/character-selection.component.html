@@ -1,14 +1,50 @@
-<main>
-  <div>
-    <button (click)="routeCharacterCreater()">create new Character</button>
-  </div>
+<section>
+  <main>
+    <div class="top-wrapper">
+      <div class="headline-wrapper">
+        <h1>Charakter Auswahl</h1>
+        <p>wähle deinen Charakter</p>
+      </div>
 
-  @for (character of characterDataService.characterList; track $index) {
-  <div class="char-card" (click)="selectCharacter(character.id!)">
-    <div>{{ character.name }}</div>
-    <div>{{ character.race }}</div>
-    <div>{{ character.charClass }}</div>
-  </div>
+      <div class="select-character-container">
+        @for (character of characterDataService.characterList; track $index) {
+        <button (click)="selectCharacter(character)">
+          <div
+            class="class-icon-wrapper"
+            [style.backgroundColor]="
+              character === selectedCharacter ? character.classColor : ''
+            "
+          >
+            <img
+              [src]="'./assets/icons/job-icons/' + character.charClass + '.svg'"
+              alt="class-icon"
+            />
+          </div>
 
-  }
-</main>
+          <div class="character-info-wrapper">
+            <h3>{{ character.name }}</h3>
+            <span
+              >{{ character.race }} -
+              {{ character.charClass | classTranslate }}</span
+            >
+          </div>
+        </button>
+        }
+      </div>
+    </div>
+
+    <div class="bottom-wrapper">
+      <button (click)="routeCharacterCreater()">
+        neuen Charakter erstellen
+      </button>
+
+      <app-navigation
+        [backText]="'Logout'"
+        (back)="logout()"
+        (next)="routeToCharacterOverview()"
+        [color]="selectedCharacter?.classColor ?? null"
+      ></app-navigation>
+    </div>
+  </main>
+  <footer>asdasd</footer>
+</section>

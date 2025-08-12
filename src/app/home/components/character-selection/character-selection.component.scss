@@ -1,6 +1,111 @@
+@import "./../../../../styles.scss";
+@import "./../../../../mixin.scss";
+
 main {
-  min-height: 100vh;
-  min-height: 100svh;
+  @include dFlex($jc: space-between, $gp: 16px);
+  flex-direction: column;
+  height: 100vh;
+  height: 100svh;
+  width: 100vw;
+  width: 100svw;
+  overflow-y: auto;
+  background-color: $bg-dark;
+  overflow-x: hidden;
+}
+
+.headline-wrapper {
+  @include dFlex($gp: 8px);
+  flex-direction: column;
+  padding-top: 16px;
+
+  h1 {
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  p {
+    color: rgba(224, 224, 224, 0.5);
+    font-size: 15px;
+  }
+}
+
+.select-character-container {
+  @include dFlex($gp: 8px);
+  flex-direction: column;
+  width: 100%;
+  padding-left: 8px;
+  padding-right: 8px;
+
+  > button {
+    @include dFlex($gp: 8px);
+    background-color: unset;
+    border: 1px solid $bg-dark;
+    padding: 0;
+    width: 100%;
+
+    .class-icon-wrapper {
+      width: 64px;
+      height: 64px;
+      aspect-ratio: 1 / 1;
+      background-color: $bg-darker;
+      border-radius: 8px;
+      padding: 8px;
+      transition: background-color 250ms ease-in-out;
+    }
+
+    .character-info-wrapper {
+      background-color: $bg-darker;
+      padding: 12px;
+      border-radius: 8px;
+      flex-grow: 1;
+      min-width: 0;
+
+      h3 {
+        font-size: 15px;
+        font-weight: 500;
+        letter-spacing: 0.75px;
+        text-transform: uppercase;
+        color: $copy-light;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      span {
+        color: $copy-grey;
+        font-size: 12px;
+        letter-spacing: 0.6px;
+      }
+    }
+  }
+}
+
+.top-wrapper,
+.bottom-wrapper {
+  @include dFlex($gp: 8px);
+  flex-direction: column;
+  width: 100%;
+}
+
+.bottom-wrapper > button {
+  cursor: pointer;
+  color: $copy-light;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.75px;
+  text-transform: uppercase;
+  width: 250px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  border: 1px solid $bg-dark;
+  background: $bg-darker;
+  box-shadow: 0 20px 50px 0 rgba(0, 0, 0, 0.12);
 }
 
 .char-card {

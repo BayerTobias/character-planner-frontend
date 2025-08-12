@@ -50,6 +50,10 @@ export class AuthService {
     }
   }
 
+  async logout() {
+    console.error('implement LOGOUT');
+  }
+
   async verifyEmail(url: string) {
     return await lastValueFrom(this.http.get<{ message: string }>(url));
   }
