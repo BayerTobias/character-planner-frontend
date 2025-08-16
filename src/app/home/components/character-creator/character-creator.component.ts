@@ -28,11 +28,11 @@ export class CharacterCreatorComponent {
   public characterDataService = inject(CharacterDataService);
   private router = inject(Router);
 
-  private character: BaseCharacter | Mage = new BaseCharacter();
+  public character: BaseCharacter | Mage = new BaseCharacter();
 
-  public selectClassScreen: boolean = true;
+  public selectClassScreen: boolean = false;
   public selectRaceScreen: boolean = false;
-  public characterDetailsScreen: boolean = false;
+  public characterDetailsScreen: boolean = true;
 
   public selectedClass: CharClassListItem | null = null;
   public selectedRace: CharRace | null = null;

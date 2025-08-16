@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -7,9 +7,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { InputWithErrorMsgComponent } from '../../../../shared/components/form-components/input-with-error-msg/input-with-error-msg.component';
+
 import { NavigationComponent } from '../../../../shared/components/navigation/navigation.component';
 import { CharDetails } from '../../../models/char-dedails.model';
+import { ClassTranslatePipe } from '../../../../shared/pipes/class-translate.pipe';
 
 @Component({
   selector: 'app-character-details',
@@ -17,14 +18,17 @@ import { CharDetails } from '../../../models/char-dedails.model';
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    InputWithErrorMsgComponent,
     NavigationComponent,
+    ClassTranslatePipe,
   ],
   templateUrl: './character-details.component.html',
   styleUrl: './character-details.component.scss',
 })
 export class CharacterDetailsComponent {
   private fb = inject(FormBuilder);
+
+  @Input() characterClass: string = 'test';
+  @Input() characterRace: string = 'test';
 
   public developmentPoints: number = 35;
   public spendPoints: number = 0;
@@ -33,6 +37,10 @@ export class CharacterDetailsComponent {
   private characterDetails: CharDetails = new CharDetails();
 
   @Output() characterDetailsEvent = new EventEmitter<CharDetails>();
+
+  ngOnInit() {
+    console.log(this.characterClass, this.characterRace);
+  }
 
   public attributeCosts = [
     { cost: 0, value: 0, bonus: -99 },

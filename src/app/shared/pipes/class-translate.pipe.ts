@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ClassTranslatePipe implements PipeTransform {
   private readonly translations: Record<string, string> = {
-    mage: 'Magier',
+    mage: 'Zauberer',
     warrior: 'Krieger',
     rogue: 'Dieb',
     priest: 'Priester',
