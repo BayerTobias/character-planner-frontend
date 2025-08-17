@@ -38,7 +38,7 @@ main {
 }
 
 form {
-  @include dFlex($jc: flex-start);
+  @include dFlex($jc: flex-start, $gp: 16px);
   flex-direction: column;
   flex-grow: 1;
   padding: 0 12px;
@@ -46,12 +46,14 @@ form {
 }
 
 .stat-distribution-wrapper {
+  display: grid;
+  gap: 4px;
   width: 100%;
 
   .attribute-info-wrapper {
     @include dFlex($jc: space-between);
 
-    > span {
+    span {
       color: $copy-grey;
       font-size: 12px;
       font-weight: 500;
@@ -65,9 +67,6 @@ form {
 
       > span {
         text-align: right;
-        font-size: 12px;
-        font-weight: 500;
-        letter-spacing: 0.6px;
         text-transform: uppercase;
       }
 
@@ -110,5 +109,67 @@ form {
     text-align: center;
     font-size: 12px;
     letter-spacing: 0.6px;
+  }
+}
+
+.stat-distribution-row {
+  display: grid;
+  grid-template-columns: auto min-content auto;
+  justify-content: space-between;
+  align-items: center;
+
+  > input {
+    background-color: $bg-dark;
+    width: 30px;
+    text-align: center;
+    color: $copy-light;
+    font-size: 20px;
+    font-weight: 700;
+    border: unset;
+  }
+
+  > span {
+    color: $copy-light;
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+}
+
+.stat-control {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: space-between;
+  gap: 4px;
+  width: 175px;
+
+  > button {
+    @include dFlex();
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background-color: $copy-light;
+    border: transparent;
+  }
+
+  > div {
+    @include dFlex();
+    flex-direction: column;
+
+    :first-child {
+      color: $copy-light;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+    }
+
+    :nth-child(2) {
+      color: green;
+      text-align: center;
+      font-size: 10px;
+      letter-spacing: 0.5px;
+    }
   }
 }

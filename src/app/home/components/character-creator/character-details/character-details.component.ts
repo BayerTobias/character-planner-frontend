@@ -120,30 +120,57 @@ export class CharacterDetailsComponent {
     }
   }
 
+  increaseStat(statname: string) {
+    const control = this.getFormControl(statname + 'Value');
+    const currentValue = control.value;
+
+    if (currentValue < 10) {
+      control.patchValue(currentValue + 1);
+      this.calculateDevelopmentPoints();
+
+      console.log(control);
+    }
+  }
+
+  decreaseStat(statname: string) {
+    const control = this.getFormControl(statname + 'Value');
+    const currentValue = control.value;
+
+    if (currentValue > 0) {
+      control.patchValue(currentValue - 1);
+      this.calculateDevelopmentPoints();
+
+      console.log(control);
+    }
+  }
+
   getFormControl(controlName: string) {
     return this.createCharacterForm.get(controlName) as FormControl;
   }
 
   submitCharacterDetails() {
-    if (this.createCharacterForm.valid) {
-      this.characterDetails.name = this.getFormValue('characterName');
-      this.characterDetails.strengthValue = this.getFormValue('strengthValue');
-      this.characterDetails.strengthBonus = this.statBonuses['strengthBonus'];
-      this.characterDetails.agilityValue = this.getFormValue('agilityValue');
-      this.characterDetails.agilityBonus = this.statBonuses['agilityBonus'];
-      this.characterDetails.constitutionValue =
-        this.getFormValue('constitutionValue');
-      this.characterDetails.constitutionBonus =
-        this.statBonuses['constitutionBonus'];
-      this.characterDetails.intelligenceValue =
-        this.getFormValue('intelligenceValue');
-      this.characterDetails.intelligenceBonus =
-        this.statBonuses['intelligenceBonus'];
-      this.characterDetails.charismaValue = this.getFormValue('charismaValue');
-      this.characterDetails.charismaBonus = this.statBonuses['charismaBonus'];
+    if (!this.createCharacterForm.valid) {
+      console.error('ERROR');
+      return;
+    }
 
-      this.characterDetailsEvent.emit(this.characterDetails);
-    } else console.error('ERROR');
+    this.characterDetails.name = this.getFormValue('characterName');
+    this.characterDetails.strengthValue = this.getFormValue('strengthValue');
+    this.characterDetails.strengthBonus = this.statBonuses['strengthBonus'];
+    this.characterDetails.agilityValue = this.getFormValue('agilityValue');
+    this.characterDetails.agilityBonus = this.statBonuses['agilityBonus'];
+    this.characterDetails.constitutionValue =
+      this.getFormValue('constitutionValue');
+    this.characterDetails.constitutionBonus =
+      this.statBonuses['constitutionBonus'];
+    this.characterDetails.intelligenceValue =
+      this.getFormValue('intelligenceValue');
+    this.characterDetails.intelligenceBonus =
+      this.statBonuses['intelligenceBonus'];
+    this.characterDetails.charismaValue = this.getFormValue('charismaValue');
+    this.characterDetails.charismaBonus = this.statBonuses['charismaBonus'];
+
+    this.characterDetailsEvent.emit(this.characterDetails);
   }
 
   getFormValue(value: string) {

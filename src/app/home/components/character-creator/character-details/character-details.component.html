@@ -26,15 +26,36 @@
         </div>
 
         <div class="stat-distribution-row">
-          <input
-            (input)="calculateDevelopmentPoints()"
-            formControlName="strengthValue"
-            type="number"
-          />
+          <div class="stat-control">
+            <button type="button" (click)="decreaseStat('strength')">-</button>
+            <div>
+              <span>Stärke</span>
+              <span>+1 Volksbonus</span>
+              <!-- if race bonus ....  -->
+            </div>
+            <button type="button" (click)="increaseStat('strength')">+</button>
+          </div>
+
+          <span>{{ createCharacterForm.get("strengthValue")?.value }}</span>
           <span>{{ statBonuses["strengthBonus"] }}</span>
         </div>
 
         <div class="stat-distribution-row">
+          <div class="stat-control">
+            <button type="button" (click)="decreaseStat('agility')">-</button>
+            <div>
+              <span>Geschicklichkeit</span>
+              <span>+1 Volksbonus</span>
+              <!-- if race bonus ....  -->
+            </div>
+            <button type="button" (click)="increaseStat('agility')">+</button>
+          </div>
+
+          <span>{{ createCharacterForm.get("agilityValue")?.value }}</span>
+          <span>{{ statBonuses["agilityBonus"] }}</span>
+        </div>
+
+        <!-- <div class="stat-distribution-row">
           <input
             (input)="calculateDevelopmentPoints()"
             formControlName="agilityValue"
@@ -68,7 +89,7 @@
             type="number"
           />
           <span>{{ statBonuses["charismaBonus"] }}</span>
-        </div>
+        </div> -->
       </div>
 
       <!-- <button type="submit">Karakter erstellen</button> -->
