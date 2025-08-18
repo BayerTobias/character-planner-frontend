@@ -27,20 +27,17 @@ import { ClassTranslatePipe } from '../../../../shared/pipes/class-translate.pip
 export class CharacterDetailsComponent {
   private fb = inject(FormBuilder);
 
-  @Input() characterClass: string = 'test';
-  @Input() characterRace: string = 'test';
+  @Input() characterClass: string = '';
+  @Input() characterRace: string = '';
 
   public developmentPoints: number = 35;
   public spendPoints: number = 0;
+  public developmentPointsLeft: number = 35;
 
   public createCharacterForm: FormGroup;
   private characterDetails: CharDetails = new CharDetails();
 
   @Output() characterDetailsEvent = new EventEmitter<CharDetails>();
-
-  ngOnInit() {
-    console.log(this.characterClass, this.characterRace);
-  }
 
   public attributeCosts = [
     { cost: 0, value: 0, bonus: -99 },
@@ -75,6 +72,10 @@ export class CharacterDetailsComponent {
     });
   }
 
+  ngOnInit() {
+    this.calculateDevelopmentPoints();
+  }
+
   calculateDevelopmentPoints() {
     this.spendPoints = 0;
 
@@ -89,6 +90,8 @@ export class CharacterDetailsComponent {
         this.calculateBonusValue(key, costEntry);
       }
     });
+
+    this.developmentPointsLeft = this.developmentPoints - this.spendPoints;
   }
 
   calculateBonusValue(
@@ -175,5 +178,13 @@ export class CharacterDetailsComponent {
 
   getFormValue(value: string) {
     return this.createCharacterForm.get(value)?.value;
+  }
+
+  get pointsOverLimit() {
+    return Math.abs(this.developmentPointsLeft);
+  }
+
+  openInfoOverlay() {
+    console.log('Open');
   }
 }

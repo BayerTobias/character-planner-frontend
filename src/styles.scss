@@ -38,13 +38,20 @@ $bg-darker: rgba(27, 27, 27, 1);
 $bard-color: rgba(238, 189, 83, 1);
 $rouge-color: rgba(191, 63, 63, 1);
 $warrior-color: rgba(128, 90, 37, 1);
-$priest: rgba(169, 169, 169, 1);
+$priest-color: rgba(169, 169, 169, 1);
 $schaman-color: rgba(130, 91, 221, 1);
 $ranger-color: rgba(122, 191, 105, 1);
 $mage-color: rgb(88, 169, 227);
 
-/* FONTS */
-/* fira-sans-300 - latin */
+// Success and Error Colors
+
+$success-green: rgba(2, 122, 72, 1);
+$success-green-medium: rgba(151, 255, 186, 1);
+
+$error-red: rgba(180, 35, 24, 1);
+$error-red-medium: rgba(255, 131, 131, 1);
+
+/* FONTS */ /* fira-sans-300 - latin */
 @font-face {
   font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
   font-family: "Fira Sans";
