@@ -1,0 +1,28 @@
+<div class="stat-distribution-row">
+  <div class="stat-control">
+    <button type="button" (click)="decreaseStat()">-</button>
+    <div>
+      <span>{{ statName }}</span>
+      <span>+1 Volksbonus</span>
+      <!-- if race bonus ....  -->
+    </div>
+    <button type="button" (click)="increaseStat()">+</button>
+  </div>
+
+  <span>{{ statValue }}</span>
+
+  @if (statValue > 0) {
+  <span
+    [style.color]="
+      statBonus > 0
+        ? 'rgba(2, 122, 72, 1)'
+        : statBonus < 0
+        ? 'rgba(180, 35, 24, 1)'
+        : ''
+    "
+    >{{ statBonus }}</span
+  >
+  }@else {
+  <img src="/assets/icons/shared-icons/skull.svg" alt="skull" />
+  }
+</div>

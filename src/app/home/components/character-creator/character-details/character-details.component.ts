@@ -11,6 +11,7 @@ import {
 import { NavigationComponent } from '../../../../shared/components/navigation/navigation.component';
 import { CharDetails } from '../../../models/char-dedails.model';
 import { ClassTranslatePipe } from '../../../../shared/pipes/class-translate.pipe';
+import { StatDistributionRowComponent } from './stat-distribution-row/stat-distribution-row.component';
 
 @Component({
   selector: 'app-character-details',
@@ -20,6 +21,7 @@ import { ClassTranslatePipe } from '../../../../shared/pipes/class-translate.pip
     ReactiveFormsModule,
     NavigationComponent,
     ClassTranslatePipe,
+    StatDistributionRowComponent,
   ],
   templateUrl: './character-details.component.html',
   styleUrl: './character-details.component.scss',

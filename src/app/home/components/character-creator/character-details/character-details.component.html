@@ -23,158 +23,45 @@
           </div>
         </div>
 
-        <div class="stat-distribution-row">
-          <div class="stat-control">
-            <button type="button" (click)="decreaseStat('strength')">-</button>
-            <div>
-              <span>Stärke</span>
-              <span>+1 Volksbonus</span>
-              <!-- if race bonus ....  -->
-            </div>
-            <button type="button" (click)="increaseStat('strength')">+</button>
-          </div>
+        <app-stat-distribution-row
+          [statName]="'Stärke'"
+          [statValue]="createCharacterForm.get('strengthValue')?.value"
+          [statBonus]="statBonuses['strengthBonus']"
+          (decreaseEvent)="decreaseStat('strength')"
+          (increaseEvent)="increaseStat('strength')"
+        ></app-stat-distribution-row>
 
-          <span>{{ createCharacterForm.get("strengthValue")?.value }}</span>
+        <app-stat-distribution-row
+          [statName]="'Geschicklichkeit'"
+          [statValue]="createCharacterForm.get('agilityValue')?.value"
+          [statBonus]="statBonuses['agilityBonus']"
+          (decreaseEvent)="decreaseStat('agility')"
+          (increaseEvent)="increaseStat('agility')"
+        ></app-stat-distribution-row>
 
-          @if (createCharacterForm.get("strengthValue")?.value > 0) {
-          <span
-            [style.color]="
-              statBonuses['strengthBonus'] > 0
-                ? 'rgba(2, 122, 72, 1)'
-                : statBonuses['strengthBonus'] < 0
-                ? 'rgba(180, 35, 24, 1)'
-                : ''
-            "
-            >{{ statBonuses["strengthBonus"] }}</span
-          >
-          }@else {
-          <img src="/assets/icons/shared-icons/skull.svg" alt="skull" />
-          }
-        </div>
+        <app-stat-distribution-row
+          [statName]="'Konstitution'"
+          [statValue]="createCharacterForm.get('constitutionValue')?.value"
+          [statBonus]="statBonuses['constitutionBonus']"
+          (decreaseEvent)="decreaseStat('constitution')"
+          (increaseEvent)="increaseStat('constitution')"
+        ></app-stat-distribution-row>
 
-        <div class="stat-distribution-row">
-          <div class="stat-control">
-            <button type="button" (click)="decreaseStat('agility')">-</button>
-            <div>
-              <span>Geschicklichkeit</span>
-              <span>+1 Volksbonus</span>
-              <!-- if race bonus ....  -->
-            </div>
-            <button type="button" (click)="increaseStat('agility')">+</button>
-          </div>
+        <app-stat-distribution-row
+          [statName]="'Intelligenz'"
+          [statValue]="createCharacterForm.get('intelligenceValue')?.value"
+          [statBonus]="statBonuses['intelligenceBonus']"
+          (decreaseEvent)="decreaseStat('intelligence')"
+          (increaseEvent)="increaseStat('intelligence')"
+        ></app-stat-distribution-row>
 
-          <span>{{ createCharacterForm.get("agilityValue")?.value }}</span>
-
-          @if (createCharacterForm.get("agilityValue")?.value > 0) {
-          <span
-            [style.color]="
-              statBonuses['agilityBonus'] > 0
-                ? 'rgba(2, 122, 72, 1)'
-                : statBonuses['agilityBonus'] < 0
-                ? 'rgba(180, 35, 24, 1)'
-                : ''
-            "
-            >{{ statBonuses["agilityBonus"] }}</span
-          >
-          }@else {
-          <img src="/assets/icons/shared-icons/skull.svg" alt="skull" />
-          }
-        </div>
-
-        <div class="stat-distribution-row">
-          <div class="stat-control">
-            <button type="button" (click)="decreaseStat('constitution')">
-              -
-            </button>
-            <div>
-              <span>Konstitution</span>
-              <span>+1 Volksbonus</span>
-              <!-- if race bonus ....  -->
-            </div>
-            <button type="button" (click)="increaseStat('constitution')">
-              +
-            </button>
-          </div>
-
-          <span>{{ createCharacterForm.get("constitutionValue")?.value }}</span>
-
-          @if (createCharacterForm.get("constitutionValue")?.value > 0) {
-          <span
-            [style.color]="
-              statBonuses['constitutionBonus'] > 0
-                ? 'rgba(2, 122, 72, 1)'
-                : statBonuses['constitutionBonus'] < 0
-                ? 'rgba(180, 35, 24, 1)'
-                : ''
-            "
-            >{{ statBonuses["constitutionBonus"] }}</span
-          >
-          }@else {
-          <img src="/assets/icons/shared-icons/skull.svg" alt="skull" />
-          }
-        </div>
-
-        <div class="stat-distribution-row">
-          <div class="stat-control">
-            <button type="button" (click)="decreaseStat('intelligence')">
-              -
-            </button>
-            <div>
-              <span>Intelligenz</span>
-              <span>+1 Volksbonus</span>
-              <!-- if race bonus ....  -->
-            </div>
-            <button type="button" (click)="increaseStat('intelligence')">
-              +
-            </button>
-          </div>
-
-          <span>{{ createCharacterForm.get("intelligenceValue")?.value }}</span>
-
-          @if (createCharacterForm.get("intelligenceValue")?.value > 0) {
-          <span
-            [style.color]="
-              statBonuses['intelligenceBonus'] > 0
-                ? 'rgba(2, 122, 72, 1)'
-                : statBonuses['intelligenceBonus'] < 0
-                ? 'rgba(180, 35, 24, 1)'
-                : ''
-            "
-            >{{ statBonuses["intelligenceBonus"] }}</span
-          >
-          }@else {
-          <img src="/assets/icons/shared-icons/skull.svg" alt="skull" />
-          }
-        </div>
-
-        <div class="stat-distribution-row">
-          <div class="stat-control">
-            <button type="button" (click)="decreaseStat('charisma')">-</button>
-            <div>
-              <span>Charisma</span>
-              <span>+1 Volksbonus</span>
-              <!-- if race bonus ....  -->
-            </div>
-            <button type="button" (click)="increaseStat('charisma')">+</button>
-          </div>
-
-          <span>{{ createCharacterForm.get("charismaValue")?.value }}</span>
-
-          @if (createCharacterForm.get("charismaValue")?.value > 0) {
-          <span
-            [style.color]="
-              statBonuses['charismaBonus'] > 0
-                ? 'rgba(2, 122, 72, 1)'
-                : statBonuses['charismaBonus'] < 0
-                ? 'rgba(180, 35, 24, 1)'
-                : ''
-            "
-            >{{ statBonuses["charismaBonus"] }}</span
-          >
-          }@else {
-          <img src="/assets/icons/shared-icons/skull.svg" alt="skull" />
-          }
-        </div>
+        <app-stat-distribution-row
+          [statName]="'Charisma'"
+          [statValue]="createCharacterForm.get('charismaValue')?.value"
+          [statBonus]="statBonuses['charismaBonus']"
+          (decreaseEvent)="decreaseStat('charisma')"
+          (increaseEvent)="increaseStat('charisma')"
+        ></app-stat-distribution-row>
       </div>
     </form>
 
