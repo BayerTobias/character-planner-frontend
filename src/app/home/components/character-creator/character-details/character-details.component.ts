@@ -12,6 +12,7 @@ import { NavigationComponent } from '../../../../shared/components/navigation/na
 import { CharDetails } from '../../../models/char-dedails.model';
 import { ClassTranslatePipe } from '../../../../shared/pipes/class-translate.pipe';
 import { StatDistributionRowComponent } from './stat-distribution-row/stat-distribution-row.component';
+import { OverlayBaseComponent } from '../../overlay-base/overlay-base.component';
 
 @Component({
   selector: 'app-character-details',
@@ -22,6 +23,7 @@ import { StatDistributionRowComponent } from './stat-distribution-row/stat-distr
     NavigationComponent,
     ClassTranslatePipe,
     StatDistributionRowComponent,
+    OverlayBaseComponent,
   ],
   templateUrl: './character-details.component.html',
   styleUrl: './character-details.component.scss',

@@ -1,8 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, Type } from '@angular/core';
 import { ReciveDmgComponent } from '../recive-dmg/recive-dmg.component';
 import { HourlyRestComponentComponent } from '../hourly-rest/hourly-rest.component';
 import { CustomWeaponCreatorComponent } from '../item-management/custom-weapon-creator/custom-weapon-creator.component';
 import { CustomWeapon } from '../../models/custom-weapon.model';
+import { NgTemplateOutlet } from '../../../../../node_modules/@angular/common/index';
+import { StatDistributionInfoComponent } from '../character-creator/character-details/stat-distribution-info/stat-distribution-info.component';
 
 @Component({
   selector: 'app-overlay-base',
@@ -11,14 +13,15 @@ import { CustomWeapon } from '../../models/custom-weapon.model';
     ReciveDmgComponent,
     HourlyRestComponentComponent,
     CustomWeaponCreatorComponent,
+    StatDistributionInfoComponent,
   ],
   templateUrl: './overlay-base.component.html',
   styleUrl: './overlay-base.component.scss',
 })
 export class OverlayBaseComponent {
-  @Output() closeOverlayEvent = new EventEmitter();
-
   @Input() slectedCustomWeapon: CustomWeapon | null = null;
+
+  @Output() closeOverlayEvent = new EventEmitter();
 
   ngOnInit() {
     console.log('overlay-base', this.slectedCustomWeapon);

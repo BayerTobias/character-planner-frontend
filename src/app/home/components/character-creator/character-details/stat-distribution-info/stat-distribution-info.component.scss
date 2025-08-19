@@ -1,0 +1,111 @@
+@import "./../../../../../../styles.scss";
+@import "./../../../../../../mixin.scss";
+
+section {
+  @include dFlex($gp: 16px, $ai: flex-start);
+  flex-direction: column;
+  padding: 32px;
+
+  p {
+    color: $copy-light;
+    font-size: 14px;
+    line-height: 27px;
+    letter-spacing: 0.28px;
+  }
+
+  h2,
+  span {
+    color: $copy-light;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 27px;
+    letter-spacing: 0.28px;
+  }
+}
+
+.example-wrapper {
+  @include dFlex($gp: 4px, $ai: flex-start);
+  flex-direction: column;
+}
+
+.headline-wrapper {
+  @include dFlex($gp: 8px);
+  flex-direction: column;
+  width: 100%;
+
+  h1 {
+    color: $copy-light;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 32px;
+  }
+
+  p {
+    color: rgba(224, 224, 224, 0.5);
+    font-size: 15px;
+    text-align: center;
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 24px 0;
+
+  thead {
+    position: sticky;
+    top: 0;
+    background-color: $bg-dark;
+
+    th {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      color: white;
+      font-size: 24px;
+      line-height: 27px;
+      letter-spacing: 0.48px;
+      font-weight: 400;
+      width: 48px;
+      text-align: start;
+      padding-top: 12px;
+
+      z-index: 2;
+    }
+  }
+
+  tbody {
+    :first-child {
+      td {
+        border-radius: 8px 8px 0 0;
+      }
+    }
+
+    :last-child {
+      td {
+        border-radius: 0 0 8px 8px;
+      }
+    }
+
+    tr {
+      td {
+        background-color: rgba(238, 238, 238, 1);
+        height: 48px;
+        width: 48px;
+
+        color: $copy-dark;
+        text-align: center;
+        font-size: 32px;
+        line-height: 27px;
+        letter-spacing: 0.64px;
+
+        img {
+          width: 32px;
+          height: 32px;
+        }
+      }
+    }
+  }
+}
