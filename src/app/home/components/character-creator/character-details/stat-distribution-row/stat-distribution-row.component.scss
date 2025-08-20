@@ -55,10 +55,17 @@
     }
 
     :nth-child(2) {
-      color: $success-green-medium;
       text-align: center;
       font-size: 10px;
       letter-spacing: 0.5px;
     }
   }
+}
+
+.green {
+  color: $success-green-medium;
+}
+
+.red {
+  color: $error-red-medium;
 }

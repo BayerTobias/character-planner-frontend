@@ -1,4 +1,7 @@
-<section>
+<section
+  [style.overflow]="overlayOpen ? 'hidden' : ''"
+  [style.height]="overlayOpen ? '100vh' : ''"
+>
   <main>
     <div class="headline-wrapper">
       <h1>Charakter erstellen</h1>
@@ -11,7 +14,10 @@
     <form [formGroup]="createCharacterForm" (submit)="submitCharacterDetails()">
       <div class="character-display">
         <input type="text" placeholder="Charakter Name" />
-        <span>{{ characterRace }} - {{ characterClass | classTranslate }}</span>
+        <span
+          >{{ characterRace?.name }} -
+          {{ characterClass | classTranslate }}</span
+        >
       </div>
 
       <div class="stat-distribution-wrapper">
@@ -26,6 +32,7 @@
         <app-stat-distribution-row
           [statName]="'Stärke'"
           [statValue]="createCharacterForm.get('strengthValue')?.value"
+          [statModifier]="characterRace?.strengthModifier ?? 0"
           [statBonus]="statBonuses['strengthBonus']"
           (decreaseEvent)="decreaseStat('strength')"
           (increaseEvent)="increaseStat('strength')"
@@ -34,6 +41,7 @@
         <app-stat-distribution-row
           [statName]="'Geschicklichkeit'"
           [statValue]="createCharacterForm.get('agilityValue')?.value"
+          [statModifier]="characterRace?.agilityModifier ?? 0"
           [statBonus]="statBonuses['agilityBonus']"
           (decreaseEvent)="decreaseStat('agility')"
           (increaseEvent)="increaseStat('agility')"
@@ -42,6 +50,7 @@
         <app-stat-distribution-row
           [statName]="'Konstitution'"
           [statValue]="createCharacterForm.get('constitutionValue')?.value"
+          [statModifier]="characterRace?.constitutionModifier ?? 0"
           [statBonus]="statBonuses['constitutionBonus']"
           (decreaseEvent)="decreaseStat('constitution')"
           (increaseEvent)="increaseStat('constitution')"
@@ -50,6 +59,7 @@
         <app-stat-distribution-row
           [statName]="'Intelligenz'"
           [statValue]="createCharacterForm.get('intelligenceValue')?.value"
+          [statModifier]="characterRace?.intelligenceModifier ?? 0"
           [statBonus]="statBonuses['intelligenceBonus']"
           (decreaseEvent)="decreaseStat('intelligence')"
           (increaseEvent)="increaseStat('intelligence')"
@@ -58,6 +68,7 @@
         <app-stat-distribution-row
           [statName]="'Charisma'"
           [statValue]="createCharacterForm.get('charismaValue')?.value"
+          [statModifier]="characterRace?.charismaModifier ?? 0"
           [statBonus]="statBonuses['charismaBonus']"
           (decreaseEvent)="decreaseStat('charisma')"
           (increaseEvent)="increaseStat('charisma')"
@@ -66,7 +77,7 @@
     </form>
 
     <div class="info-wrapper">
-      <button type="button" (click)="openInfoOverlay()">
+      <button type="button" (click)="toggleInfoOverlay()">
         <svg
           width="18"
           height="18"
@@ -103,4 +114,7 @@
   <footer>asdasd</footer>
 </section>
 
-<app-overlay-base></app-overlay-base>
+@if(overlayOpen){<app-overlay-base
+  (closeOverlayEvent)="toggleInfoOverlay()"
+></app-overlay-base
+>}

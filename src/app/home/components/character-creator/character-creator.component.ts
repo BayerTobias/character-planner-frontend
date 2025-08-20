@@ -30,9 +30,9 @@ export class CharacterCreatorComponent {
 
   public character: BaseCharacter | Mage = new BaseCharacter();
 
-  public selectClassScreen: boolean = false;
+  public selectClassScreen: boolean = true;
   public selectRaceScreen: boolean = false;
-  public characterDetailsScreen: boolean = true;
+  public characterDetailsScreen: boolean = false;
 
   public selectedClass: CharClassListItem | null = null;
   public selectedRace: CharRace | null = null;

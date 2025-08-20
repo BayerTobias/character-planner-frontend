@@ -23,6 +23,15 @@ section {
   }
 }
 
+.close-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  border: unset;
+  color: $copy-light;
+  background-color: $bg-dark;
+}
+
 .example-wrapper {
   @include dFlex($gp: 4px, $ai: flex-start);
   flex-direction: column;
@@ -51,9 +60,15 @@ section {
 }
 
 table {
-  width: 100%;
   border-collapse: separate;
   border-spacing: 24px 0;
+  table-layout: fixed;
+  width: auto;
+  margin: 0 auto;
+
+  col {
+    width: 48px;
+  }
 
   thead {
     position: sticky;

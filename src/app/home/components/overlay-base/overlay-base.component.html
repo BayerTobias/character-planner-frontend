@@ -5,5 +5,8 @@
     (closeOverlayEvent)="closeOverlay()"
     [customWeapon]="slectedCustomWeapon"
   ></app-custom-weapon-creator> -->
-  <app-stat-distribution-info></app-stat-distribution-info>
+  <app-stat-distribution-info
+    (click)="$event.stopPropagation()"
+    (closeEvent)="closeOverlay()"
+  ></app-stat-distribution-info>
 </section>

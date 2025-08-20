@@ -1,9 +1,8 @@
-import { Component, EventEmitter, Input, Output, Type } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ReciveDmgComponent } from '../recive-dmg/recive-dmg.component';
 import { HourlyRestComponentComponent } from '../hourly-rest/hourly-rest.component';
 import { CustomWeaponCreatorComponent } from '../item-management/custom-weapon-creator/custom-weapon-creator.component';
 import { CustomWeapon } from '../../models/custom-weapon.model';
-import { NgTemplateOutlet } from '../../../../../node_modules/@angular/common/index';
 import { StatDistributionInfoComponent } from '../character-creator/character-details/stat-distribution-info/stat-distribution-info.component';
 
 @Component({

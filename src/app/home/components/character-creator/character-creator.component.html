@@ -13,7 +13,7 @@
   } @else if (characterDetailsScreen) {
   <app-character-details
     [characterClass]="selectedClass?.name ?? ''"
-    [characterRace]="selectedRace?.name ?? ''"
+    [characterRace]="selectedRace ?? null"
     (characterDetailsEvent)="createCharacter($event)"
   ></app-character-details>
   }

@@ -13,6 +13,12 @@ import { CharDetails } from '../../../models/char-dedails.model';
 import { ClassTranslatePipe } from '../../../../shared/pipes/class-translate.pipe';
 import { StatDistributionRowComponent } from './stat-distribution-row/stat-distribution-row.component';
 import { OverlayBaseComponent } from '../../overlay-base/overlay-base.component';
+import { CharRace } from '../../../models/char-race.model';
+import {
+  ATTRIBUTE_COST,
+  AttributeCosts,
+  StatBonuses,
+} from './character-details.constants';
 
 @Component({
   selector: 'app-character-details',
@@ -32,7 +38,7 @@ export class CharacterDetailsComponent {
   private fb = inject(FormBuilder);
 
   @Input() characterClass: string = '';
-  @Input() characterRace: string = '';
+  @Input() characterRace: CharRace | null = null;
 
   public developmentPoints: number = 35;
   public spendPoints: number = 0;
@@ -41,23 +47,13 @@ export class CharacterDetailsComponent {
   public createCharacterForm: FormGroup;
   private characterDetails: CharDetails = new CharDetails();
 
+  public overlayOpen: boolean = false;
+
   @Output() characterDetailsEvent = new EventEmitter<CharDetails>();
 
-  public attributeCosts = [
-    { cost: 0, value: 0, bonus: -99 },
-    { cost: 1, value: 1, bonus: -3 },
-    { cost: 2, value: 2, bonus: -2 },
-    { cost: 3, value: 3, bonus: -1 },
-    { cost: 4, value: 4, bonus: -1 },
-    { cost: 5, value: 5, bonus: 0 },
-    { cost: 6, value: 6, bonus: 1 },
-    { cost: 8, value: 7, bonus: 1 },
-    { cost: 10, value: 8, bonus: 2 },
-    { cost: 12, value: 9, bonus: 2 },
-    { cost: 16, value: 10, bonus: 3 },
-  ];
+  private attributeCosts: AttributeCosts[] = ATTRIBUTE_COST;
 
-  public statBonuses: { [key: string]: number } = {
+  public statBonuses: StatBonuses = {
     strengthBonus: 0,
     agilityBonus: 0,
     constitutionBonus: 0,
@@ -134,8 +130,6 @@ export class CharacterDetailsComponent {
     if (currentValue < 10) {
       control.patchValue(currentValue + 1);
       this.calculateDevelopmentPoints();
-
-      console.log(control);
     }
   }
 
@@ -146,8 +140,6 @@ export class CharacterDetailsComponent {
     if (currentValue > 0) {
       control.patchValue(currentValue - 1);
       this.calculateDevelopmentPoints();
-
-      console.log(control);
     }
   }
 
@@ -188,7 +180,7 @@ export class CharacterDetailsComponent {
     return Math.abs(this.developmentPointsLeft);
   }
 
-  openInfoOverlay() {
-    console.log('Open');
+  toggleInfoOverlay() {
+    this.overlayOpen = !this.overlayOpen;
   }
 }

@@ -3,8 +3,11 @@
     <button type="button" (click)="decreaseStat()">-</button>
     <div>
       <span>{{ statName }}</span>
-      <span>+1 Volksbonus</span>
-      <!-- if race bonus ....  -->
+      @if (statModifier < 0) {<span class="red"
+        >{{ statModifier }} Volksmalus</span
+      >} @if (statModifier > 0) {<span class="green"
+        >{{ statModifier }} Volksbonus</span
+      >}
     </div>
     <button type="button" (click)="increaseStat()">+</button>
   </div>

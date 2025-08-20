@@ -11,6 +11,7 @@ export class StatDistributionRowComponent {
   @Input() statName: string = '';
   @Input() statValue: number = 0;
   @Input() statBonus: number = 0;
+  @Input() statModifier: number = 0;
 
   @Output() decreaseEvent = new EventEmitter();
   @Output() increaseEvent = new EventEmitter();
