@@ -13,7 +13,11 @@
 
     <form [formGroup]="createCharacterForm" (submit)="submitCharacterDetails()">
       <div class="character-display">
-        <input type="text" placeholder="Charakter Name" />
+        <input
+          formControlName="characterName"
+          type="text"
+          placeholder="Charakter Name"
+        />
         <span
           >{{ characterRace?.name }} -
           {{ characterClass | classTranslate }}</span
@@ -31,7 +35,7 @@
 
         <app-stat-distribution-row
           [statName]="'Stärke'"
-          [statValue]="createCharacterForm.get('strengthValue')?.value"
+          [statValue]="getAttributeValueWithModifier('strengthValue')"
           [statModifier]="characterRace?.strengthModifier ?? 0"
           [statBonus]="statBonuses['strengthBonus']"
           (decreaseEvent)="decreaseStat('strength')"
@@ -40,7 +44,7 @@
 
         <app-stat-distribution-row
           [statName]="'Geschicklichkeit'"
-          [statValue]="createCharacterForm.get('agilityValue')?.value"
+          [statValue]="getAttributeValueWithModifier('agilityValue')"
           [statModifier]="characterRace?.agilityModifier ?? 0"
           [statBonus]="statBonuses['agilityBonus']"
           (decreaseEvent)="decreaseStat('agility')"
@@ -49,7 +53,7 @@
 
         <app-stat-distribution-row
           [statName]="'Konstitution'"
-          [statValue]="createCharacterForm.get('constitutionValue')?.value"
+          [statValue]="getAttributeValueWithModifier('constitutionValue')"
           [statModifier]="characterRace?.constitutionModifier ?? 0"
           [statBonus]="statBonuses['constitutionBonus']"
           (decreaseEvent)="decreaseStat('constitution')"
@@ -58,7 +62,7 @@
 
         <app-stat-distribution-row
           [statName]="'Intelligenz'"
-          [statValue]="createCharacterForm.get('intelligenceValue')?.value"
+          [statValue]="getAttributeValueWithModifier('intelligenceValue')"
           [statModifier]="characterRace?.intelligenceModifier ?? 0"
           [statBonus]="statBonuses['intelligenceBonus']"
           (decreaseEvent)="decreaseStat('intelligence')"
@@ -67,7 +71,7 @@
 
         <app-stat-distribution-row
           [statName]="'Charisma'"
-          [statValue]="createCharacterForm.get('charismaValue')?.value"
+          [statValue]="getAttributeValueWithModifier('charismaValue')"
           [statModifier]="characterRace?.charismaModifier ?? 0"
           [statBonus]="statBonuses['charismaBonus']"
           (decreaseEvent)="decreaseStat('charisma')"
@@ -107,6 +111,7 @@
     </div>
 
     <app-navigation
+      (back)="backToSelectRace.emit()"
       [nextText]="'Charakter erstellen'"
       (next)="submitCharacterDetails()"
     ></app-navigation>

@@ -70,8 +70,8 @@ export class CharacterDataService {
     const url = environment.baseUrl + 'api/characters/';
     const body = character.asPostRequestJson();
 
-    const resp: CharacterResponseData = await lastValueFrom(
-      this.http.post<CharacterResponseData>(url, body)
+    const resp: CharacterData = await lastValueFrom(
+      this.http.post<CharacterData>(url, body)
     );
     return resp;
   }

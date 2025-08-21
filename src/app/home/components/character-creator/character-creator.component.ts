@@ -78,9 +78,7 @@ export class CharacterCreatorComponent {
           this.character
         );
         console.log(resp);
-        this.router.navigateByUrl(
-          `character?character_id=${resp.character.id}`
-        );
+        this.router.navigateByUrl(`character?character_id=${resp.id}`);
       } catch (err) {
         console.error(err);
       }

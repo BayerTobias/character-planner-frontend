@@ -17,7 +17,9 @@ import { CharRace } from '../../../models/char-race.model';
 import {
   ATTRIBUTE_COST,
   AttributeCosts,
+  raceModifierMap,
   StatBonuses,
+  statBonusMap,
 } from './character-details.constants';
 
 @Component({
@@ -49,7 +51,8 @@ export class CharacterDetailsComponent {
 
   public overlayOpen: boolean = false;
 
-  @Output() characterDetailsEvent = new EventEmitter<CharDetails>();
+  @Output() characterDetailsSubmitted = new EventEmitter<CharDetails>();
+  @Output() backToSelectRace = new EventEmitter();
 
   private attributeCosts: AttributeCosts[] = ATTRIBUTE_COST;
 
@@ -81,46 +84,42 @@ export class CharacterDetailsComponent {
 
     Object.keys(this.createCharacterForm.controls).forEach((key) => {
       const attributeValue = this.createCharacterForm.get(key)?.value;
+      const finalValueWithModifier = this.getAttributeValueWithModifier(key);
+
       const costEntry = this.attributeCosts.find(
         (entry) => entry.value === attributeValue
       );
 
       if (costEntry) {
         this.spendPoints += costEntry.cost;
-        this.calculateBonusValue(key, costEntry);
+        this.calculateBonusValue(key, finalValueWithModifier);
       }
     });
 
     this.developmentPointsLeft = this.developmentPoints - this.spendPoints;
   }
 
-  calculateBonusValue(
-    statName: string,
-    costEntry: {
-      cost: number;
-      value: number;
-      bonus: number;
-    }
-  ) {
-    switch (statName) {
-      case 'strengthValue':
-        this.statBonuses['strengthBonus'] = costEntry.bonus;
-        break;
-      case 'agilityValue':
-        this.statBonuses['agilityBonus'] = costEntry.bonus;
-        break;
-      case 'constitutionValue':
-        this.statBonuses['constitutionBonus'] = costEntry.bonus;
-        break;
-      case 'intelligenceValue':
-        this.statBonuses['intelligenceBonus'] = costEntry.bonus;
-        break;
-      case 'charismaValue':
-        this.statBonuses['charismaBonus'] = costEntry.bonus;
-        break;
-      default:
-        break;
-    }
+  getAttributeValueWithModifier(statName: string) {
+    const baseValue = this.createCharacterForm.get(statName)?.value;
+    const key = raceModifierMap[statName];
+
+    if (!this.characterRace) return;
+
+    const modifier = this.characterRace[key];
+
+    return baseValue + modifier;
+  }
+
+  calculateBonusValue(statName: string, statValuewithBonus: number) {
+    const bonusKey = statBonusMap[statName];
+
+    const costEntry = this.attributeCosts.find(
+      (entry) => entry.value === statValuewithBonus
+    );
+
+    if (!costEntry) return;
+
+    this.statBonuses[bonusKey] = costEntry?.bonus;
   }
 
   increaseStat(statname: string) {
@@ -136,8 +135,11 @@ export class CharacterDetailsComponent {
   decreaseStat(statname: string) {
     const control = this.getFormControl(statname + 'Value');
     const currentValue = control.value;
+    const valueWithModifier = this.getAttributeValueWithModifier(
+      statname + 'Value'
+    );
 
-    if (currentValue > 0) {
+    if (valueWithModifier > 0) {
       control.patchValue(currentValue - 1);
       this.calculateDevelopmentPoints();
     }
@@ -169,7 +171,9 @@ export class CharacterDetailsComponent {
     this.characterDetails.charismaValue = this.getFormValue('charismaValue');
     this.characterDetails.charismaBonus = this.statBonuses['charismaBonus'];
 
-    this.characterDetailsEvent.emit(this.characterDetails);
+    console.log(this.characterDetails);
+
+    this.characterDetailsSubmitted.emit(this.characterDetails);
   }
 
   getFormValue(value: string) {

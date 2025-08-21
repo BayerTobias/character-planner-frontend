@@ -14,7 +14,8 @@
   <app-character-details
     [characterClass]="selectedClass?.name ?? ''"
     [characterRace]="selectedRace ?? null"
-    (characterDetailsEvent)="createCharacter($event)"
+    (characterDetailsSubmitted)="createCharacter($event)"
+    (backToSelectRace)="goToStep('race')"
   ></app-character-details>
   }
 </section>
