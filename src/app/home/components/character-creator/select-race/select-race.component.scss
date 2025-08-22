@@ -37,20 +37,24 @@ main {
 }
 
 .race-wrapper {
-  @include dFlex($gp: 12px);
+  @include dFlex($gp: 12px, $jc: flex-start);
   flex-direction: column;
+  flex: 1;
   width: 100%;
   position: relative;
   padding: 50px 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-height: 0;
 }
 
 .select-race-box {
   border-radius: 8px;
   border: 1px solid $bg-dark;
-
   width: 250px;
   overflow: hidden;
   background-color: $bg-darker;
+  flex-shrink: 0;
 
   > button {
     background-color: transparent;
