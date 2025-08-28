@@ -1,5 +1,20 @@
 <div class="character-card">
-  <button (click)="openDmgOverlay()">damage</button>
+  <div class="headline-wrapper">
+    <h1>Charakter Übersicht</h1>
+  </div>
+
+  <app-character-details
+    [name]="characterDataService.character?.name ?? ''"
+    [characterRace]="characterDataService.character?.race ?? null"
+    [characterClass]="characterDataService.character?.class ?? null"
+    [currentHealth]="characterDataService.character?.currentHp ?? 0"
+    [maxHealth]="characterDataService.character?.maxHealth ?? 0"
+    [currentMana]="characterDataService.character?.currentMana ?? 0"
+    [maxMana]="characterDataService.character?.maxMana ?? 0"
+    [level]="characterDataService.character?.level ?? 0"
+  ></app-character-details>
+
+  <!-- <button (click)="openDmgOverlay()">damage</button> -->
 
   @if (characterDataService.character) {
   <app-stat-box
@@ -14,12 +29,6 @@
     [charismaValue]="characterDataService.character!.charismaValue"
     [charismaBonus]="characterDataService.character!.charismaBonus"
   ></app-stat-box>
-
-  <app-character-details
-    [name]="characterDataService.character!.name"
-    [maxHealth]="characterDataService.character!.maxHealth"
-    [level]="characterDataService.character!.level"
-  ></app-character-details>
 
   @for (skill of characterDataService.character.class.skills; track $index)
   {<app-skills-display [skill]="skill" [index]="$index"></app-skills-display>}

@@ -1,32 +1,18 @@
-@import "./../../../../mixin.scss";
-@import "./../../../../styles.scss";
+@import "./../../../../../mixin.scss";
+@import "./../../../../../styles.scss";
 
-.character-card {
-  @include dFlex($gp: 16px);
-  flex-direction: column;
-  min-height: 100vh;
-  min-height: 100svh;
-  width: 100vw;
-  width: 100svw;
-  background-color: $bg-dark;
+:host {
+  width: 100%;
 }
 
-.headline-wrapper {
-  @include dFlex($gp: 8px);
+section {
+  width: 100%;
+  @include dFlex($gp: 16px);
   flex-direction: column;
-  padding-top: 16px;
-
-  h1 {
-    color: white;
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
 }
 
 .character-display {
-  @include dFlex($gp: 0px);
+  @include dFlex();
   flex-direction: column;
   background-color: $bg-darker;
   padding: 6px;
@@ -103,13 +89,4 @@
       line-height: 28px;
     }
   }
-}
-
-.focused {
-  border: 1px solid red;
-}
-
-.weapon-inventory {
-  @include dFlex();
-  flex-direction: column;
 }

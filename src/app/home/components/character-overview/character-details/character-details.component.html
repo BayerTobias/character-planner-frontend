@@ -1,0 +1,19 @@
+<section>
+  <div class="character-display">
+    <h3>{{ name }}</h3>
+    <span
+      >{{ characterRace?.name }} -
+      {{ characterClass?.name ?? "" | classTranslate }}</span
+    >
+  </div>
+
+  <div class="status-info">
+    <span class="hp-mp">Hp: {{ currentHealth }} / {{ maxHealth }}</span>
+    <div class="lvl">
+      <span>Lvl</span>
+      <span>{{ level | number : "2.0" }}</span>
+    </div>
+
+    <span class="hp-mp">Mp: {{ currentMana }} / {{ maxMana }}</span>
+  </div>
+</section>

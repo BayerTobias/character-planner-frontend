@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Mage } from '../../models/mage-character.model';
 import { StatBoxComponent } from '../../../shared/components/character-components/stat-box/stat-box.component';
 import { SkillsDisplayComponent } from '../../../shared/components/character-components/skills-display/skills-display.component';
-import { CharacterDetailsComponent } from '../../../shared/components/character-components/character-details/character-details.component';
+import { CharacterDetailsComponent } from './character-details/character-details.component';
 import { OverlayBaseComponent } from '../overlay-base/overlay-base.component';
 import { SkilledNode } from '../../models/skilled-node.model';
 import { GameDataService } from '../../../shared/services/game-data.service';
@@ -13,6 +13,7 @@ import { BaseArmor } from '../../models/base-armor.model';
 import { CommonModule } from '@angular/common';
 import { BaseWeapon } from '../../models/base-weapon.model';
 import { ArmorSelectorComponent } from '../item-management/armor-selector/armor-selector.component';
+import { ClassTranslatePipe } from '../../../shared/pipes/class-translate.pipe';
 
 @Component({
   selector: 'app-character-overview',
@@ -34,7 +35,7 @@ export class CharacterOverviewComponent {
   private route = inject(ActivatedRoute);
 
   private characterId: number = -1;
-  public overlay: boolean = true;
+  public overlay: boolean = false;
 
   public selectArmorOpen: boolean = false;
 
