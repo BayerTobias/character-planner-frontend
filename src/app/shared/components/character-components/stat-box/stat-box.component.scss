@@ -1,26 +1,50 @@
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  width: fit-content;
-  border: 1px solid black;
+@import "./../../../../../mixin.scss";
+@import "./../../../../../styles.scss";
+
+table {
+  border-collapse: separate;
+  border-spacing: 8px 12px;
   padding: 8px;
-}
+  border-radius: 8px;
+  background-color: $bg-darker;
 
-.row {
-  display: flex;
-  gap: 8px;
-
-  .stat-name {
-    width: 85px;
-    color: red;
+  thead {
+    th {
+      color: $copy-grey;
+      text-align: start;
+      text-transform: uppercase;
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 0.8px;
+    }
   }
 
-  .stat-bonus {
-    color: aqua;
-  }
+  tbody {
+    tr {
+      position: relative;
 
-  .value {
-    font-weight: 700;
-    color: green;
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background-color: $bg-dark;
+      }
+
+      td {
+        text-align: end;
+        color: $copy-light;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
+
+        &:first-child {
+          text-align: start;
+        }
+      }
+    }
   }
 }

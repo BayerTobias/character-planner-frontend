@@ -156,19 +156,22 @@ export class CharacterDetailsComponent {
     }
 
     this.characterDetails.name = this.getFormValue('characterName');
-    this.characterDetails.strengthValue = this.getFormValue('strengthValue');
+    this.characterDetails.strengthValue =
+      this.getAttributeValueWithModifier('strengthValue');
     this.characterDetails.strengthBonus = this.statBonuses['strengthBonus'];
-    this.characterDetails.agilityValue = this.getFormValue('agilityValue');
+    this.characterDetails.agilityValue =
+      this.getAttributeValueWithModifier('agilityValue');
     this.characterDetails.agilityBonus = this.statBonuses['agilityBonus'];
     this.characterDetails.constitutionValue =
-      this.getFormValue('constitutionValue');
+      this.getAttributeValueWithModifier('constitutionValue');
     this.characterDetails.constitutionBonus =
       this.statBonuses['constitutionBonus'];
     this.characterDetails.intelligenceValue =
-      this.getFormValue('intelligenceValue');
+      this.getAttributeValueWithModifier('intelligenceValue');
     this.characterDetails.intelligenceBonus =
       this.statBonuses['intelligenceBonus'];
-    this.characterDetails.charismaValue = this.getFormValue('charismaValue');
+    this.characterDetails.charismaValue =
+      this.getAttributeValueWithModifier('charismaValue');
     this.characterDetails.charismaBonus = this.statBonuses['charismaBonus'];
 
     console.log(this.characterDetails);

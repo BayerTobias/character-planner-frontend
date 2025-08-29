@@ -1,32 +1,84 @@
-<div class="wrapper">
-  <div class="row">
-    <span class="stat-name">Stärke:</span>
-    <span class="value">{{ strengthValue }}</span>
-    <span class="stat-bonus">Bonus:</span>
-    <span class="value">{{ strengthBonus }}</span>
-  </div>
-  <div class="row">
-    <span class="stat-name">Geschick:</span>
-    <span class="value"> {{ agilityValue }}</span>
-    <span class="stat-bonus">Bonus:</span>
-    <span class="value">{{ agilityBonus }}</span>
-  </div>
-  <div class="row">
-    <span class="stat-name">Konstitution:</span>
-    <span class="value">{{ constitutionValue }}</span>
-    <span class="stat-bonus">Bonus:</span>
-    <span class="value">{{ constitutionBonus }}</span>
-  </div>
-  <div class="row">
-    <span class="stat-name">Interligenz:</span>
-    <span class="value">{{ intelligenceValue }}</span>
-    <span class="stat-bonus">Bonus:</span>
-    <span class="value">{{ intelligenceBonus }}</span>
-  </div>
-  <div class="row">
-    <span class="stat-name">Charisma:</span>
-    <span class="value">{{ charismaValue }}</span>
-    <span class="stat-bonus">Bonus:</span>
-    <span class="value">{{ charismaBonus }}</span>
-  </div>
-</div>
+<table>
+  <thead>
+    <th scope="col">Attribut</th>
+    <th scope="col">Wert</th>
+    <th scope="col">Bonus</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Stärke</td>
+      <td>{{ strengthValue | number : "2.0" }}</td>
+      <td
+        [style.color]="
+          strengthBonus > 0
+            ? 'rgba(151, 255, 186, 1)'
+            : strengthBonus < 0
+            ? 'rgba(255, 131, 131, 1)'
+            : ''
+        "
+      >
+        {{ strengthBonus }}
+      </td>
+    </tr>
+    <tr>
+      <td>Geschicklichkeit</td>
+      <td>{{ agilityValue | number : "2.0" }}</td>
+      <td
+        [style.color]="
+          agilityBonus > 0
+            ? 'rgba(151, 255, 186, 1)'
+            : agilityBonus < 0
+            ? 'rgba(255, 131, 131, 1)'
+            : ''
+        "
+      >
+        {{ agilityBonus }}
+      </td>
+    </tr>
+    <tr>
+      <td>Konstitution</td>
+      <td>{{ constitutionValue | number : "2.0" }}</td>
+      <td
+        [style.color]="
+          constitutionBonus > 0
+            ? 'rgba(151, 255, 186, 1)'
+            : constitutionBonus < 0
+            ? 'rgba(255, 131, 131, 1)'
+            : ''
+        "
+      >
+        {{ constitutionBonus }}
+      </td>
+    </tr>
+    <tr>
+      <td>Intelligenz</td>
+      <td>{{ intelligenceValue | number : "2.0" }}</td>
+      <td
+        [style.color]="
+          intelligenceBonus > 0
+            ? 'rgba(151, 255, 186, 1)'
+            : intelligenceBonus < 0
+            ? 'rgba(255, 131, 131, 1)'
+            : ''
+        "
+      >
+        {{ intelligenceBonus }}
+      </td>
+    </tr>
+    <tr>
+      <td>Charisma</td>
+      <td>{{ charismaValue | number : "2.0" }}</td>
+      <td
+        [style.color]="
+          charismaBonus > 0
+            ? 'rgba(151, 255, 186, 1)'
+            : charismaBonus < 0
+            ? 'rgba(255, 131, 131, 1)'
+            : ''
+        "
+      >
+        {{ charismaBonus }}
+      </td>
+    </tr>
+  </tbody>
+</table>

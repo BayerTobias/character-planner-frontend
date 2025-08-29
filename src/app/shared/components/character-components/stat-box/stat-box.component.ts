@@ -1,9 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-stat-box',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './stat-box.component.html',
   styleUrl: './stat-box.component.scss',
 })
