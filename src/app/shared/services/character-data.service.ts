@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { lastValueFrom } from 'rxjs';
 
@@ -22,7 +22,8 @@ import { CharacterResponseData } from '../../interfaces/character-api-interfaces
 export class CharacterDataService {
   private http = inject(HttpClient);
 
-  public character?: BaseCharacter | Mage;
+  // public character?: BaseCharacter | Mage | null = null;
+  public character = signal<BaseCharacter | Mage | null>(null);
   public characterList: CharacterListItem[] = [];
 
   constructor() {}
@@ -48,8 +49,9 @@ export class CharacterDataService {
     );
     console.log(resp);
 
-    this.character = CharacterFactory.create(resp);
-    console.log(this.character);
+    const characterObject = CharacterFactory.create(resp);
+    this.setCharacter(characterObject);
+    console.log(characterObject);
   }
 
   async getClassDetails(id: number) {
@@ -74,5 +76,24 @@ export class CharacterDataService {
       this.http.post<CharacterData>(url, body)
     );
     return resp;
+  }
+
+  //  Character signal functions
+
+  setCharacter(character: BaseCharacter | Mage) {
+    this.character.set(character);
+  }
+
+  updateCharacter(patch: Partial<BaseCharacter | Mage>) {
+    this.character.update((currentChar) => {
+      if (!currentChar) return currentChar;
+
+      Object.assign(currentChar, patch);
+      return currentChar;
+    });
+
+    // console.log(this.character());
+
+    // this.character.set(structuredClone(this.character()));
   }
 }

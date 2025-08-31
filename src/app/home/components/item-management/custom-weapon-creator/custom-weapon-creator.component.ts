@@ -90,16 +90,14 @@ export class CustomWeaponCreatorComponent {
   }
 
   async createOrUpdateWeapon() {
-    const character = this.characterDataService.character;
+    const character = this.characterDataService.character();
 
-    if (!character || !this.customWeaponForm.valid) {
-      return;
-    }
+    if (!character || !this.customWeaponForm.valid) return;
 
     if (this.customWeapon) {
       this.updateExistingweapon();
     } else {
-      this.createNewWeapon(character);
+      this.createNewWeapon();
     }
 
     await this.uploadCharacter(character);
@@ -108,26 +106,50 @@ export class CustomWeaponCreatorComponent {
   updateExistingweapon() {
     if (!this.customWeapon) return;
 
-    CustomWeaponFactory.updateWeapon(this.customWeapon, this.customWeaponForm);
-    this.customWeapon.weaponGroups = this.selectedWeaponGroups;
+    const updatedWeapon = CustomWeaponFactory.updateWeapon(
+      this.customWeapon,
+      this.customWeaponForm
+    );
+    updatedWeapon.weaponGroups = this.selectedWeaponGroups;
+
+    this.characterDataService.character.update((currentCharacter) => {
+      if (!currentCharacter) return currentCharacter;
+
+      currentCharacter.customWeapons = currentCharacter.customWeapons.map(
+        (weapon) =>
+          weapon.id === this.customWeapon?.id ? updatedWeapon : weapon
+      );
+
+      return currentCharacter;
+    });
   }
 
-  createNewWeapon(character: BaseCharacter) {
+  createNewWeapon() {
     const newWeapon = CustomWeaponFactory.fromForm(this.customWeaponForm);
     newWeapon.weaponGroups = this.selectedWeaponGroups;
-    character.customWeapons.push(newWeapon);
+
+    this.characterDataService.character.update((currentCharacter) => {
+      if (!currentCharacter) return currentCharacter;
+
+      currentCharacter.customWeapons.push(newWeapon);
+      return currentCharacter;
+    });
   }
 
+  // vermutlcih in character overview auslagern
   async deleteWeapon() {
-    const character = this.characterDataService.character;
+    const character = this.characterDataService.character();
 
     if (!this.customWeapon || !character) return;
 
-    const index = character.customWeapons.findIndex(
-      (weapon) => weapon.id === this.customWeapon?.id
-    );
+    this.characterDataService.character.update((currentCharacter) => {
+      if (!currentCharacter) return currentCharacter;
 
-    character.customWeapons.splice(index, 1);
+      currentCharacter.customWeapons = currentCharacter.customWeapons.filter(
+        (weapon) => weapon.id !== this.customWeapon?.id
+      );
+      return currentCharacter;
+    });
 
     await this.uploadCharacter(character);
   }

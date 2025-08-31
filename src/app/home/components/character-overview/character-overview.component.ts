@@ -66,25 +66,21 @@ export class CharacterOverviewComponent {
   }
 
   async skillDevelopMagic() {
-    const character = this.characterDataService.character;
-
-    if (character) {
-      const dm = character?.class.skills.find((skill) => skill.id === 19);
-
-      if (dm) {
-        dm.nodesSkilled = 1;
-
-        character.skilledSkills.push(
-          new SkilledNode({
-            id: null,
-            skill: 19,
-            nodes_skilled: 1,
-          })
-        );
-      }
-
-      await this.characterDataService.uploadCharacter(character);
-    }
+    // const character = this.characterDataService.character;
+    // if (character) {
+    //   const dm = character?.class.skills.find((skill) => skill.id === 19);
+    //   if (dm) {
+    //     dm.nodesSkilled = 1;
+    //     character.skilledSkills.push(
+    //       new SkilledNode({
+    //         id: null,
+    //         skill: 19,
+    //         nodes_skilled: 1,
+    //       })
+    //     );
+    //   }
+    //   await this.characterDataService.uploadCharacter(character);
+    // }
   }
 
   openEditCustomWeapon(customWeapon: CustomWeapon) {
@@ -120,18 +116,15 @@ export class CharacterOverviewComponent {
   }
 
   async saveSelectedWeapons() {
-    const character = this.characterDataService.character;
-
-    if (!character) return;
-
-    character.baseWeapons = this.selectedBaseWeapons;
-
-    try {
-      const resp = await this.characterDataService.uploadCharacter(character);
-      console.log(resp);
-    } catch (err) {
-      console.error(err);
-    }
+    // const character = this.characterDataService.character;
+    // if (!character) return;
+    // character.baseWeapons = this.selectedBaseWeapons;
+    // try {
+    //   const resp = await this.characterDataService.uploadCharacter(character);
+    //   console.log(resp);
+    // } catch (err) {
+    //   console.error(err);
+    // }
   }
 
   openCreateNewWeapon() {

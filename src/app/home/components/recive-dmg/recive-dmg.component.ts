@@ -16,10 +16,12 @@ export class ReciveDmgComponent {
   @Output() submitEvent = new EventEmitter();
 
   async submitForm() {
-    const character = this.characterService.character;
+    const character = this.characterService.character();
 
     if (character) {
-      character.currentHp = character.currentHp - this.dmg;
+      this.characterService.updateCharacter({
+        currentHp: character.currentHp - this.dmg,
+      });
 
       await this.characterService.uploadCharacter(character);
 

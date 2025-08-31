@@ -57,13 +57,18 @@ export class ArmorSelectorComponent {
   }
 
   async selectArmor(armor: BaseArmor) {
-    const character = this.characterDataService.character;
+    const character = this.characterDataService.character();
 
     if (!character) {
       return;
     }
 
-    character.armor = armor;
+    this.characterDataService.character.update((currentCharacter) => {
+      if (!currentCharacter) return currentCharacter;
+
+      currentCharacter.armor = armor;
+      return currentCharacter;
+    });
 
     try {
       const resp = await this.characterDataService.uploadCharacter(character);

@@ -19,18 +19,19 @@ export class HourlyRestComponentComponent {
   constructor() {}
 
   ngOnInit() {
-    console.log(this.characterService.character?.class.mainStat);
+    console.log(this.characterService.character()?.class.mainStat);
     console.log(this.calculateManaRegen());
+    const character = this.characterService.character();
 
-    if (this.characterService.character) {
-      this.displayMana = this.characterService.character.currentMana;
+    if (character) {
+      this.displayMana = character.currentMana;
     }
   }
 
   submitForm() {}
 
   calculateManaRegen() {
-    const character = this.characterService.character;
+    const character = this.characterService.character();
     if (character && this.displayMana && character.currentMana) {
       const mainStat = character.class.mainStat;
 

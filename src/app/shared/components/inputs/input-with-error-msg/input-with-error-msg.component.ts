@@ -14,13 +14,7 @@ export class InputWithErrorMsgComponent {
   @Input() control!: FormControl;
   @Input() label: string = 'input';
 
-  ngOnInit() {
-    console.log('Form controll', this.control);
-  }
-
   get errorMessage(): string | null {
-    console.log('error check', this.control);
-
     if (!this.control || !this.control.errors || !this.control.touched)
       return null;
 

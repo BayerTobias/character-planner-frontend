@@ -9,7 +9,7 @@
         selectArmorOpen ? 'armor-option-' + focusedArmorIndex : null
       "
     >
-      {{ characterDataService.character?.armor?.name ?? "Select Armor" }}
+      {{ characterDataService.character()?.armor?.name ?? "Select Armor" }}
     </button>
 
     @if (selectArmorOpen) {

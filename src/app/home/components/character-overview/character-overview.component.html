@@ -3,36 +3,40 @@
     <h1>Charakter Übersicht</h1>
   </div>
 
+  @let character = characterDataService.character();
+
   <app-character-details
-    [name]="characterDataService.character?.name ?? ''"
-    [characterRace]="characterDataService.character?.race ?? null"
-    [characterClass]="characterDataService.character?.class ?? null"
-    [currentHealth]="characterDataService.character?.currentHp ?? 0"
-    [maxHealth]="characterDataService.character?.maxHealth ?? 0"
-    [currentMana]="characterDataService.character?.currentMana ?? 0"
-    [maxMana]="characterDataService.character?.maxMana ?? 0"
-    [level]="characterDataService.character?.level ?? 0"
+    [name]="character?.name ?? ''"
+    [characterRace]="character?.race ?? null"
+    [characterClass]="character?.class ?? null"
+    [currentHealth]="character?.currentHp ?? 0"
+    [maxHealth]="character?.maxHealth ?? 0"
+    [currentMana]="character?.currentMana ?? 0"
+    [maxMana]="character?.maxMana ?? 0"
+    [level]="character?.level ?? 0"
   ></app-character-details>
 
   <!-- <button (click)="openDmgOverlay()">damage</button> -->
 
-  @if (characterDataService.character) {
+  @if (character) {
   <app-stat-box
-    [strengthValue]="characterDataService.character!.strengthValue"
-    [strengthBonus]="characterDataService.character!.strengthBonus"
-    [agilityValue]="characterDataService.character!.agilityValue"
-    [agilityBonus]="characterDataService.character!.agilityBonus"
-    [constitutionValue]="characterDataService.character!.constitutionValue"
-    [constitutionBonus]="characterDataService.character!.constitutionBonus"
-    [intelligenceValue]="characterDataService.character!.intelligenceValue"
-    [intelligenceBonus]="characterDataService.character!.intelligenceBonus"
-    [charismaValue]="characterDataService.character!.charismaValue"
-    [charismaBonus]="characterDataService.character!.charismaBonus"
+    [strengthValue]="character.strengthValue"
+    [strengthBonus]="character.strengthBonus"
+    [agilityValue]="character.agilityValue"
+    [agilityBonus]="character.agilityBonus"
+    [constitutionValue]="character.constitutionValue"
+    [constitutionBonus]="character.constitutionBonus"
+    [intelligenceValue]="character.intelligenceValue"
+    [intelligenceBonus]="character.intelligenceBonus"
+    [charismaValue]="character.charismaValue"
+    [charismaBonus]="character.charismaBonus"
   ></app-stat-box>
 
-  @for (skill of characterDataService.character.class.skills; track $index)
-  {<app-skills-display [skill]="skill" [index]="$index"></app-skills-display>}
-  @for (skill of characterDataService.character.customSkills; track $index) {
+  @for (skill of character?.class?.skills; track $index) {<app-skills-display
+    [skill]="skill"
+    [index]="$index"
+  ></app-skills-display
+  >} @for (skill of character?.customSkills; track $index) {
   <app-skills-display [skill]="skill" [index]="$index"></app-skills-display>
   } }
 </div>
@@ -42,13 +46,11 @@
 <div>
   <ul class="weapon-inventory">
     <span>Base Weapons</span>
-    @for (baseWeapon of characterDataService.character?.baseWeapons; track
-    $index) {
+    @for (baseWeapon of character?.baseWeapons; track $index) {
     <li>{{ baseWeapon.name }}</li>
     }
     <span>Custom Weapons</span>
-    @for (customWeapon of characterDataService.character?.customWeapons; track
-    $index) {
+    @for (customWeapon of character?.customWeapons; track $index) {
     <li>{{ customWeapon.name }}</li>
     }
   </ul>
@@ -72,7 +74,7 @@
 <app-armor-selector></app-armor-selector>
 
 <button (click)="skillDevelopMagic()">testskills</button>
-@for ( customWeapon of characterDataService.character?.customWeapons; track
+@for ( customWeapon of characterDataService.character()?.customWeapons; track
 $index) {
 <button (click)="openEditCustomWeapon(customWeapon)">
   {{ customWeapon.name }}
