@@ -3,7 +3,7 @@ import { CharacterDataService } from '../../../shared/services/character-data.se
 import { ActivatedRoute } from '@angular/router';
 import { Mage } from '../../models/mage-character.model';
 import { StatBoxComponent } from '../../../shared/components/character-components/stat-box/stat-box.component';
-import { SkillsDisplayComponent } from '../../../shared/components/character-components/skills-display/skills-display.component';
+import { SkillsDisplayComponent } from '../../../shared/components/character-components/skills-overview/skills-display/skills-display.component';
 import { CharacterDetailsComponent } from './character-details/character-details.component';
 import { OverlayBaseComponent } from '../overlay-base/overlay-base.component';
 import { SkilledNode } from '../../models/skilled-node.model';
@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 import { BaseWeapon } from '../../models/base-weapon.model';
 import { ArmorSelectorComponent } from '../item-management/armor-selector/armor-selector.component';
 import { ClassTranslatePipe } from '../../../shared/pipes/class-translate.pipe';
+import { SkillsOverviewComponent } from '../../../shared/components/character-components/skills-overview/skills-overview.component';
 
 @Component({
   selector: 'app-character-overview',
@@ -25,6 +26,7 @@ import { ClassTranslatePipe } from '../../../shared/pipes/class-translate.pipe';
     OverlayBaseComponent,
     CommonModule,
     ArmorSelectorComponent,
+    SkillsOverviewComponent,
   ],
   templateUrl: './character-overview.component.html',
   styleUrl: './character-overview.component.scss',

@@ -5,20 +5,20 @@
 
   @let character = characterDataService.character();
 
-  <app-character-details
-    [name]="character?.name ?? ''"
-    [characterRace]="character?.race ?? null"
-    [characterClass]="character?.class ?? null"
-    [currentHealth]="character?.currentHp ?? 0"
-    [maxHealth]="character?.maxHealth ?? 0"
-    [currentMana]="character?.currentMana ?? 0"
-    [maxMana]="character?.maxMana ?? 0"
-    [level]="character?.level ?? 0"
-  ></app-character-details>
-
   <!-- <button (click)="openDmgOverlay()">damage</button> -->
 
   @if (character) {
+  <app-character-details
+    [name]="character.name"
+    [characterRace]="character.race"
+    [characterClass]="character.class"
+    [currentHealth]="character.currentHp"
+    [maxHealth]="character.maxHealth"
+    [currentMana]="character.currentMana"
+    [maxMana]="character.maxMana"
+    [level]="character.level"
+  ></app-character-details>
+
   <app-stat-box
     [strengthValue]="character.strengthValue"
     [strengthBonus]="character.strengthBonus"
@@ -32,57 +32,61 @@
     [charismaBonus]="character.charismaBonus"
   ></app-stat-box>
 
-  @for (skill of character?.class?.skills; track $index) {<app-skills-display
+  <app-skills-overview [character]="character"></app-skills-overview>
+
+  <!-- @for (skill of character?.class?.skills; track $index) {<app-skills-display
     [skill]="skill"
     [index]="$index"
   ></app-skills-display
   >} @for (skill of character?.customSkills; track $index) {
   <app-skills-display [skill]="skill" [index]="$index"></app-skills-display>
-  } }
-</div>
+  } -->
 
-<!-- Weapon Inventar extra Komponente -->
+  }
 
-<div>
-  <ul class="weapon-inventory">
-    <span>Base Weapons</span>
-    @for (baseWeapon of character?.baseWeapons; track $index) {
-    <li>{{ baseWeapon.name }}</li>
-    }
-    <span>Custom Weapons</span>
-    @for (customWeapon of character?.customWeapons; track $index) {
-    <li>{{ customWeapon.name }}</li>
-    }
-  </ul>
+  <!-- Weapon Inventar extra Komponente -->
 
-  <button (click)="toggleSelectBaseWeapon()">Open Select base Weapon</button>
-
-  @if (selectBaseWeaponOpen) {
   <div>
-    @for (baseWeapon of gameDataService.baseWeapons; track $index) {
-    <ul>
-      <li (click)="selectBaseWeapon(baseWeapon)">{{ baseWeapon.name }}</li>
+    <ul class="weapon-inventory">
+      <span>Base Weapons</span>
+      @for (baseWeapon of character?.baseWeapons; track $index) {
+      <li>{{ baseWeapon.name }}</li>
+      }
+      <span>Custom Weapons</span>
+      @for (customWeapon of character?.customWeapons; track $index) {
+      <li>{{ customWeapon.name }}</li>
+      }
     </ul>
+
+    <button (click)="toggleSelectBaseWeapon()">Open Select base Weapon</button>
+
+    @if (selectBaseWeaponOpen) {
+    <div>
+      @for (baseWeapon of gameDataService.baseWeapons; track $index) {
+      <ul>
+        <li (click)="selectBaseWeapon(baseWeapon)">{{ baseWeapon.name }}</li>
+      </ul>
+      }
+      <button (click)="saveSelectedWeapons()">save</button>
+    </div>
     }
-    <button (click)="saveSelectedWeapons()">save</button>
   </div>
+
+  <button (click)="openCreateNewWeapon()">new Custom weapon</button>
+
+  <app-armor-selector></app-armor-selector>
+
+  <button (click)="skillDevelopMagic()">testskills</button>
+  @for ( customWeapon of characterDataService.character()?.customWeapons; track
+  $index) {
+  <button (click)="openEditCustomWeapon(customWeapon)">
+    {{ customWeapon.name }}
+  </button>
+
+  } @if(overlay){
+  <app-overlay-base
+    (closeOverlayEvent)="closeOverlay()"
+    [slectedCustomWeapon]="selectedCustomWeapon"
+  ></app-overlay-base>
   }
 </div>
-
-<button (click)="openCreateNewWeapon()">new Custom weapon</button>
-
-<app-armor-selector></app-armor-selector>
-
-<button (click)="skillDevelopMagic()">testskills</button>
-@for ( customWeapon of characterDataService.character()?.customWeapons; track
-$index) {
-<button (click)="openEditCustomWeapon(customWeapon)">
-  {{ customWeapon.name }}
-</button>
-
-} @if(overlay){
-<app-overlay-base
-  (closeOverlayEvent)="closeOverlay()"
-  [slectedCustomWeapon]="selectedCustomWeapon"
-></app-overlay-base>
-}

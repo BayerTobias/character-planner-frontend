@@ -1,0 +1,13 @@
+<section>
+  <div class="headline-row">
+    <h3>Fertigkeit</h3>
+    <h3>Stufe</h3>
+    <h3>Nächste</h3>
+  </div>
+
+  @for (skill of character.class.skills; track $index) {
+  <app-skills-display [skill]="skill"></app-skills-display>
+  } @for (skill of character.customSkills; track $index) {
+  <app-skills-display [skill]="skill"></app-skills-display>
+  }
+</section>

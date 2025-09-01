@@ -17,7 +17,7 @@ export class CharacterDetailsComponent {
   @Input() characterClass: CharClass | null = null;
   @Input() currentHealth: number = -1;
   @Input() maxHealth: number = -1;
-  @Input() currentMana: number = -1;
-  @Input() maxMana: number = -1;
+  @Input() currentMana: number | null = null;
+  @Input() maxMana: number | null = null;
   @Input() level: number = -1;
 }
