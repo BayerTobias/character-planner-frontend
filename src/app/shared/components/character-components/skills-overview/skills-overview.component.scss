@@ -3,7 +3,8 @@
 
 section {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: max-content max-content 100px;
+  justify-content: center;
   gap: 4px;
   padding: 16px 8px;
   border-radius: 8px;

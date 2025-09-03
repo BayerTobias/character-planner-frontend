@@ -4,10 +4,13 @@
 :host,
 .skill-wrapper {
   display: contents;
-  gap: 6px;
 
   :nth-child(2) {
     justify-self: end;
+  }
+
+  :nth-child(3) {
+    overflow: hidden;
   }
 }
 
@@ -18,58 +21,41 @@ span {
   letter-spacing: 0.6px;
 }
 
-// .skill-wrapper {
-//   display: flex;
-//   justify-content: flex-start;
-//   align-items: center;
-//   gap: 2px;
+.skill-poin-row {
+  display: flex;
+  gap: 4px;
+}
 
-//   .skill-box {
-//     display: flex;
-//     justify-content: space-between;
-//     width: 143px;
-//   }
+.skill-point-wrapper {
+  @include dFlex();
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  background-color: rgba(217, 217, 217, 1);
+}
 
-//   .single-point {
-//     height: 12px;
-//     width: 12px;
-//     border-radius: 6px;
-//     border: 1px solid black;
-//   }
+.inner-ring {
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  border: 1px solid $mage-color;
+}
 
-//   .duble-point {
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     height: 12px;
-//     width: calc(12px * 2);
-//     border: 1px solid black;
-//     border-radius: 6px;
-//     overflow: hidden;
+.single-point {
+  @include dFlex();
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: rgba(217, 217, 217, 1);
+}
 
-//     div {
-//       height: 100%;
-//       width: 50%;
-//     }
-//   }
+.multi-point {
+  gap: 6px;
+  width: auto;
+  padding: 0 1px;
+}
 
-//   .quad-point {
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     height: 12px;
-//     width: calc(12px * 4);
-//     border: 1px solid black;
-//     border-radius: 6px;
-//     overflow: hidden;
-
-//     div {
-//       height: 100%;
-//       width: 25%;
-//     }
-//   }
-// }
-
-// .skilled {
-//   background-color: aqua;
-// }
+.skilled {
+  background-color: $mage-color;
+}

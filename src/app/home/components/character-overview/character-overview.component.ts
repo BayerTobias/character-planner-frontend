@@ -64,25 +64,36 @@ export class CharacterOverviewComponent {
 
   closeOverlay() {
     this.overlay = false;
-    console.log(this.characterDataService.character);
+    console.log(this.characterDataService.character());
   }
 
   async skillDevelopMagic() {
-    // const character = this.characterDataService.character;
-    // if (character) {
-    //   const dm = character?.class.skills.find((skill) => skill.id === 19);
+    const character = this.characterDataService.character();
+
+    if (!character) return;
+
+    console.log(character.class.skills);
+
+    // this.characterDataService.character.update((currentCharacter) => {
+    //   if (!currentCharacter) return currentCharacter;
+
+    //   const dm = currentCharacter.class.skills.find((skill) => skill.id === 6);
+
     //   if (dm) {
     //     dm.nodesSkilled = 1;
-    //     character.skilledSkills.push(
+    //     currentCharacter.skilledSkills.push(
     //       new SkilledNode({
     //         id: null,
-    //         skill: 19,
+    //         skill: 6,
     //         nodes_skilled: 1,
     //       })
     //     );
     //   }
-    //   await this.characterDataService.uploadCharacter(character);
-    // }
+
+    //   return currentCharacter;
+    // });
+
+    // await this.characterDataService.uploadCharacter(character);
   }
 
   openEditCustomWeapon(customWeapon: CustomWeapon) {

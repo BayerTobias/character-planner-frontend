@@ -5,70 +5,141 @@
   </span>
 
   <span>
-    {{ calculateSkillRank() }}
+    {{ calculateSkillRank() | number : "2.0" }}
   </span>
 
-  <div>Punkte display hier rein</div>
+  <div>
+    <div
+      class="skill-poin-row"
+      [style.transform]="getTanslate(skill.nodesSkilled)"
+    >
+      <div class="skill-point-wrapper">
+        <div
+          [ngClass]="{ skilled: skill.nodesSkilled >= 1 }"
+          class="inner-ring"
+        ></div>
+      </div>
 
-  <!-- <div class="skill-box">
-    <p>{{ skill.name }}:</p>
-    @if (skill.secondLevelCost) {<span
-      >{{ skill.firstLevelCost }}/{{ skill.secondLevelCost }}</span
-    >}@else {
-    <span>{{ skill.firstLevelCost }}</span>
-    }
-  </div> -->
+      <div class="skill-point-wrapper">
+        <div
+          [ngClass]="{ skilled: skill.nodesSkilled >= 2 }"
+          class="inner-ring"
+        ></div>
+      </div>
 
-  <!-- <div
-    class="single-point"
-    [ngClass]="{ skilled: skill.nodesSkilled >= 1 }"
-  ></div>
-  <div
-    class="single-point"
-    [ngClass]="{ skilled: skill.nodesSkilled >= 2 }"
-  ></div>
-  <div
-    class="single-point"
-    [ngClass]="{ skilled: skill.nodesSkilled >= 3 }"
-  ></div>
-  <div
-    class="single-point"
-    [ngClass]="{ skilled: skill.nodesSkilled >= 4 }"
-  ></div>
-  <div
-    class="single-point"
-    [ngClass]="{ skilled: skill.nodesSkilled >= 5 }"
-  ></div>
-  <div class="duble-point">
-    <div [ngClass]="{ skilled: skill.nodesSkilled >= 6 }"></div>
-    <div [ngClass]="{ skilled: skill.nodesSkilled >= 7 }"></div>
+      <div class="skill-point-wrapper">
+        <div
+          [ngClass]="{ skilled: skill.nodesSkilled >= 3 }"
+          class="inner-ring"
+        ></div>
+      </div>
+
+      <div class="skill-point-wrapper">
+        <div
+          [ngClass]="{ skilled: skill.nodesSkilled >= 4 }"
+          class="inner-ring"
+        ></div>
+      </div>
+
+      <div class="skill-point-wrapper">
+        <div
+          [ngClass]="{ skilled: skill.nodesSkilled >= 5 }"
+          class="inner-ring"
+        ></div>
+      </div>
+
+      <div class="skill-point-wrapper multi-point">
+        <div
+          [ngClass]="{ skilled: skill.nodesSkilled >= 6 }"
+          class="inner-ring"
+        ></div>
+        <div
+          [ngClass]="{ skilled: skill.nodesSkilled >= 7 }"
+          class="inner-ring"
+        ></div>
+      </div>
+
+      <div class="skill-point-wrapper multi-point">
+        <div
+          [ngClass]="{ skilled: skill.nodesSkilled >= 8 }"
+          class="inner-ring"
+        ></div>
+        <div
+          [ngClass]="{ skilled: skill.nodesSkilled >= 9 }"
+          class="inner-ring"
+        ></div>
+      </div>
+
+      <div class="skill-point-wrapper multi-point">
+        <div
+          [ngClass]="{ skilled: skill.nodesSkilled >= 10 }"
+          class="inner-ring"
+        ></div>
+        <div
+          [ngClass]="{ skilled: skill.nodesSkilled >= 11 }"
+          class="inner-ring"
+        ></div>
+      </div>
+
+      <div class="skill-point-wrapper multi-point">
+        <div
+          [ngClass]="{ skilled: skill.nodesSkilled >= 12 }"
+          class="inner-ring"
+        ></div>
+        <div
+          [ngClass]="{ skilled: skill.nodesSkilled >= 13 }"
+          class="inner-ring"
+        ></div>
+      </div>
+
+      <div class="skill-point-wrapper multi-point">
+        <div
+          [ngClass]="{ skilled: skill.nodesSkilled >= 14 }"
+          class="inner-ring"
+        ></div>
+        <div
+          [ngClass]="{ skilled: skill.nodesSkilled >= 15 }"
+          class="inner-ring"
+        ></div>
+      </div>
+
+      <div class="skill-point-wrapper multi-point">
+        <div
+          [ngClass]="{ skilled: skill.nodesSkilled >= 16 }"
+          class="inner-ring"
+        ></div>
+        <div
+          [ngClass]="{ skilled: skill.nodesSkilled >= 17 }"
+          class="inner-ring"
+        ></div>
+        <div
+          [ngClass]="{ skilled: skill.nodesSkilled >= 18 }"
+          class="inner-ring"
+        ></div>
+        <div
+          [ngClass]="{ skilled: skill.nodesSkilled >= 19 }"
+          class="inner-ring"
+        ></div>
+      </div>
+
+      <div class="skill-point-wrapper multi-point">
+        <div
+          [ngClass]="{ skilled: skill.nodesSkilled >= 20 }"
+          class="inner-ring"
+        ></div>
+        <div
+          [ngClass]="{ skilled: skill.nodesSkilled >= 21 }"
+          class="inner-ring"
+        ></div>
+        <div
+          [ngClass]="{ skilled: skill.nodesSkilled >= 22 }"
+          class="inner-ring"
+        ></div>
+        <div
+          [ngClass]="{ skilled: skill.nodesSkilled >= 23 }"
+          class="inner-ring"
+        ></div>
+      </div>
+    </div>
   </div>
-  <div class="duble-point">
-    <div [ngClass]="{ skilled: skill.nodesSkilled >= 8 }"></div>
-    <div [ngClass]="{ skilled: skill.nodesSkilled >= 9 }"></div>
-  </div>
-  <div class="duble-point">
-    <div [ngClass]="{ skilled: skill.nodesSkilled >= 10 }"></div>
-    <div [ngClass]="{ skilled: skill.nodesSkilled >= 11 }"></div>
-  </div>
-  <div class="duble-point">
-    <div [ngClass]="{ skilled: skill.nodesSkilled >= 12 }"></div>
-    <div [ngClass]="{ skilled: skill.nodesSkilled >= 13 }"></div>
-  </div>
-  <div class="duble-point">
-    <div [ngClass]="{ skilled: skill.nodesSkilled >= 14 }"></div>
-    <div [ngClass]="{ skilled: skill.nodesSkilled >= 15 }"></div>
-  </div>
-  <div class="quad-point">
-    <div [ngClass]="{ skilled: skill.nodesSkilled >= 16 }"></div>
-    <div [ngClass]="{ skilled: skill.nodesSkilled >= 17 }"></div>
-    <div [ngClass]="{ skilled: skill.nodesSkilled >= 18 }"></div>
-    <div [ngClass]="{ skilled: skill.nodesSkilled >= 19 }"></div>
-  </div>
-  <div class="quad-point">
-    <div [ngClass]="{ skilled: skill.nodesSkilled >= 20 }"></div>
-    <div [ngClass]="{ skilled: skill.nodesSkilled >= 21 }"></div>
-    <div [ngClass]="{ skilled: skill.nodesSkilled >= 22 }"></div>
-    <div [ngClass]="{ skilled: skill.nodesSkilled >= 23 }"></div>
-  </div> -->
 </div>

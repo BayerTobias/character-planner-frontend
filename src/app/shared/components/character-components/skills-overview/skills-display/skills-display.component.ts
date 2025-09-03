@@ -18,6 +18,16 @@ export class SkillsDisplayComponent {
   //   console.log(this.index);
   // }
 
+  getTanslate(nodesSkilled: number) {
+    const skillPontWidth = 20;
+
+    if (nodesSkilled <= 3) return `translateX(-${0}px)`;
+
+    const overflowCount = nodesSkilled - 3;
+
+    return `translateX(-${overflowCount * skillPontWidth}px)`;
+  }
+
   calculateSkillRank() {
     switch (this.skill.nodesSkilled) {
       case 1:
@@ -55,7 +65,6 @@ export class SkillsDisplayComponent {
         return 11;
       case 23:
         return 12;
-
       default:
         return 0;
     }
