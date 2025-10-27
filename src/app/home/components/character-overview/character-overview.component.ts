@@ -15,6 +15,7 @@ import { BaseWeapon } from '../../models/base-weapon.model';
 import { ArmorSelectorComponent } from '../item-management/armor-selector/armor-selector.component';
 import { ClassTranslatePipe } from '../../../shared/pipes/class-translate.pipe';
 import { SkillsOverviewComponent } from '../../../shared/components/character-components/skills-overview/skills-overview.component';
+import { CharacterControlsComponent } from './character-controls/character-controls.component';
 
 @Component({
   selector: 'app-character-overview',
@@ -27,6 +28,7 @@ import { SkillsOverviewComponent } from '../../../shared/components/character-co
     CommonModule,
     ArmorSelectorComponent,
     SkillsOverviewComponent,
+    CharacterControlsComponent,
   ],
   templateUrl: './character-overview.component.html',
   styleUrl: './character-overview.component.scss',

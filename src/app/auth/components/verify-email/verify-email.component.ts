@@ -18,7 +18,7 @@ export class VerifyEmailComponent {
 
   async ngOnInit() {
     const route = this.route.queryParams.subscribe(async (params) => {
-      const url = params['url'];
+      let url = params['url'];
 
       try {
         const response = await this.authService.verifyEmail(url);
