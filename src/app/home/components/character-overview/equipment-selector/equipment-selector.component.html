@@ -1,0 +1,39 @@
+<section>
+  <div>
+    <div>
+      <h3>Standart Waffen</h3>
+      <ul></ul>
+    </div>
+
+    <div>
+      <h3>Spezial Waffen</h3>
+      <ul></ul>
+    </div>
+  </div>
+
+  <div>
+    <div>
+      <h3>Rüstung</h3>
+      <form>
+        <select>
+          @for (armor of gameDataService.baseArmors; track $index) { @if
+          (armor.type === 'armor') {
+          <option>{{ armor.name }} {{ armor.armorBonus }}</option>
+          } }
+        </select>
+      </form>
+    </div>
+
+    <div>
+      <h3>Schild</h3>
+      <form>
+        <select>
+          @for (armor of gameDataService.baseArmors; track $index) { @if
+          (armor.type === 'shield') {
+          <option>{{ armor.name }} {{ armor.armorBonus }}</option>
+          } }
+        </select>
+      </form>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,6 @@
+@import "./../../../../../mixin.scss";
+@import "./../../../../../styles.scss";
+
+section {
+  @include dFlex();
+}

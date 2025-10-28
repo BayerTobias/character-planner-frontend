@@ -16,6 +16,7 @@ import { ArmorSelectorComponent } from '../item-management/armor-selector/armor-
 import { ClassTranslatePipe } from '../../../shared/pipes/class-translate.pipe';
 import { SkillsOverviewComponent } from '../../../shared/components/character-components/skills-overview/skills-overview.component';
 import { CharacterControlsComponent } from './character-controls/character-controls.component';
+import { EquipmentSelectorComponent } from './equipment-selector/equipment-selector.component';
 
 @Component({
   selector: 'app-character-overview',
@@ -29,6 +30,7 @@ import { CharacterControlsComponent } from './character-controls/character-contr
     ArmorSelectorComponent,
     SkillsOverviewComponent,
     CharacterControlsComponent,
+    EquipmentSelectorComponent,
   ],
   templateUrl: './character-overview.component.html',
   styleUrl: './character-overview.component.scss',
