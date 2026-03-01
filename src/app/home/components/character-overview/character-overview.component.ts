@@ -3,10 +3,8 @@ import { CharacterDataService } from '../../../shared/services/character-data.se
 import { ActivatedRoute } from '@angular/router';
 import { Mage } from '../../models/mage-character.model';
 import { StatBoxComponent } from '../../../shared/components/character-components/stat-box/stat-box.component';
-import { SkillsDisplayComponent } from '../../../shared/components/character-components/skills-overview/skills-display/skills-display.component';
 import { CharacterDetailsComponent } from './character-details/character-details.component';
 import { OverlayBaseComponent } from '../overlay-base/overlay-base.component';
-import { SkilledNode } from '../../models/skilled-node.model';
 import { GameDataService } from '../../../shared/services/game-data.service';
 import { CustomWeapon } from '../../models/custom-weapon.model';
 import { BaseArmor } from '../../models/base-armor.model';
@@ -23,7 +21,6 @@ import { EquipmentSelectorComponent } from './equipment-selector/equipment-selec
   standalone: true,
   imports: [
     StatBoxComponent,
-    SkillsDisplayComponent,
     CharacterDetailsComponent,
     OverlayBaseComponent,
     CommonModule,
