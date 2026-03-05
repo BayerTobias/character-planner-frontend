@@ -1,3 +1,5 @@
+import { BaseArmorRequestDto } from '../../shared/api/dtos/items/base-armor-request.dto';
+
 export interface BaseArmorData {
   id: number;
   name: string;
@@ -27,7 +29,7 @@ export class BaseArmor {
     this.type = data?.type || '';
   }
 
-  asJason() {
+  asJason(): BaseArmorRequestDto {
     return {
       id: this.id,
       name: this.name,

@@ -1,3 +1,5 @@
+import { WeaponGroupRequestDto } from '../../shared/api/dtos/items/weapon-group-request.dto';
+
 export interface WeaponGroupData {
   id: number;
   name: string;
@@ -12,7 +14,7 @@ export class WeaponGroup {
     this.name = data?.name || '';
   }
 
-  asJason() {
+  asJason(): WeaponGroupRequestDto {
     return {
       id: this.id,
       name: this.name,

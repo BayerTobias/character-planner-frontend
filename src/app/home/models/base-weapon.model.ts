@@ -1,3 +1,4 @@
+import { BaseWeaponRequestDto } from '../../shared/api/dtos/items/base-weapon-request.dto';
 import { WeaponGroup, WeaponGroupData } from './weapon-group.model';
 
 export interface BaseWeaponData {
@@ -25,7 +26,7 @@ export class BaseWeapon {
     this.id = data?.id || null;
     this.name = data?.name || '';
     this.weaponGroups = (data?.weapon_group || []).map(
-      (weaponGroup: WeaponGroupData) => new WeaponGroup(weaponGroup)
+      (weaponGroup: WeaponGroupData) => new WeaponGroup(weaponGroup),
     );
     this.minStr = data?.min_str || 0;
     this.dmg = data?.dmg || 0;
@@ -34,7 +35,7 @@ export class BaseWeapon {
     this.iniBonus = data?.ini_bonus || 0;
   }
 
-  asJason() {
+  asJason(): BaseWeaponRequestDto {
     return {
       id: this.id,
       name: this.name,
