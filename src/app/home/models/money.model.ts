@@ -1,3 +1,5 @@
+import { MoneyRequestDto } from '../../shared/api/dtos/character/money-request.dto';
+
 export interface MoneyData {
   id: number;
   gf: number;
@@ -21,7 +23,7 @@ export class Money {
     this.tt = data?.tt || 0;
   }
 
-  asJason() {
+  asJason(): MoneyRequestDto {
     return { id: this.id, gf: this.gf, kl: this.kl, mu: this.mu, tt: this.tt };
   }
 }

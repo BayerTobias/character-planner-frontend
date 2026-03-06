@@ -1,3 +1,4 @@
+import { CustomWeaponRequestDto } from '../../shared/api/dtos/items/custom-weapon-request.dto';
 import { WeaponGroup, WeaponGroupData } from './weapon-group.model';
 
 export interface CustomWeaponData {
@@ -28,7 +29,7 @@ export class CustomWeapon {
     this.name = data?.name || '';
     this.weaponGroups =
       (data?.weapon_group || []).map(
-        (weaponGroup: WeaponGroupData) => new WeaponGroup(weaponGroup)
+        (weaponGroup: WeaponGroupData) => new WeaponGroup(weaponGroup),
       ) || [];
     this.minStr = data?.min_str || 0;
     this.dmg = data?.dmg || 0;
@@ -38,11 +39,13 @@ export class CustomWeapon {
     this.special = data?.special || '';
   }
 
-  asJason() {
+  asJason(): CustomWeaponRequestDto {
     return {
       id: this.id,
       name: this.name,
-      weapon_group: this.weaponGroups.map((group) => group.id),
+      weapon_group: this.weaponGroups
+        .map((group) => group.id)
+        .filter((id): id is number => id !== null),
       min_str: this.minStr,
       dmg: this.dmg,
       attribute: this.attribute,

@@ -1,3 +1,5 @@
+import { CustomSkillRequestDto } from '../../shared/api/dtos/skills/custom-skill-request.dto';
+
 export interface CustomSkillData {
   id: number;
   name: string;
@@ -24,7 +26,7 @@ export class CustomSkill {
     this.nodesSkilled = data?.nodes_skilled || 0;
   }
 
-  asJson() {
+  asJson(): CustomSkillRequestDto {
     return {
       id: this.id,
       name: this.name,

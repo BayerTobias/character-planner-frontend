@@ -1,3 +1,5 @@
+import { skilledNodeRequestDto } from '../../shared/api/dtos/skills/skilled-node-request.dto';
+
 export interface NodeData {
   id: number | null;
   skill: number;
@@ -15,7 +17,7 @@ export class SkilledNode {
     this.nodesSkilled = data.nodes_skilled || 0;
   }
 
-  asJson() {
+  asJson(): skilledNodeRequestDto {
     return {
       id: this.id,
       skill_id: this.skillId,
