@@ -13,7 +13,7 @@ export interface BaseWeaponData {
 }
 
 export class BaseWeapon {
-  id: number | null;
+  id: number;
   name: string;
   weaponGroups: WeaponGroup[];
   minStr: number;
@@ -22,17 +22,17 @@ export class BaseWeapon {
   weight: number;
   iniBonus: number;
 
-  constructor(data?: BaseWeaponData) {
-    this.id = data?.id || null;
-    this.name = data?.name || '';
-    this.weaponGroups = (data?.weapon_group || []).map(
+  constructor(data: BaseWeaponData) {
+    this.id = data.id;
+    this.name = data.name;
+    this.weaponGroups = data.weapon_group.map(
       (weaponGroup: WeaponGroupData) => new WeaponGroup(weaponGroup),
     );
-    this.minStr = data?.min_str || 0;
-    this.dmg = data?.dmg || 0;
-    this.attribute = data?.attribute || 'ST/GE';
-    this.weight = data?.weight || 0;
-    this.iniBonus = data?.ini_bonus || 0;
+    this.minStr = data.min_str;
+    this.dmg = data.dmg;
+    this.attribute = data.attribute;
+    this.weight = data.weight;
+    this.iniBonus = data.ini_bonus;
   }
 
   asJason(): BaseWeaponRequestDto {

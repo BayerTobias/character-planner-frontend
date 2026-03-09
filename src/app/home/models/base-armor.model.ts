@@ -19,14 +19,14 @@ export class BaseArmor {
   maneuverBonus: number;
   type: string;
 
-  constructor(data?: BaseArmorData) {
-    this.id = data?.id || null;
-    this.name = data?.name || '';
-    this.minStr = data?.min_str || 0;
-    this.weight = data?.weight ? parseFloat(data?.weight) : 0;
-    this.armorBonus = data?.armor_bonus || 0;
-    this.maneuverBonus = data?.maneuver_bonus || 0;
-    this.type = data?.type || '';
+  constructor(data: BaseArmorData) {
+    this.id = data.id;
+    this.name = data.name;
+    this.minStr = data.min_str;
+    this.weight = Number(data.weight);
+    this.armorBonus = data.armor_bonus;
+    this.maneuverBonus = data.maneuver_bonus;
+    this.type = data.type;
   }
 
   asJason(): BaseArmorRequestDto {

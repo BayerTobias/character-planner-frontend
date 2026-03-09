@@ -8,15 +8,15 @@ export interface CharacterRequestDto {
 
   // Core Character Information
   name: string;
-  character_race_id: number;
-  character_class_id: number;
+  character_race_id: number | null;
+  character_class_id: number | null;
   current_lvl: number;
 
   // Health and Mana
   current_hp: number;
   max_hp: number;
-  current_mana: number;
-  max_mana: number;
+  current_mana: number | null;
+  max_mana: number | null;
 
   // Primary Attributes
   strength_value: number;
@@ -36,7 +36,7 @@ export interface CharacterRequestDto {
   attribute_points: number;
 
   // Items
-  base_weapons: number[];
+  base_weapons: number[] | null;
   custom_weapons: CustomWeaponRequestDto[];
   base_armor_id: number | null;
   shield_id: number | null;

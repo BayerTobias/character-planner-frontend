@@ -1,3 +1,4 @@
+import { CharacterRequestDto } from '../../shared/api/dtos/character/character-request.dto';
 import { BaseArmor, BaseArmorData } from './base-armor.model';
 import { BaseWeapon, BaseWeaponData } from './base-weapon.model';
 import { CharClass, CharClassData } from './char-class.model';
@@ -117,18 +118,18 @@ export class BaseCharacter {
 
     // Skills
     this.skilledSkills = (data?.skilled_skills || []).map(
-      (skilledNode: NodeData) => new SkilledNode(skilledNode)
+      (skilledNode: NodeData) => new SkilledNode(skilledNode),
     );
     this.customSkills = (data?.custom_skills || []).map(
-      (customSkill: CustomSkillData) => new CustomSkill(customSkill)
+      (customSkill: CustomSkillData) => new CustomSkill(customSkill),
     );
     this.addSkilledNodes();
     // Items
     this.baseWeapons = (data?.base_weapons || []).map(
-      (baseWeapon: BaseWeaponData) => new BaseWeapon(baseWeapon)
+      (baseWeapon: BaseWeaponData) => new BaseWeapon(baseWeapon),
     );
     this.customWeapons = (data?.custom_weapons || []).map(
-      (customWeapon: CustomWeaponData) => new CustomWeapon(customWeapon)
+      (customWeapon: CustomWeaponData) => new CustomWeapon(customWeapon),
     );
     this.armor = data?.base_armor ? new BaseArmor(data.base_armor) : null;
     this.shield = data?.shield ? new BaseArmor(data?.shield) : null;
@@ -256,7 +257,7 @@ export class BaseCharacter {
     return (this.constitutionBonus + this.class.baseLvlHp) * this.level;
   }
 
-  asPostRequestJson() {
+  asPostRequestJson(): CharacterRequestDto {
     return {
       id: this.id ?? null,
 
@@ -286,20 +287,20 @@ export class BaseCharacter {
 
       // Skills
       custom_skills: this.customSkills.map((customSkill) =>
-        customSkill.asJson()
+        customSkill.asJson(),
       ),
       skilled_skills: this.skilledSkills.map((skilledSkill) =>
-        skilledSkill.asJson()
+        skilledSkill.asJson(),
       ),
       attribute_points: 0,
 
       // Items
       base_weapons: this.baseWeapons.map((baseWeapon) => baseWeapon.id),
       custom_weapons: this.customWeapons.map((customWeapon) =>
-        customWeapon.asJason()
+        customWeapon.asJason(),
       ),
-      base_armor_id: this.armor?.id,
-      shield_id: this.shield?.id,
+      base_armor_id: this.armor?.id ?? null,
+      shield_id: this.shield?.id ?? null,
       money: this.money.asJason(),
     };
   }
