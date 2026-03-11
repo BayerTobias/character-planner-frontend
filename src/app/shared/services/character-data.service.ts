@@ -1,7 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, map } from 'rxjs';
 
 import {
   BaseCharacter,
@@ -14,52 +13,78 @@ import {
 } from '../../home/models/character-list-item.model';
 import { CharClass, CharClassData } from '../../home/models/char-class.model';
 import { CharacterFactory } from '../../home/factories/character-factory';
-import { CharacterResponseData } from '../../interfaces/character-api-interfaces/character-response-interface';
+import { CharacterApiService } from './character-api.service';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CharacterDataService {
   private http = inject(HttpClient);
+  private api = inject(CharacterApiService);
 
-  // public character?: BaseCharacter | Mage | null = null;
   public character = signal<BaseCharacter | Mage | null>(null);
-  public characterList: CharacterListItem[] = [];
+  public characterList = signal<CharacterListItem[]>([]);
 
   constructor() {}
 
-  async getCharacterList() {
-    const url = environment.baseUrl + 'api/characters/';
+  getCharacterList() {
+    this.api.getCharacterList().subscribe({
+      next: (resp) => {
+        this.characterList.set(resp.map((data) => new CharacterListItem(data)));
+        console.log('char List:', this.characterList());
+      },
 
-    try {
-      const resp: CharacterListItemData[] = await lastValueFrom(
-        this.http.get<CharacterListItemData[]>(url)
-      );
-      this.characterList = resp.map((data) => new CharacterListItem(data));
-      console.log('char List:', this.characterList);
-    } catch (err) {
-      console.error(err);
-    }
+      error: (err) => {
+        console.error(err);
+      },
+    });
+
+    // try {
+    //   const resp: CharacterListItemData[] = await lastValueFrom(
+    //     this.http.get<CharacterListItemData[]>(url),
+    //   );
+    //   this.characterList = resp.map((data) => new CharacterListItem(data));
+    //   console.log('char List:', this.characterList);
+    // } catch (err) {
+    //   console.error(err);
+    // }
   }
 
-  async getCharacterData(id: number) {
-    const url = environment.baseUrl + `api/characters/${id}/`;
-    const resp: CharacterData = await lastValueFrom(
-      this.http.get<CharacterData>(url)
-    );
-    console.log(resp);
+  getCharacterData(id: number) {
+    this.api.getCharacterData(id).subscribe({
+      next: (resp) => {
+        const characterObject = CharacterFactory.create(resp);
+        this.setCharacter(characterObject);
+        console.log(characterObject);
+      },
 
-    const characterObject = CharacterFactory.create(resp);
-    this.setCharacter(characterObject);
-    console.log(characterObject);
+      error: (err) => {
+        console.error(err);
+      },
+    });
+
+    // const url = environment.baseUrl + `api/characters/${id}/`;
+    // const resp: CharacterData = await lastValueFrom(
+    //   this.http.get<CharacterData>(url),
+    // );
+    // console.log(resp);
+
+    // const characterObject = CharacterFactory.create(resp);
+    // this.setCharacter(characterObject);
+    // console.log(characterObject);
   }
 
   async getClassDetails(id: number) {
+    // return this.api
+    //   .getClassDetails(id)
+    //   .pipe(map((resp) => new CharClass(resp)));
+
     const url = environment.baseUrl + `api/classes/${id}/`;
 
     try {
       const resp: CharClassData = await lastValueFrom(
-        this.http.get<CharClassData>(url)
+        this.http.get<CharClassData>(url),
       );
       return new CharClass(resp);
     } catch (err) {
@@ -69,11 +94,13 @@ export class CharacterDataService {
   }
 
   async uploadCharacter(character: BaseCharacter) {
+    // return this.api.uploadCharacter(character.asPostRequestJson());
+
     const url = environment.baseUrl + 'api/characters/';
     const body = character.asPostRequestJson();
 
     const resp: CharacterData = await lastValueFrom(
-      this.http.post<CharacterData>(url, body)
+      this.http.post<CharacterData>(url, body),
     );
     return resp;
   }

@@ -2,8 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { CharacterListItemData } from '../../home/models/character-list-item.model';
 import { environment } from '../../../environments/environment';
-import { BaseCharacter } from '../../home/models/base-character.model';
+import {
+  BaseCharacter,
+  CharacterData,
+} from '../../home/models/base-character.model';
 import { CharClassData } from '../../home/models/char-class.model';
+import { CharacterRequestDto } from '../api/dtos/character/character-request.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -28,8 +32,7 @@ export class CharacterApiService {
     return this.http.get<CharClassData>(this.classesUrl + `${id}/`);
   }
 
-  //Todo: create upload character dto and use it here
-  uploadCharacter(body: {}) {
+  uploadCharacter(body: CharacterRequestDto) {
     return this.http.post<CharacterData>(this.charactersUrl, body);
   }
 }
