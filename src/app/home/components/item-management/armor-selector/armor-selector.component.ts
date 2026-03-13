@@ -56,12 +56,10 @@ export class ArmorSelectorComponent {
     }
   }
 
-  async selectArmor(armor: BaseArmor) {
+  selectArmor(armor: BaseArmor) {
     const character = this.characterDataService.character();
 
-    if (!character) {
-      return;
-    }
+    if (!character) return;
 
     this.characterDataService.character.update((currentCharacter) => {
       if (!currentCharacter) return currentCharacter;
@@ -70,12 +68,22 @@ export class ArmorSelectorComponent {
       return currentCharacter;
     });
 
-    try {
-      const resp = await this.characterDataService.uploadCharacter(character);
-      console.log(resp);
-      this.selectArmorOpen = false;
-    } catch (err) {
-      console.error(err);
-    }
+    this.characterDataService.uploadCharacter(character).subscribe({
+      next: (resp) => {
+        console.log(resp);
+        this.selectArmorOpen = false;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+
+    // try {
+    //   const resp = await this.characterDataService.uploadCharacter(character);
+    //   console.log(resp);
+    //   this.selectArmorOpen = false;
+    // } catch (err) {
+    //   console.error(err);
+    // }
   }
 }

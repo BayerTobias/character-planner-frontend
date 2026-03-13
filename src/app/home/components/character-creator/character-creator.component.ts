@@ -11,6 +11,7 @@ import { SelectRaceComponent } from './select-race/select-race.component';
 import { CharacterDetailsComponent } from './character-details/character-details.component';
 import { CharDetails } from '../../models/char-dedails.model';
 import { CharacterFactory } from '../../factories/character-factory';
+import { switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-character-creator',
@@ -67,22 +68,43 @@ export class CharacterCreatorComponent {
     console.log(this.selectedRace);
   }
 
-  async createCharacter($event: CharDetails) {
+  createCharacter($event: CharDetails) {
     this.characterDetails = $event;
 
-    if (this.canCreateCharacter()) {
-      try {
-        await this.prepareCharacter();
+    if (!this.canCreateCharacter()) return;
 
-        const resp = await this.characterDataService.uploadCharacter(
-          this.character
-        );
-        console.log(resp);
-        this.router.navigateByUrl(`character?character_id=${resp.id}`);
-      } catch (err) {
-        console.error(err);
-      }
-    }
+    this.prepareCharacter()
+      .pipe(
+        switchMap(() =>
+          this.characterDataService.uploadCharacter(this.character),
+        ),
+      )
+      .subscribe({
+        next: (resp) => {
+          console.log(resp);
+          this.router.navigateByUrl(`character?character_id=${resp.id}`);
+        },
+
+        error: (err) => {
+          console.error(err);
+        },
+      });
+
+    // this.characterDetails = $event;
+
+    // if (this.canCreateCharacter()) {
+    //   try {
+    //     await this.prepareCharacter();
+
+    //     const resp = await this.characterDataService.uploadCharacter(
+    //       this.character,
+    //     );
+    //     console.log(resp);
+    //     this.router.navigateByUrl(`character?character_id=${resp.id}`);
+    //   } catch (err) {
+    //     console.error(err);
+    //   }
+    // }
   }
 
   canCreateCharacter() {
@@ -94,18 +116,36 @@ export class CharacterCreatorComponent {
     );
   }
 
-  async prepareCharacter() {
+  prepareCharacter() {
     this.character = CharacterFactory.create(
       undefined,
-      this.selectedClass?.name || 'default'
+      this.selectedClass?.name || 'default',
     );
+
     this.character.race = this.selectedRace!;
-    this.character.class = await this.characterDataService.getClassDetails(
-      this.selectedClass!.id!
-    );
-    this.fillCharacterStats();
-    this.character.maxHealth = this.character.calculateMaxHealth();
-    this.character.currentHp = this.character.maxHealth;
+
+    return this.characterDataService
+      .getClassDetails(this.selectedClass!.id!)
+      .pipe(
+        tap((charClass) => {
+          this.character.class = charClass;
+          this.fillCharacterStats();
+          this.character.maxHealth = this.character.calculateMaxHealth();
+          this.character.currentHp = this.character.maxHealth;
+        }),
+      );
+
+    // this.character = CharacterFactory.create(
+    //   undefined,
+    //   this.selectedClass?.name || 'default'
+    // );
+    // this.character.race = this.selectedRace!;
+    // this.character.class = await this.characterDataService.getClassDetails(
+    //   this.selectedClass!.id!
+    // );
+    // this.fillCharacterStats();
+    // this.character.maxHealth = this.character.calculateMaxHealth();
+    // this.character.currentHp = this.character.maxHealth;
   }
 
   fillCharacterStats() {
