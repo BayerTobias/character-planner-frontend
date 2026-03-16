@@ -13,9 +13,9 @@ import { WeaponGroup } from '../../../models/weapon-group.model';
 import { CommonModule } from '@angular/common';
 import { CharacterDataService } from '../../../../shared/services/character-data.service';
 import { CustomWeaponFactory } from '../../../factories/custom-weapon-factory';
-import { BaseCharacter } from '../../../models/base-character.model';
 import { InputWithErrorMsgComponent } from '../../../../shared/components/inputs/input-with-error-msg/input-with-error-msg.component';
 import { NavigationComponent } from '../../../../shared/components/navigation/navigation.component';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-custom-weapon-creator',
@@ -73,7 +73,7 @@ export class CustomWeaponCreatorComponent {
 
   selectWeaponGroup(weaponGroup: WeaponGroup) {
     const index = this.selectedWeaponGroups.findIndex(
-      (group) => group.id === weaponGroup.id
+      (group) => group.id === weaponGroup.id,
     );
 
     if (index > -1) {
@@ -85,7 +85,7 @@ export class CustomWeaponCreatorComponent {
 
   isSelected(weaponGroup: WeaponGroup) {
     return this.selectedWeaponGroups.some(
-      (group) => group.id === weaponGroup.id
+      (group) => group.id === weaponGroup.id,
     );
   }
 
@@ -100,7 +100,17 @@ export class CustomWeaponCreatorComponent {
       this.createNewWeapon();
     }
 
-    await this.uploadCharacter(character);
+    this.characterDataService
+      .uploadCharacter(character)
+      .pipe(
+        tap((resp) => console.log(resp)),
+        tap(() => this.emitCloseOverlay()),
+      )
+      .subscribe({
+        error: (err) => console.error(err),
+      });
+
+    // await this.uploadCharacter(character);
   }
 
   updateExistingweapon() {
@@ -108,7 +118,7 @@ export class CustomWeaponCreatorComponent {
 
     const updatedWeapon = CustomWeaponFactory.updateWeapon(
       this.customWeapon,
-      this.customWeaponForm
+      this.customWeaponForm,
     );
     updatedWeapon.weaponGroups = this.selectedWeaponGroups;
 
@@ -117,7 +127,7 @@ export class CustomWeaponCreatorComponent {
 
       currentCharacter.customWeapons = currentCharacter.customWeapons.map(
         (weapon) =>
-          weapon.id === this.customWeapon?.id ? updatedWeapon : weapon
+          weapon.id === this.customWeapon?.id ? updatedWeapon : weapon,
       );
 
       return currentCharacter;
@@ -146,23 +156,33 @@ export class CustomWeaponCreatorComponent {
       if (!currentCharacter) return currentCharacter;
 
       currentCharacter.customWeapons = currentCharacter.customWeapons.filter(
-        (weapon) => weapon.id !== this.customWeapon?.id
+        (weapon) => weapon.id !== this.customWeapon?.id,
       );
       return currentCharacter;
     });
 
-    await this.uploadCharacter(character);
+    this.characterDataService
+      .uploadCharacter(character)
+      .pipe(
+        tap((resp) => console.log(resp)),
+        tap(() => this.emitCloseOverlay()),
+      )
+      .subscribe({
+        error: (err) => console.error(err),
+      });
+
+    // await this.uploadCharacter(character);
   }
 
-  async uploadCharacter(character: BaseCharacter) {
-    try {
-      const resp = await this.characterDataService.uploadCharacter(character);
-      this.emitCloseOverlay();
-      console.log(resp);
-    } catch (err) {
-      console.error(err);
-    }
-  }
+  // async uploadCharacter(character: BaseCharacter) {
+  //   try {
+  //     const resp = await this.characterDataService.uploadCharacter(character);
+  //     this.emitCloseOverlay();
+  //     console.log(resp);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // }
 
   emitCloseOverlay() {
     this.closeOverlayEvent.emit();
