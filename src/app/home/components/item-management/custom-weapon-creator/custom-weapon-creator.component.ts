@@ -89,7 +89,7 @@ export class CustomWeaponCreatorComponent {
     );
   }
 
-  async createOrUpdateWeapon() {
+  createOrUpdateWeapon() {
     const character = this.characterDataService.character();
 
     if (!character || !this.customWeaponForm.valid) return;
@@ -147,7 +147,7 @@ export class CustomWeaponCreatorComponent {
   }
 
   // vermutlcih in character overview auslagern
-  async deleteWeapon() {
+  deleteWeapon() {
     const character = this.characterDataService.character();
 
     if (!this.customWeapon || !character) return;

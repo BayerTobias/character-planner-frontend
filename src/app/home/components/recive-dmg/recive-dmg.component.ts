@@ -1,6 +1,7 @@
 import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CharacterDataService } from '../../../shared/services/character-data.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-recive-dmg',
@@ -15,7 +16,7 @@ export class ReciveDmgComponent {
 
   @Output() submitEvent = new EventEmitter();
 
-  async submitForm() {
+  submitForm() {
     const character = this.characterService.character();
 
     if (character) {
@@ -23,9 +24,20 @@ export class ReciveDmgComponent {
         currentHp: character.currentHp - this.dmg,
       });
 
-      await this.characterService.uploadCharacter(character);
+      this.characterService
+        .uploadCharacter(character)
+        .pipe(
+          tap(() => {
+            this.submitEvent.emit();
+          }),
+        )
+        .subscribe({
+          error: (err) => {
+            console.error('Uploading receive damage:', err);
+          },
+        });
 
-      this.submitEvent.emit();
+      // await this.characterService.uploadCharacter(character);
     }
   }
 }
