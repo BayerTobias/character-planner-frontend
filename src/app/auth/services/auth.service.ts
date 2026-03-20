@@ -2,23 +2,25 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { catchError, firstValueFrom, lastValueFrom, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { AuthApiService } from './auth-api.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private http = inject(HttpClient);
+  private authApiService = inject(AuthApiService);
 
   constructor() {}
 
-  async loginWithEmailAndPawword(email: string, password: string) {
-    const url = environment.baseUrl + 'api/login/';
-    const body = { email: email, password: password };
+  // async loginWithEmailAndPawword(email: string, password: string) {
+  //   const url = environment.baseUrl + 'api/login/';
+  //   const body = { email: email, password: password };
 
-    return lastValueFrom(this.http.post(url, body));
-  }
+  //   return lastValueFrom(this.http.post(url, body));
+  // }
 
-  async loginWithGoogleOauth() {
+  loginWithGoogleOauth() {
     const url = environment.baseUrl + 'api/google/';
 
     window.location.href = url;
@@ -27,7 +29,7 @@ export class AuthService {
   async registerUserWithUsernameAndPassword(
     username: string,
     email: string,
-    password: string
+    password: string,
   ) {
     const url = environment.baseUrl + 'api/register/';
     const body = { name: username, email: email, password: password };
@@ -40,7 +42,7 @@ export class AuthService {
 
     try {
       const response: { message?: string } = await lastValueFrom(
-        this.http.get(url)
+        this.http.get(url),
       );
 
       return response && response.message === 'Authenticated';
@@ -56,5 +58,9 @@ export class AuthService {
 
   async verifyEmail(url: string) {
     return await lastValueFrom(this.http.get<{ message: string }>(url));
+  }
+
+  setToken(token: string) {
+    localStorage.setItem('token', token);
   }
 }

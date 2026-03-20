@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { StandardButtonComponent } from '../../../shared/components/buttons/standard-button/standard-button.component';
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AuthApiService } from '../../services/auth-api.service';
 
 @Component({
   selector: 'app-login',
@@ -30,6 +31,8 @@ export class LoginComponent {
 
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
+  private authApiService = inject(AuthApiService);
+
   private router = inject(Router);
 
   public slideIn: boolean = false;
@@ -67,16 +70,28 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.httpErrorMsg = null;
       localStorage.removeItem('token');
-      try {
-        const resp: LoginResponse =
-          (await this.authService.loginWithEmailAndPawword(
-            this.email?.value,
-            this.password?.value
-          )) as LoginResponse;
-        this.handleSuccessfullLogin(resp);
-      } catch (err) {
-        this.handleError(err);
-      }
+
+      this.authApiService
+        .login(this.email!.value, this.password!.value)
+        .subscribe({
+          next: (resp: LoginResponse) => {
+            this.handleSuccessfullLogin(resp);
+          },
+          error: (error: unknown) => {
+            this.handleError(error);
+          },
+        });
+
+      // try {
+      //   const resp: LoginResponse =
+      //     (await this.authService.loginWithEmailAndPawword(
+      //       this.email?.value,
+      //       this.password?.value,
+      //     )) as LoginResponse;
+      //   this.handleSuccessfullLogin(resp);
+      // } catch (err) {
+      //   this.handleError(err);
+      // }
     } else this.loginForm.markAllAsTouched();
   }
 
@@ -103,7 +118,7 @@ export class LoginComponent {
    * @param resp The response containing the authentication token.
    */
   handleSuccessfullLogin(resp: LoginResponse) {
-    localStorage.setItem('token', resp.access_token);
+    this.authService.setToken(resp.access_token);
     this.router.navigateByUrl('/select-character');
   }
 
