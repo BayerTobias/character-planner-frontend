@@ -66,13 +66,13 @@ export class LoginComponent {
     return this.loginForm.get('rememberMe');
   }
 
-  async login() {
+  login() {
     if (this.loginForm.valid) {
       this.httpErrorMsg = null;
       localStorage.removeItem('token');
 
-      this.authApiService
-        .login(this.email!.value, this.password!.value)
+      this.authService
+        .loginWithEmailAndPawword(this.email!.value, this.password!.value)
         .subscribe({
           next: (resp: LoginResponse) => {
             this.handleSuccessfullLogin(resp);

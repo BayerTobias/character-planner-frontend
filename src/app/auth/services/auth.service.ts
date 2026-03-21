@@ -1,6 +1,13 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
-import { catchError, firstValueFrom, lastValueFrom, throwError } from 'rxjs';
+import {
+  catchError,
+  firstValueFrom,
+  lastValueFrom,
+  map,
+  of,
+  throwError,
+} from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AuthApiService } from './auth-api.service';
 
@@ -13,12 +20,14 @@ export class AuthService {
 
   constructor() {}
 
-  // async loginWithEmailAndPawword(email: string, password: string) {
-  //   const url = environment.baseUrl + 'api/login/';
-  //   const body = { email: email, password: password };
+  loginWithEmailAndPawword(email: string, password: string) {
+    return this.authApiService.loginWithEmailAndPawword(email, password);
 
-  //   return lastValueFrom(this.http.post(url, body));
-  // }
+    // const url = environment.baseUrl + 'api/login/';
+    // const body = { email: email, password: password };
+
+    // return lastValueFrom(this.http.post(url, body));
+  }
 
   loginWithGoogleOauth() {
     const url = environment.baseUrl + 'api/google/';
@@ -26,30 +35,40 @@ export class AuthService {
     window.location.href = url;
   }
 
-  async registerUserWithUsernameAndPassword(
+  registerUserWithUsernameAndPassword(
     username: string,
     email: string,
     password: string,
   ) {
-    const url = environment.baseUrl + 'api/register/';
-    const body = { name: username, email: email, password: password };
+    return this.authApiService.registerUserWithUsernameAndPassword(
+      username,
+      email,
+      password,
+    );
 
-    return lastValueFrom(this.http.post(url, body));
+    // const url = environment.baseUrl + 'api/register/';
+    // const body = { name: username, email: email, password: password };
+    // return lastValueFrom(this.http.post(url, body));
   }
 
-  async checkAuth() {
-    const url = environment.baseUrl + 'api/check-auth/';
+  checkAuth() {
+    return this.authApiService.checkAuth().pipe(
+      map((response) => response && response.message === 'Authenticated'),
+      catchError(() => of(false)),
+    );
 
-    try {
-      const response: { message?: string } = await lastValueFrom(
-        this.http.get(url),
-      );
+    // const url = environment.baseUrl + 'api/check-auth/';
 
-      return response && response.message === 'Authenticated';
-    } catch (err) {
-      console.error(err);
-      return false;
-    }
+    // try {
+    //   const response: { message?: string } = await lastValueFrom(
+    //     this.http.get(url),
+    //   );
+
+    //   return response && response.message === 'Authenticated';
+    // } catch (err) {
+    //   console.error(err);
+    //   return false;
+    // }
   }
 
   async logout() {

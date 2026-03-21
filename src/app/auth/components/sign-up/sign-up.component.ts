@@ -47,7 +47,7 @@ export class SignUpComponent {
         passwordRepeat: ['', Validators.required],
         privacyPolicy: [false, Validators.requiredTrue],
       },
-      { validators: [CustomValidators.passwordMatchValidator] }
+      { validators: [CustomValidators.passwordMatchValidator] },
     );
   }
 
@@ -102,21 +102,41 @@ export class SignUpComponent {
     return this.signupForm.get('privacyPolicy');
   }
 
-  async signUp() {
+  signUp() {
     if (this.signupForm.valid) {
       this.httpErrorMsg = null;
-      try {
-        const resp = await this.authService.registerUserWithUsernameAndPassword(
-          this.username?.value,
-          this.email?.value,
-          this.password?.value
-        );
-        console.log(resp);
-      } catch (err) {
-        console.log('Error:', err);
 
-        this.handleError(err);
-      }
+      this.authService
+        .registerUserWithUsernameAndPassword(
+          this.username!.value,
+          this.email!.value,
+          this.password!.value,
+        )
+        .subscribe({
+          next: (response) => {
+            console.log(response);
+            console.log('before close');
+            this.close();
+            console.log('after close');
+          },
+          error: (error) => {
+            console.error('Error:', error);
+            this.handleError(error);
+          },
+        });
+
+      // try {
+      //   const resp = await this.authService.registerUserWithUsernameAndPassword(
+      //     this.username?.value,
+      //     this.email?.value,
+      //     this.password?.value
+      //   );
+      //   console.log(resp);
+      // } catch (err) {
+      //   console.log('Error:', err);
+
+      //   this.handleError(err);
+      // }
     } else this.signupForm.markAllAsTouched();
   }
 
