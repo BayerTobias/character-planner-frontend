@@ -13,6 +13,7 @@ export class AuthApiService {
   private loginUrl = environment.baseUrl + 'api/login/';
   private registerUrl = environment.baseUrl + 'api/register/';
   private checkAuthUrl = environment.baseUrl + 'api/check-auth/';
+  private logoutUrl = environment.baseUrl + 'api/logout/';
 
   constructor() {}
 
@@ -37,5 +38,9 @@ export class AuthApiService {
 
   checkAuth() {
     return this.http.get<{ message?: string }>(this.checkAuthUrl);
+  }
+
+  logout() {
+    return this.http.post(this.logoutUrl, {});
   }
 }

@@ -25,8 +25,16 @@ export class CharacterSelectionComponent {
     this.characterDataService.getCharacterList();
   }
 
-  async logout() {
-    await this.authService.logout();
+  logout() {
+    this.authService.logout().subscribe({
+      next: (resp) => {
+        console.log('Logout successful', resp);
+        this.router.navigateByUrl('/login');
+      },
+      error: (err) => {
+        console.error('Logout failed', err);
+      },
+    });
   }
 
   routeToCharacterOverview() {

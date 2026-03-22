@@ -71,8 +71,8 @@ export class AuthService {
     // }
   }
 
-  async logout() {
-    console.error('implement LOGOUT');
+  logout() {
+    return this.authApiService.logout();
   }
 
   async verifyEmail(url: string) {
