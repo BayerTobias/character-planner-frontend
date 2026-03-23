@@ -45,10 +45,6 @@ export class AuthService {
       email,
       password,
     );
-
-    // const url = environment.baseUrl + 'api/register/';
-    // const body = { name: username, email: email, password: password };
-    // return lastValueFrom(this.http.post(url, body));
   }
 
   checkAuth() {
@@ -56,27 +52,14 @@ export class AuthService {
       map((response) => response && response.message === 'Authenticated'),
       catchError(() => of(false)),
     );
-
-    // const url = environment.baseUrl + 'api/check-auth/';
-
-    // try {
-    //   const response: { message?: string } = await lastValueFrom(
-    //     this.http.get(url),
-    //   );
-
-    //   return response && response.message === 'Authenticated';
-    // } catch (err) {
-    //   console.error(err);
-    //   return false;
-    // }
   }
 
   logout() {
     return this.authApiService.logout();
   }
 
-  async verifyEmail(url: string) {
-    return await lastValueFrom(this.http.get<{ message: string }>(url));
+  verifyEmail(url: string) {
+    return this.authApiService.verifyEmail(url);
   }
 
   setToken(token: string) {

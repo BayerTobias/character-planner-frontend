@@ -81,17 +81,6 @@ export class LoginComponent {
             this.handleError(error);
           },
         });
-
-      // try {
-      //   const resp: LoginResponse =
-      //     (await this.authService.loginWithEmailAndPawword(
-      //       this.email?.value,
-      //       this.password?.value,
-      //     )) as LoginResponse;
-      //   this.handleSuccessfullLogin(resp);
-      // } catch (err) {
-      //   this.handleError(err);
-      // }
     } else this.loginForm.markAllAsTouched();
   }
 

@@ -39,16 +39,6 @@ export class CharacterDataService {
         console.error(err);
       },
     });
-
-    // try {
-    //   const resp: CharacterListItemData[] = await lastValueFrom(
-    //     this.http.get<CharacterListItemData[]>(url),
-    //   );
-    //   this.characterList = resp.map((data) => new CharacterListItem(data));
-    //   console.log('char List:', this.characterList);
-    // } catch (err) {
-    //   console.error(err);
-    // }
   }
 
   getCharacterData(id: number) {
@@ -63,46 +53,16 @@ export class CharacterDataService {
         console.error(err);
       },
     });
-
-    // const url = environment.baseUrl + `api/characters/${id}/`;
-    // const resp: CharacterData = await lastValueFrom(
-    //   this.http.get<CharacterData>(url),
-    // );
-    // console.log(resp);
-
-    // const characterObject = CharacterFactory.create(resp);
-    // this.setCharacter(characterObject);
-    // console.log(characterObject);
   }
 
   getClassDetails(id: number) {
     return this.api
       .getClassDetails(id)
       .pipe(map((resp) => new CharClass(resp)));
-
-    // const url = environment.baseUrl + `api/classes/${id}/`;
-
-    // try {
-    //   const resp: CharClassData = await lastValueFrom(
-    //     this.http.get<CharClassData>(url),
-    //   );
-    //   return new CharClass(resp);
-    // } catch (err) {
-    //   console.error(err);
-    //   return new CharClass();
-    // }
   }
 
   uploadCharacter(character: BaseCharacter) {
     return this.api.uploadCharacter(character.asPostRequestJson());
-
-    // const url = environment.baseUrl + 'api/characters/';
-    // const body = character.asPostRequestJson();
-
-    // const resp: CharacterData = await lastValueFrom(
-    //   this.http.post<CharacterData>(url, body),
-    // );
-    // return resp;
   }
 
   //  Character signal functions

@@ -43,4 +43,8 @@ export class AuthApiService {
   logout() {
     return this.http.post(this.logoutUrl, {});
   }
+
+  verifyEmail(url: string) {
+    return this.http.get<{ message: string }>(url);
+  }
 }

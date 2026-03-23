@@ -89,22 +89,6 @@ export class CharacterCreatorComponent {
           console.error(err);
         },
       });
-
-    // this.characterDetails = $event;
-
-    // if (this.canCreateCharacter()) {
-    //   try {
-    //     await this.prepareCharacter();
-
-    //     const resp = await this.characterDataService.uploadCharacter(
-    //       this.character,
-    //     );
-    //     console.log(resp);
-    //     this.router.navigateByUrl(`character?character_id=${resp.id}`);
-    //   } catch (err) {
-    //     console.error(err);
-    //   }
-    // }
   }
 
   canCreateCharacter() {
@@ -134,18 +118,6 @@ export class CharacterCreatorComponent {
           this.character.currentHp = this.character.maxHealth;
         }),
       );
-
-    // this.character = CharacterFactory.create(
-    //   undefined,
-    //   this.selectedClass?.name || 'default'
-    // );
-    // this.character.race = this.selectedRace!;
-    // this.character.class = await this.characterDataService.getClassDetails(
-    //   this.selectedClass!.id!
-    // );
-    // this.fillCharacterStats();
-    // this.character.maxHealth = this.character.calculateMaxHealth();
-    // this.character.currentHp = this.character.maxHealth;
   }
 
   fillCharacterStats() {

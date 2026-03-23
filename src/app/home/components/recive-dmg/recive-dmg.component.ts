@@ -36,8 +36,6 @@ export class ReciveDmgComponent {
             console.error('Uploading receive damage:', err);
           },
         });
-
-      // await this.characterService.uploadCharacter(character);
     }
   }
 }

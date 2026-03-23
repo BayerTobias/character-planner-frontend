@@ -124,19 +124,6 @@ export class SignUpComponent {
             this.handleError(error);
           },
         });
-
-      // try {
-      //   const resp = await this.authService.registerUserWithUsernameAndPassword(
-      //     this.username?.value,
-      //     this.email?.value,
-      //     this.password?.value
-      //   );
-      //   console.log(resp);
-      // } catch (err) {
-      //   console.log('Error:', err);
-
-      //   this.handleError(err);
-      // }
     } else this.signupForm.markAllAsTouched();
   }
 

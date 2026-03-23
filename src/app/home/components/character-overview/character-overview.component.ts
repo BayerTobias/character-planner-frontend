@@ -48,11 +48,11 @@ export class CharacterOverviewComponent {
   public selectBaseWeaponOpen: boolean = false;
   public selectedBaseWeapons: BaseWeapon[] = [];
 
-  async ngOnInit() {
+  ngOnInit() {
     this.route.queryParams.subscribe((params) => {
       this.characterId = +params['character_id'];
     });
-    await this.characterDataService.getCharacterData(this.characterId);
+    this.characterDataService.getCharacterData(this.characterId);
   }
 
   isCaster(): boolean {
@@ -116,7 +116,7 @@ export class CharacterOverviewComponent {
 
   selectBaseWeapon(baseWeapon: BaseWeapon) {
     const index = this.selectedBaseWeapons.findIndex(
-      (weapon) => weapon.id === baseWeapon.id
+      (weapon) => weapon.id === baseWeapon.id,
     );
 
     if (index === -1) {

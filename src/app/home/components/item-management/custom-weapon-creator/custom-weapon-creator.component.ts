@@ -109,8 +109,6 @@ export class CustomWeaponCreatorComponent {
       .subscribe({
         error: (err) => console.error(err),
       });
-
-    // await this.uploadCharacter(character);
   }
 
   updateExistingweapon() {
@@ -170,19 +168,7 @@ export class CustomWeaponCreatorComponent {
       .subscribe({
         error: (err) => console.error(err),
       });
-
-    // await this.uploadCharacter(character);
   }
-
-  // async uploadCharacter(character: BaseCharacter) {
-  //   try {
-  //     const resp = await this.characterDataService.uploadCharacter(character);
-  //     this.emitCloseOverlay();
-  //     console.log(resp);
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // }
 
   emitCloseOverlay() {
     this.closeOverlayEvent.emit();

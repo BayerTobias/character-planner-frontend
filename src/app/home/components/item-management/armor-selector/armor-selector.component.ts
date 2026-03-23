@@ -21,7 +21,7 @@ export class ArmorSelectorComponent {
     this.selectArmorOpen = !this.selectArmorOpen;
   }
 
-  async handleKeydown(event: KeyboardEvent) {
+  handleKeydown(event: KeyboardEvent) {
     const maxIndex = this.gameDataService.baseArmors.length - 1;
 
     switch (event.key) {
@@ -42,7 +42,7 @@ export class ArmorSelectorComponent {
       case 'Enter':
         if (this.selectArmorOpen) {
           const armor = this.gameDataService.baseArmors[this.focusedArmorIndex];
-          await this.selectArmor(armor);
+          this.selectArmor(armor);
           event.preventDefault();
         }
         break;

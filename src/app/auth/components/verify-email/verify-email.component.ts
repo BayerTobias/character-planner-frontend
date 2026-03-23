@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-verify-email',
@@ -16,22 +17,28 @@ export class VerifyEmailComponent {
 
   public message: string | null = null;
 
-  async ngOnInit() {
-    const route = this.route.queryParams.subscribe(async (params) => {
-      let url = params['url'];
-
-      try {
-        const response = await this.authService.verifyEmail(url);
-        this.message = response.message;
-        console.log(response.message);
-      } catch (err: unknown) {
-        if (err instanceof HttpErrorResponse) {
-          console.error(err);
-          this.message = err.message;
-        } else {
-          this.message = 'unknown error';
-        }
-      }
-    });
+  ngOnInit() {
+    this.route.queryParams
+      .pipe(
+        switchMap((params) => {
+          const url = params['url'];
+          if (!url) throw new Error('Missing verification URL');
+          return this.authService.verifyEmail(url);
+        }),
+      )
+      .subscribe({
+        next: (response) => {
+          this.message = response.message;
+          console.log(response.message);
+        },
+        error: (err: unknown) => {
+          if (err instanceof HttpErrorResponse) {
+            console.error(err);
+            this.message = err.message;
+          } else {
+            this.message = 'unknown error';
+          }
+        },
+      });
   }
 }
