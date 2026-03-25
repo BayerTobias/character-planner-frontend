@@ -25,7 +25,6 @@
   }
 }
 
-
 .focused {
   border: 1px solid red;
 }
@@ -33,4 +32,19 @@
 .weapon-inventory {
   @include dFlex();
   flex-direction: column;
+}
+
+.burger-button {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  border: none;
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.open {
+  transform: translateX(-100svw);
 }
