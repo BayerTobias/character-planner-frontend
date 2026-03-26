@@ -129,16 +129,22 @@ export class CharacterOverviewComponent {
     console.log(this.selectedBaseWeapons);
   }
 
-  async saveSelectedWeapons() {
-    // const character = this.characterDataService.character;
-    // if (!character) return;
-    // character.baseWeapons = this.selectedBaseWeapons;
-    // try {
-    //   const resp = await this.characterDataService.uploadCharacter(character);
-    //   console.log(resp);
-    // } catch (err) {
-    //   console.error(err);
-    // }
+  saveSelectedWeapons() {
+    const character = this.characterDataService.character();
+    if (!character) return;
+    character.baseWeapons = this.selectedBaseWeapons;
+
+    this.characterDataService.uploadCharacter(character).subscribe({
+      next: (resp) => {
+        console.log(resp);
+        this.characterDataService.updateCharacter({
+          baseWeapons: this.selectedBaseWeapons,
+        });
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
   }
 
   openCreateNewWeapon() {
