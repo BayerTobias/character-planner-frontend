@@ -1,0 +1,83 @@
+@import "./../../../../../mixin.scss";
+@import "./../../../../../styles.scss";
+
+section {
+  @include dFlex($gp: 8px, $ai: flex-start);
+  padding: 16px 8px;
+  background-color: $bg-darker;
+  flex-direction: column;
+  border-radius: 8px;
+  border: 1px solid $bg-darker;
+  box-shadow: 0 20px 50px 0 rgba(0, 0, 0, 0.12);
+
+  width: 320px;
+}
+
+h3 {
+  color: $copy-light;
+}
+
+table {
+  width: 100%;
+  border-spacing: 0 12px;
+  border-collapse: separate;
+  table-layout: fixed;
+
+  colgroup {
+    col {
+      &:first-child {
+        width: 100%;
+      }
+      &:nth-child(2),
+      &:nth-child(3),
+      &:nth-child(4) {
+        width: 40px;
+      }
+    }
+  }
+
+  th {
+    color: $copy-grey;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+
+    &:first-child {
+      text-align: left;
+    }
+  }
+
+  tr {
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background-color: $bg-dark;
+    }
+  }
+
+  td {
+    color: $copy-light;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.6px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &:not(:first-child) {
+      text-align: center;
+      // max-width: 40px;
+    }
+  }
+}
+
+.col-small {
+  width: 40px;
+  text-align: center;
+}

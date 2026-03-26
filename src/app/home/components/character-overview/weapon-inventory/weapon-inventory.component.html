@@ -1,0 +1,58 @@
+<section>
+  <h3>Standardwaffen:</h3>
+
+  <table>
+    <colgroup>
+      <col />
+      <col />
+      <col />
+      <col />
+    </colgroup>
+
+    <thead>
+      <th>Name</th>
+      <th>gew</th>
+      <th>ini</th>
+      <th>dmg</th>
+    </thead>
+    <tbody>
+      @for (weapon of baseWeapons; track $index) {
+        <tr>
+          <td>{{ weapon.name }}</td>
+          <td>{{ weapon.weight }}</td>
+          <td>{{ weapon.iniBonus }}</td>
+          <td>{{ weapon.dmg }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  <h3>Spezialwaffen:</h3>
+
+  <table>
+    <colgroup>
+      <col />
+      <col />
+      <col />
+      <col />
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>gew</th>
+        <th>ini</th>
+        <th>dmg</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (weapon of customWeapons; track $index) {
+        <tr>
+          <td>{{ weapon.name }}</td>
+          <td>{{ weapon.weight }}</td>
+          <td>{{ weapon.iniBonus }}</td>
+          <td>{{ weapon.dmg }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</section>

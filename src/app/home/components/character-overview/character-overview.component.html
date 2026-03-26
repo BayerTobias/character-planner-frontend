@@ -36,6 +36,11 @@
 
     <app-equipment-selector></app-equipment-selector>
 
+    <app-weapon-inventory
+      [baseWeapons]="character.baseWeapons"
+      [customWeapons]="character.customWeapons"
+    ></app-weapon-inventory>
+
     <!-- @for (skill of character?.class?.skills; track $index) {<app-skills-display
     [skill]="skill"
     [index]="$index"
@@ -48,7 +53,7 @@
   <!-- Weapon Inventar extra Komponente -->
 
   <div>
-    <ul class="weapon-inventory">
+    <!-- <ul class="weapon-inventory">
       <span>Base Weapons</span>
       @for (baseWeapon of character?.baseWeapons; track $index) {
         <li>{{ baseWeapon.name }}</li>
@@ -57,7 +62,7 @@
       @for (customWeapon of character?.customWeapons; track $index) {
         <li>{{ customWeapon.name }}</li>
       }
-    </ul>
+    </ul> -->
 
     <button (click)="toggleSelectBaseWeapon()">Open Select base Weapon</button>
 

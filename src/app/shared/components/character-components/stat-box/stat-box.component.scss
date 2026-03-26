@@ -3,19 +3,24 @@
 
 table {
   border-collapse: separate;
-  border-spacing: 8px 12px;
+  border-spacing: 0 12px;
   padding: 8px;
   border-radius: 8px;
   background-color: $bg-darker;
+  width: 320px;
 
   thead {
     th {
       color: $copy-grey;
-      text-align: start;
+      text-align: center;
       text-transform: uppercase;
       font-size: 16px;
       font-weight: 500;
       letter-spacing: 0.8px;
+
+      &:first-child {
+        text-align: start;
+      }
     }
   }
 
@@ -34,7 +39,7 @@ table {
       }
 
       td {
-        text-align: end;
+        text-align: center;
         color: $copy-light;
         font-size: 12px;
         font-weight: 500;

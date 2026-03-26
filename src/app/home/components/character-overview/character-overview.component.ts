@@ -15,6 +15,7 @@ import { ClassTranslatePipe } from '../../../shared/pipes/class-translate.pipe';
 import { SkillsOverviewComponent } from '../../../shared/components/character-components/skills-overview/skills-overview.component';
 import { CharacterControlsComponent } from './character-controls/character-controls.component';
 import { EquipmentSelectorComponent } from './equipment-selector/equipment-selector.component';
+import { WeaponInventoryComponent } from './weapon-inventory/weapon-inventory.component';
 
 @Component({
   selector: 'app-character-overview',
@@ -28,6 +29,7 @@ import { EquipmentSelectorComponent } from './equipment-selector/equipment-selec
     SkillsOverviewComponent,
     CharacterControlsComponent,
     EquipmentSelectorComponent,
+    WeaponInventoryComponent,
   ],
   templateUrl: './character-overview.component.html',
   styleUrl: './character-overview.component.scss',
@@ -132,7 +134,6 @@ export class CharacterOverviewComponent {
   saveSelectedWeapons() {
     const character = this.characterDataService.character();
     if (!character) return;
-    character.baseWeapons = this.selectedBaseWeapons;
 
     this.characterDataService.uploadCharacter(character).subscribe({
       next: (resp) => {
