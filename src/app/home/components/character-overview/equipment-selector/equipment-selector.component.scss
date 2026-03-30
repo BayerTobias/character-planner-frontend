@@ -2,5 +2,16 @@
 @import "./../../../../../styles.scss";
 
 section {
-  @include dFlex();
+  @include dFlex($gp: 8px, $jc: space-between);
+  padding: 16px 8px;
+  background-color: $bg-darker;
+  border-radius: 8px;
+  border: 1px solid $bg-darker;
+  box-shadow: 0 20px 50px 0 rgba(0, 0, 0, 0.12);
+
+  width: 320px;
+}
+
+h3 {
+  color: $copy-light;
 }
