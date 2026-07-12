@@ -20,8 +20,8 @@ export class ReciveDmgComponent {
     const character = this.characterService.character();
 
     if (character) {
-      this.characterService.updateCharacter({
-        currentHp: character.currentHp - this.dmg,
+      this.characterService.updateCharacter((char) => {
+        char.currentHp -= this.dmg;
       });
 
       this.characterService

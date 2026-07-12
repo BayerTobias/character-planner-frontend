@@ -138,8 +138,8 @@ export class CharacterOverviewComponent {
     this.characterDataService.uploadCharacter(character).subscribe({
       next: (resp) => {
         console.log(resp);
-        this.characterDataService.updateCharacter({
-          baseWeapons: this.selectedBaseWeapons,
+        this.characterDataService.updateCharacter((char) => {
+          char.baseWeapons = this.selectedBaseWeapons;
         });
       },
       error: (err) => {

@@ -2,10 +2,12 @@
   <div>
     <h3>Rüstung</h3>
     <form>
-      <select>
-        @for (armor of gameDataService.baseArmors; track $index) {
+      <select (change)="onArmorSelected($event)">
+        @for (armor of gameDataService.baseArmors; track armor.id) {
           @if (armor.type === "armor") {
-            <option>{{ armor.name }} {{ armor.armorBonus }}</option>
+            <option [value]="armor.id">
+              {{ armor.name }} {{ armor.armorBonus }}
+            </option>
           }
         }
       </select>
@@ -15,10 +17,12 @@
   <div>
     <h3>Schild</h3>
     <form>
-      <select>
-        @for (armor of gameDataService.baseArmors; track $index) {
+      <select (change)="onShieldSelected($event)">
+        @for (armor of gameDataService.baseArmors; track armor.id) {
           @if (armor.type === "shield") {
-            <option>{{ armor.name }} {{ armor.armorBonus }}</option>
+            <option [value]="armor.id">
+              {{ armor.name }} {{ armor.armorBonus }}
+            </option>
           }
         }
       </select>

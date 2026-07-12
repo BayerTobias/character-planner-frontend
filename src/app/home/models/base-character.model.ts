@@ -257,6 +257,14 @@ export class BaseCharacter {
     return (this.constitutionBonus + this.class.baseLvlHp) * this.level;
   }
 
+  equipArmor(armor: BaseArmor): void {
+    this.armor = armor;
+  }
+
+  equipShield(shield: BaseArmor): void {
+    this.shield = shield;
+  }
+
   asPostRequestJson(): CharacterRequestDto {
     return {
       id: this.id ?? null,

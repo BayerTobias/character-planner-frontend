@@ -1,6 +1,6 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
-import { lastValueFrom, map } from 'rxjs';
+import { lastValueFrom, map, tap } from 'rxjs';
 
 import {
   BaseCharacter,
@@ -62,7 +62,29 @@ export class CharacterDataService {
   }
 
   uploadCharacter(character: BaseCharacter) {
+    console.log('UPLOAD');
+
     return this.api.uploadCharacter(character.asPostRequestJson());
+  }
+
+  saveCharacter() {
+    const character = this.character();
+
+    console.log(character);
+
+    if (!character) return;
+
+    return this.uploadCharacter(character).pipe(
+      tap((resp) => {
+        const updatedCharacter = CharacterFactory.create(resp);
+        this.setCharacter(updatedCharacter);
+      }),
+    );
+  }
+
+  updateAndSaveCharacter(mutator: (character: BaseCharacter | Mage) => void) {
+    this.updateCharacter(mutator);
+    return this.saveCharacter();
   }
 
   //  Character signal functions
@@ -71,16 +93,29 @@ export class CharacterDataService {
     this.character.set(character);
   }
 
-  updateCharacter(patch: Partial<BaseCharacter | Mage>) {
+  updateCharacter(mutator: (character: BaseCharacter | Mage) => void) {
     this.character.update((currentChar) => {
       if (!currentChar) return currentChar;
 
-      Object.assign(currentChar, patch);
-      return currentChar;
+      const updated = Object.assign(
+        Object.create(Object.getPrototypeOf(currentChar)),
+        currentChar,
+      );
+      mutator(updated);
+      return updated;
     });
-
-    // console.log(this.character());
-
-    // this.character.set(structuredClone(this.character()));
   }
+
+  // updateCharacter(patch: Partial<BaseCharacter | Mage>) {
+  //   this.character.update((currentChar) => {
+  //     if (!currentChar) return currentChar;
+
+  //     Object.assign(currentChar, patch);
+  //     return currentChar;
+  //   });
+
+  //   // console.log(this.character());
+
+  //   // this.character.set(structuredClone(this.character()));
+  // }
 }

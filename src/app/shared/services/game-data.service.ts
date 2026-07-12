@@ -60,7 +60,7 @@ export class GameDataService {
     });
   }
 
-  async getRaceList() {
+  getRaceList() {
     const url = environment.baseUrl + 'api/races';
 
     this.http.get<CharRaceData[]>(url).subscribe({
@@ -74,7 +74,7 @@ export class GameDataService {
     });
   }
 
-  async getBaseArmorsList() {
+  getBaseArmorsList() {
     const url = environment.baseUrl + 'api/base-armors';
 
     this.http.get<BaseArmorData[]>(url).subscribe({
@@ -90,7 +90,7 @@ export class GameDataService {
     });
   }
 
-  async getBaseWeaponsList() {
+  getBaseWeaponsList() {
     const url = environment.baseUrl + 'api/base-weapons';
 
     this.http.get<BaseWeaponData[]>(url).subscribe({
@@ -106,7 +106,7 @@ export class GameDataService {
     });
   }
 
-  async getWeaponGroupsList() {
+  getWeaponGroupsList() {
     const url = environment.baseUrl + 'api/weapon-groups';
 
     this.http.get<WeaponGroupData[]>(url).subscribe({
