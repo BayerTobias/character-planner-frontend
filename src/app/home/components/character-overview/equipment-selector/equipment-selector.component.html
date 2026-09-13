@@ -1,17 +1,26 @@
 <section>
   <div>
     <h3>Rüstung</h3>
-    <form>
-      <select (change)="onArmorSelected($event)">
-        @for (armor of gameDataService.baseArmors; track armor.id) {
-          @if (armor.type === "armor") {
-            <option [value]="armor.id">
-              {{ armor.name }} {{ armor.armorBonus }}
-            </option>
+
+    @if (characterDataService.character(); as character) {
+      <form>
+        <select
+          name="armor"
+          [ngModel]="character.armor?.id ?? ''"
+          (change)="onArmorSelected($event)"
+        >
+          <option value="">select Armor</option>
+
+          @for (armor of gameDataService.baseArmors; track armor.id) {
+            @if (armor.type === "armor") {
+              <option [value]="armor.id">
+                {{ armor.name }} {{ armor.armorBonus }}
+              </option>
+            }
           }
-        }
-      </select>
-    </form>
+        </select>
+      </form>
+    }
   </div>
 
   <div>

@@ -257,7 +257,12 @@ export class BaseCharacter {
     return (this.constitutionBonus + this.class.baseLvlHp) * this.level;
   }
 
-  equipArmor(armor: BaseArmor): void {
+  equipArmor(armor: BaseArmor | null): void {
+    if (armor === null) {
+      this.armor = null;
+      return;
+    }
+
     this.armor = armor;
   }
 

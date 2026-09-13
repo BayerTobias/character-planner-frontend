@@ -15,28 +15,50 @@ export class EquipmentSelectorComponent {
   public gameDataService = inject(GameDataService);
   public characterDataService = inject(CharacterDataService);
 
-  @Input() character: BaseCharacter | null = null;
+  public equipedArmorId: number | null = null;
 
-  onArmorSelected(event: Event) {
-    const selectedId = Number((event.target as HTMLSelectElement).value);
+  ngOnInit() {
+    this.equipedArmorId =
+      this.characterDataService.character()?.armor?.id || null;
+  }
+
+  onArmorSelected(event: Event): void {
+    const eventValue = (event.target as HTMLSelectElement).value;
+
+    if (eventValue === '') {
+      if (!this.characterDataService.character()?.armor) {
+        return;
+      }
+
+      this.characterDataService
+        .updateAndSaveCharacter((character) => {
+          character.equipArmor(null);
+        })
+        ?.subscribe({
+          next: (resp) => console.log('Character updated and saved:', resp),
+          error: (err) => console.error('Error updating character:', err),
+        });
+
+      return;
+    }
+
+    const selectedId = Number(eventValue);
     const armor = this.gameDataService.baseArmors.find(
       (armor) => armor.id === selectedId,
     );
 
-    if (armor) {
-      this.characterDataService
-        .updateAndSaveCharacter((character) => {
-          character.equipArmor(armor);
-        })
-        ?.subscribe({
-          next: (resp) => {
-            console.log('Character updated and saved:', resp);
-          },
-          error: (err) => {
-            console.error('Error updating character:', err);
-          },
-        });
+    if (!armor) {
+      return;
     }
+
+    this.characterDataService
+      .updateAndSaveCharacter((character) => {
+        character.equipArmor(armor);
+      })
+      ?.subscribe({
+        next: (resp) => console.log('Character updated and saved:', resp),
+        error: (err) => console.error('Error updating character:', err),
+      });
   }
 
   onShieldSelected(event: Event) {
